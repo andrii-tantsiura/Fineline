@@ -1,17 +1,14 @@
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Typography } from "./components/common";
-import { LoaderView } from "./components/sections/LoaderView";
 import { FontWeightAliases } from "./constants/typography";
-
-SplashScreen.preventAutoHideAsync();
+import { useSplashScreen } from "./hooks/useSplashScreen";
 
 export default function App() {
-  const [isAppReady, setAppIsReady] = useState(false);
+  const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -19,17 +16,13 @@ export default function App() {
     [FontWeightAliases.Regular]: require("./assets/fonts/Poppins-Regular.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (isAppReady) {
-      await SplashScreen.hideAsync();
-    }
-  }, [isAppReady]);
-
   useEffect(() => {
-    setAppIsReady(true);
-  }, []);
+    if (isFontsLoaded) {
+      setIsAppReady(true);
+    }
+  }, [isFontsLoaded]);
 
-  return isAppReady && isFontsLoaded ? (
+  return isAppReady ? (
     <View style={styles.container} onLayout={onLayoutRootView}>
       <Typography size="i18" weight="semiBold" color="primary">
         Fine Line
@@ -45,9 +38,7 @@ export default function App() {
 
       <StatusBar style="auto" />
     </View>
-  ) : (
-    <LoaderView />
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({
