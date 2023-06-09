@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState(false);
+  const [appIsReady, setAppIsReady] = useState<boolean>(false);
 
   useEffect(() => {
     // Pre-load fonts, data....
