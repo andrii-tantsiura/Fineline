@@ -1,11 +1,9 @@
 import { useFonts } from "expo-font";
-import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
 
-import { Typography } from "./components/common";
-import { FontWeightAliases, typographyStyle_i1 } from "./constants/typography";
+import { FontWeightAliases } from "./constants/typography";
 import { useSplashScreen } from "./hooks/useSplashScreen";
+import AppRoutes from "./navigators/AppRoutes";
 
 export default function App() {
   const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
@@ -22,19 +20,5 @@ export default function App() {
     }
   }, [isFontsLoaded]);
 
-  return isAppReady ? (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar style="auto" />
-      <Typography style={typographyStyle_i1}>Fine Line</Typography>
-    </View>
-  ) : null;
+  return isAppReady ? <AppRoutes onReady={onLayoutRootView} /> : null;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
