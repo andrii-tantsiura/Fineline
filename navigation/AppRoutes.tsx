@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
-import HomeStackNavigator from "./Home";
+import HomeStackNavigator from "./HomeStackNavigator";
 
 type AppRoutesProps = {
   onReady: () => void;
@@ -10,7 +10,7 @@ type AppRoutesProps = {
 const AppRoutes: React.FC<AppRoutesProps> = ({ onReady }) => {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="dark" />
       <NavigationContainer onReady={onReady}>
         <HomeStackNavigator />
       </NavigationContainer>

@@ -1,16 +1,35 @@
-import { FC } from "react";
+import { FC, useLayoutEffect } from "react";
 import { View } from "react-native";
 
-import { Typography } from "../../components/common";
+import { IC_ARROW_LEFT_RED } from "../../assets/icons";
+import { IconButton, Typography } from "../../components/common";
+import {
+  containerStyles,
+  iconButtonStyles,
+} from "../../constants/globalStyles";
 import { typographyStyle_i1 } from "../../constants/typography";
-import styles from "./styles";
+import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 
-const DeliveryDetailsScreen: FC = () => {
+export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
+  const goBackHandler = () => {
+    navigation.goBack();
+  };
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerBackImage: () => (
+        <IconButton
+          style={iconButtonStyles.i1}
+          source={IC_ARROW_LEFT_RED}
+          onPress={goBackHandler}
+        />
+      ),
+    });
+  }, []);
+
   return (
-    <View style={styles.container}>
+    <View style={containerStyles.i1}>
       <Typography style={typographyStyle_i1}>Fine Line</Typography>
     </View>
   );
 };
-
-export default DeliveryDetailsScreen;

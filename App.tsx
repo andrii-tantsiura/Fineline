@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import { FontWeightAliases } from "./constants/typography";
 import { useSplashScreen } from "./hooks/useSplashScreen";
-import AppRoutes from "./navigators/AppRoutes";
+import AppRoutes from "./navigation/AppRoutes";
 
 export default function App() {
   const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
