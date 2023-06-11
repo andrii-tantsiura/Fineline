@@ -7,27 +7,28 @@ import { AOResult, ExecuteAsync } from "../helpers/AOResult";
 
 class CategoriesService {
   async getCategories(): Promise<AOResult<ICategory[]>> {
-    return ExecuteAsync(async (onFailure) => {
-      const categories: ICategory[] = [];
+    return ExecuteAsync(
+      async (onFailure: (message: string) => void): Promise<ICategory[]> => {
+        const categories: ICategory[] = [];
 
-      const response = await axios.get<ICategoriesArray>(
-        API_URL + "/categories.json"
-      );
+        const response = await axios.get<ICategoriesArray>(
+          API_URL + "/categories.json"
+        );
 
-      for (const key in response.data) {
-        const tmpCategory = response.data[key];
+        for (const key in response.data) {
+          const tmpCategory = response.data[key];
 
-        const category: ICategory = {
-          id: key,
-          name: tmpCategory.name,
-          imageUrl: tmpCategory.imageUrl,
-        };
+          const category: ICategory = {
+            id: key,
+            ...tmpCategory,
+          };
 
-        categories.push(category);
+          categories.push(category);
+        }
+
+        return categories;
       }
-
-      return categories;
-    });
+    );
   }
 }
 

@@ -25,18 +25,18 @@ export async function ExecuteAsync<T>(
 ): Promise<AOResult<T>> {
   const result = new AOResult<T>();
 
-  let isOnFailureExecuted = false;
+  let isOnFailureExecuted: boolean = false;
 
-  const onFailure = (message: string) => {
+  const onFailure = (message: string): void => {
     isOnFailureExecuted = true;
     result.setFailure(message);
   };
 
   try {
-    const taskResult = await func(onFailure);
+    const funcResult = await func(onFailure);
 
     if (!isOnFailureExecuted) {
-      result.setSuccess(taskResult);
+      result.setSuccess(funcResult);
     }
   } catch (ex: any) {
     result.setException(ex);

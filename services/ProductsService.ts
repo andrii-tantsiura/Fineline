@@ -7,31 +7,28 @@ import { AOResult, ExecuteAsync } from "../helpers/AOResult";
 
 class ProductsService {
   async getProducts(): Promise<AOResult<IProduct[]>> {
-    return ExecuteAsync(async (onFailure) => {
-      const products: IProduct[] = [];
+    return ExecuteAsync(
+      async (onFailure: (message: string) => void): Promise<IProduct[]> => {
+        const products: IProduct[] = [];
 
-      const response = await axios.get<IProductsArray>(
-        API_URL + "/products.json"
-      );
+        const response = await axios.get<IProductsArray>(
+          API_URL + "/products.json"
+        );
 
-      for (const key in response.data) {
-        const tmpProduct = response.data[key];
+        for (const key in response.data) {
+          const tmpProduct = response.data[key];
 
-        const product: IProduct = {
-          id: key,
-          categoryId: tmpProduct.categoryId,
-          name: tmpProduct.name,
-          price: tmpProduct.price,
-          imageUrl: tmpProduct.imageUrl,
-          rating: tmpProduct.rating,
-          ingredients: tmpProduct.ingredients,
-        };
+          const product: IProduct = {
+            id: key,
+            ...tmpProduct,
+          };
 
-        products.push(product);
+          products.push(product);
+        }
+
+        return products;
       }
-
-      return products;
-    });
+    );
   }
 }
 
