@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Typography } from "./components/common";
-import { FontWeightAliases } from "./constants/typography";
+import { FontWeightAliases, typographyStyle_i1 } from "./constants/typography";
 import { useSplashScreen } from "./hooks/useSplashScreen";
 
 export default function App() {
@@ -24,19 +24,8 @@ export default function App() {
 
   return isAppReady ? (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Typography size="i18" weight="semiBold" color="primary">
-        Fine Line
-      </Typography>
-
-      <Typography size="i18" weight="medium" color="primary">
-        Fine Line
-      </Typography>
-
-      <Typography size="i18" weight="regular" color="primary">
-        Fine Line
-      </Typography>
-
       <StatusBar style="auto" />
+      <Typography style={typographyStyle_i1}>Fine Line</Typography>
     </View>
   ) : null;
 }

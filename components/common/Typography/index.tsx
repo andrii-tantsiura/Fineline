@@ -1,45 +1,53 @@
 import React from "react";
-import { Text, TextProps, TextStyle } from "react-native";
+import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 
-import COLORS, { IColors } from "../../../constants/colors";
+import COLORS from "../../../constants/colors";
 import {
+  FontHeights,
   FontSizes,
   FontWeights,
-  IFontSizes,
-  IFontWeights,
 } from "../../../constants/typography";
+import { TypographyStyle } from "./types";
 
-export interface ITypographyProps extends TextProps {
-  size?: keyof IFontSizes;
-  weight?: keyof IFontWeights;
-  color?: keyof IColors;
+export interface ITypographyProps extends Omit<TextProps, "style"> {
   textAlign?: TextStyle["textAlign"];
-  numberOfLines?: number;
-  textStyle?: TextStyle;
+  style?: StyleProp<TypographyStyle>;
 }
 
 export const Typography: React.FC<ITypographyProps> = ({
-  size = "i14",
-  weight = "medium",
-  color = "neutral_0",
-  textAlign = "left",
-  numberOfLines = 1,
-  textStyle,
+  textAlign: textAlignProp,
+  style,
   children,
   ...props
-}) => (
-  <Text
-    {...props}
-    style={[
-      textStyle,
-      {
-        textAlign,
-        ...FontWeights[weight],
-        ...FontSizes[size],
-        color: COLORS[color],
-      },
-    ]}
-  >
-    {children}
-  </Text>
-);
+}) => {
+  let textStyles: TextStyle[] = [];
+
+  if (style) {
+    let unionStyles: TypographyStyle = {};
+
+    if (Array.isArray(style)) {
+      unionStyles = Object.assign({}, ...style);
+    } else if (typeof style === "object") {
+      unionStyles = style;
+    }
+
+    const { textAlign, lineHeight, fontWeight, fontSize, color, ...rest } =
+      unionStyles;
+
+    const customStyle: TextStyle = {
+      textAlign: textAlignProp ?? textAlign,
+      lineHeight: lineHeight && FontHeights[lineHeight],
+      fontFamily: fontWeight && FontWeights[fontWeight],
+      fontSize: fontSize && FontSizes[fontSize],
+      color: color && COLORS[color],
+    };
+
+    textStyles = [rest, customStyle];
+  }
+
+  return (
+    <Text {...props} style={textStyles}>
+      {children}
+    </Text>
+  );
+};
