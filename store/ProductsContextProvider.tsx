@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useState } from "react";
 
-import IProduct from "../types/product";
+import { IProduct } from "../types";
 
 interface IProductsContextProps {
   products: IProduct[];

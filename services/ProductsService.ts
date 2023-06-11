@@ -1,10 +1,9 @@
 import axios from "axios";
 
 import { API_URL } from "../config";
-import IProduct from "../types/product";
-import IProductsArray from "../types/firebase/product/productsArray";
-import { AOResult, ExecuteAsync } from "../helpers/AOResult";
-import firebaseResponseToModels from "../helpers/firebaseResponseToModels";
+import { IProduct } from "../types";
+import { IProductsArray } from "../types/firebase";
+import { AOResult, ExecuteAsync, firebaseResponseToModels } from "../helpers";
 
 class ProductsService {
   getProducts = (): Promise<AOResult<IProduct[]>> =>

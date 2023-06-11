@@ -1,5 +1,5 @@
-import ICategory from "./category";
+import { ICategory } from "./category";
 
-export default interface ICategoriesArray {
+export interface ICategoriesArray {
   [index: string]: ICategory;
 }

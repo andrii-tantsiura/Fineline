@@ -11,7 +11,7 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
     setErrorMessageDataLoad(errorMessage);
 
     if (isDataLoaded) {
-      navigation.replace("Home");
+      navigation.replace("Homepage");
     }
   }
 

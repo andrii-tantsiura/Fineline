@@ -1,6 +1,6 @@
 import { useContext, useState, useCallback } from "react";
 
-import ICategory from "../types/category";
+import { ICategory } from "../types";
 import CategoriesService from "../services/CategoriesService";
 import { CategoriesContext } from "../store/CategoriesContextProvider";
 

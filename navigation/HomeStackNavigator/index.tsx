@@ -34,7 +34,7 @@ const HomeStackNavigator: FC = () => (
     />
 
     <HomeStack.Screen
-      name="Home"
+      name="Homepage"
       component={HomeScreen}
       options={headerOptions}
     />

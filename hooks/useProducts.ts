@@ -1,6 +1,6 @@
 import { useContext, useState, useCallback } from "react";
 
-import IProduct from "../types/product";
+import { IProduct } from "../types";
 import ProductsService from "../services/ProductsService";
 import { ProductsContext } from "../store/ProductsContextProvider";
 

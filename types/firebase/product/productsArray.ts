@@ -1,5 +1,5 @@
-import IProduct from "./product";
+import { IProduct } from "./product";
 
-export default interface IProductsArray {
+export interface IProductsArray {
   [index: string]: IProduct;
 }

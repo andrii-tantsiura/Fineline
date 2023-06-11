@@ -1,4 +1,4 @@
-export default function firebaseResponseToModels<T>(data: any) {
+export function firebaseResponseToModels<T>(data: any) {
   const items: Array<T> = [];
 
   for (const key in data) {

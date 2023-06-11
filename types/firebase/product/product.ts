@@ -1,4 +1,4 @@
-export default interface IProduct {
+export interface IProduct {
   categoryId: string;
   name: string;
   price: number;
