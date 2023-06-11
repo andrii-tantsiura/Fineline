@@ -10,7 +10,7 @@ import {
 import { TypographyStyle } from "./types";
 
 const createCustomStyle = (style: StyleProp<TypographyStyle>) => {
-  let textStyles: TextStyle = {};
+  let customStyle: TextStyle = {};
 
   if (style) {
     let unionStyles: TypographyStyle = {};
@@ -21,19 +21,20 @@ const createCustomStyle = (style: StyleProp<TypographyStyle>) => {
       unionStyles = style;
     }
 
-    const { lineHeight, fontWeight, fontSize, color, ...rest } = unionStyles;
+    const { lineHeight, fontWeight, fontSize, color, ...restStyleAttributes } =
+      unionStyles;
 
-    const customStyle: TextStyle = {
+    const specificStyle: TextStyle = {
       lineHeight: lineHeight && FontHeights[lineHeight],
       fontFamily: fontWeight && FontWeights[fontWeight],
       fontSize: fontSize && FontSizes[fontSize],
       color: color && COLORS[color],
     };
 
-    textStyles = Object.assign(rest, customStyle);
+    customStyle = Object.assign(restStyleAttributes, specificStyle);
   }
 
-  return textStyles;
+  return customStyle;
 };
 
 export interface ITypographyProps extends Omit<TextProps, "style"> {
