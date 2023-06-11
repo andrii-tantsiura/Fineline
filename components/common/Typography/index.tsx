@@ -9,7 +9,7 @@ import {
 } from "../../../constants/typography";
 import { TypographyStyle } from "./types";
 
-const createCustomStyle = (style: StyleProp<TypographyStyle>) => {
+const createCustomStyle = (style: StyleProp<TypographyStyle>): TextStyle => {
   let customStyle: TextStyle = {};
 
   if (style) {
@@ -48,7 +48,7 @@ export const Typography: React.FC<ITypographyProps> = ({
   children,
   ...props
 }) => {
-  let textStyles = [createCustomStyle(style), { textAlign }];
+  const textStyles = [createCustomStyle(style), { textAlign }];
 
   return (
     <Text {...props} style={textStyles}>
