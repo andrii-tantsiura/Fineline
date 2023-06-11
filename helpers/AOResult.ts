@@ -1,3 +1,5 @@
+import ERRORS from "../constants/errors";
+
 export class AOResult<T> {
   public isSuccess: boolean = false;
   public result?: T;
@@ -17,6 +19,12 @@ export class AOResult<T> {
   public setException(exception: any) {
     this.isSuccess = false;
     this.exception = exception;
+  }
+
+  public getErrorDescription(): string {
+    return (
+      this.exception?.message ?? this.message ?? ERRORS.some_error_occurred
+    );
   }
 }
 

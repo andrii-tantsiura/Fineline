@@ -1,6 +1,6 @@
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 import { Typography } from "./components/common";
@@ -8,11 +8,15 @@ import { FontWeightAliases, typographyStyle_i1 } from "./constants/typography";
 import { useSplashScreen } from "./hooks/useSplashScreen";
 import { ProductsContextProvider } from "./store/ProductsContextProvider";
 import { CategoriesContextProvider } from "./store/CategoriesContextProvider";
-import CategoriesService from "./services/CategoriesService";
-import ProductsService from "./services/ProductsService";
+import { AppInitDataComponent } from "./components/AppInitDataComponent";
 
 export default function App() {
-  const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
+  const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
+    useState<boolean>(false);
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
+
+  const [isHiddenSplashScreen, hideSplashScreen, onLayoutRootView] =
+    useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -20,31 +24,55 @@ export default function App() {
     [FontWeightAliases.Regular]: require("./assets/fonts/Poppins-Regular.ttf"),
   });
 
-  const loadCategories = useCallback(async () => {
-    const categories = await CategoriesService.getCategories();
-    console.log(categories);
+  function onDataLoaded(isDataLoaded: boolean): void {
+    setIsDataLoaded(isDataLoaded);
+  }
 
-    const products = await ProductsService.getProducts();
-    //console.log(products);
-  }, []);
+  function onClick() {}
 
-  useEffect(() => {
-    if (isFontsLoaded) {
-      loadCategories();
-      setIsAppReady(true);
-    }
-  }, [isFontsLoaded]);
+  function DisplayComponentSelection(): React.ReactNode {
+    let component: React.ReactNode = <></>;
 
-  return isAppReady ? (
-    <CategoriesContextProvider>
-      <ProductsContextProvider>
+    if (isAppResourcesLoaded && isDataLoaded) {
+      component = (
         <View style={styles.container} onLayout={onLayoutRootView}>
           <StatusBar style="auto" />
           <Typography style={typographyStyle_i1}>Fine Line</Typography>
         </View>
+      );
+    } else if (isAppResourcesLoaded) {
+      component = (
+        <>
+          <AppInitDataComponent onDataLoaded={onDataLoaded} />
+          <View
+            style={styles.container}
+            onLayout={onLayoutRootView}
+            onTouchEnd={onClick}
+          >
+            <StatusBar style="auto" />
+            <Typography style={typographyStyle_i1}>Loadiing data</Typography>
+          </View>
+        </>
+      );
+    }
+
+    return component;
+  }
+
+  useEffect(() => {
+    if (isFontsLoaded) {
+      hideSplashScreen();
+      setIsAppResourcesLoaded(true);
+    }
+  }, [isFontsLoaded]);
+
+  return (
+    <CategoriesContextProvider>
+      <ProductsContextProvider>
+        {DisplayComponentSelection()}
       </ProductsContextProvider>
     </CategoriesContextProvider>
-  ) : null;
+  );
 }
 
 const styles = StyleSheet.create({
