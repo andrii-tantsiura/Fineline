@@ -1,34 +1,33 @@
+import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import * as SplashScreen from "expo-splash-screen";
-import { StyleSheet, Text, View } from "react-native";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
+import { StyleSheet, View } from "react-native";
 
-SplashScreen.preventAutoHideAsync();
+import { Typography } from "./components/common";
+import { FontWeightAliases, typographyStyle_i1 } from "./constants/typography";
+import { useSplashScreen } from "./hooks/useSplashScreen";
 
 export default function App() {
-  const [appIsReady, setAppIsReady] = useState<boolean>(false);
+  const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
+
+  const [isFontsLoaded] = useFonts({
+    [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
+    [FontWeightAliases.Medium]: require("./assets/fonts/Poppins-Medium.ttf"),
+    [FontWeightAliases.Regular]: require("./assets/fonts/Poppins-Regular.ttf"),
+  });
 
   useEffect(() => {
-    // Pre-load fonts, data....
-    setAppIsReady(true);
-  }, []);
-
-  const onLayoutRootView = useCallback(async () => {
-    if (appIsReady) {
-      await SplashScreen.hideAsync();
+    if (isFontsLoaded) {
+      setIsAppReady(true);
     }
-  }, [appIsReady]);
+  }, [isFontsLoaded]);
 
-  if (!appIsReady) {
-    return null;
-  }
-
-  return (
+  return isAppReady ? (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <Text>Open up App.tsx to start working on your app!</Text>
       <StatusBar style="auto" />
+      <Typography style={typographyStyle_i1}>Fine Line</Typography>
     </View>
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({
