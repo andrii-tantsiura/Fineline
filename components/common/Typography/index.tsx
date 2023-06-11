@@ -9,18 +9,8 @@ import {
 } from "../../../constants/typography";
 import { TypographyStyle } from "./types";
 
-export interface ITypographyProps extends Omit<TextProps, "style"> {
-  textAlign?: TextStyle["textAlign"];
-  style?: StyleProp<TypographyStyle>;
-}
-
-export const Typography: React.FC<ITypographyProps> = ({
-  textAlign: textAlignProp,
-  style,
-  children,
-  ...props
-}) => {
-  let textStyles: TextStyle[] = [];
+const createCustomStyle = (style: StyleProp<TypographyStyle>) => {
+  let textStyles: TextStyle = {};
 
   if (style) {
     let unionStyles: TypographyStyle = {};
@@ -31,19 +21,33 @@ export const Typography: React.FC<ITypographyProps> = ({
       unionStyles = style;
     }
 
-    const { textAlign, lineHeight, fontWeight, fontSize, color, ...rest } =
-      unionStyles;
+    const { lineHeight, fontWeight, fontSize, color, ...rest } = unionStyles;
 
     const customStyle: TextStyle = {
-      textAlign: textAlignProp ?? textAlign,
       lineHeight: lineHeight && FontHeights[lineHeight],
       fontFamily: fontWeight && FontWeights[fontWeight],
       fontSize: fontSize && FontSizes[fontSize],
       color: color && COLORS[color],
     };
 
-    textStyles = [rest, customStyle];
+    textStyles = Object.assign(rest, customStyle);
   }
+
+  return textStyles;
+};
+
+export interface ITypographyProps extends Omit<TextProps, "style"> {
+  textAlign?: TextStyle["textAlign"];
+  style?: StyleProp<TypographyStyle>;
+}
+
+export const Typography: React.FC<ITypographyProps> = ({
+  textAlign,
+  style,
+  children,
+  ...props
+}) => {
+  let textStyles = [createCustomStyle(style), { textAlign }];
 
   return (
     <Text {...props} style={textStyles}>
