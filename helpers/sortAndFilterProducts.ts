@@ -13,8 +13,10 @@ export function sortAndFilterProducts(
   );
 
   if (searchNameProduct !== "") {
+    var regex = RegExp(searchNameProduct, "i");
+
     filteredProducts = filteredProducts.filter(
-      (product) => product.name === searchNameProduct
+      (product) => product.name.search(regex) !== -1
     );
   }
 

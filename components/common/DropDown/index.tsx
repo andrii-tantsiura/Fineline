@@ -4,9 +4,11 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-import { View, StyleProp, ViewStyle } from "react-native";
+import { View, Image, StyleProp, ViewStyle } from "react-native";
 import { useState } from "react";
 
+import styles from "./styles";
+import { IC_CHEVRON_DOWN_RED } from "../../../assets/icons";
 import { Typography } from "../Typography";
 import { TypographyStyle } from "../Typography/types";
 
@@ -54,8 +56,11 @@ export const DropDown: React.FC<IDropDown> = ({
   }
 
   return (
-    <View style={style} onTouchEnd={onPress}>
-      <Typography style={textStyle}>{currentSelectedItem.text}</Typography>
+    <View style={style}>
+      <View style={styles.selectContainer} onTouchEnd={onPress}>
+        <Typography style={textStyle}>{currentSelectedItem.text}</Typography>
+        <Image style={styles.image} source={IC_CHEVRON_DOWN_RED} />
+      </View>
       <Menu opened={isOpenedMenu} onBackdropPress={onPress}>
         <MenuTrigger text="" />
         <MenuOptions>

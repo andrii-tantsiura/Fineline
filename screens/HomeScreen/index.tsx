@@ -1,13 +1,15 @@
 import { FC, useState, useEffect } from "react";
-import { View } from "react-native";
+import { View, TextInput, FlatList, ListRenderItemInfo } from "react-native";
 
+import styles from "./styles";
 import { SortType } from "../../enums";
-import { containerStyles } from "../../constants/globalStyles";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { Typography } from "../../components/common";
 import { DropDown, IMenuItem } from "../../components/common/DropDown";
 import { typographyStyle_i1 } from "../../constants/typography";
 import { useCategories, useFilterProducts } from "../../hooks";
+import { ICategory, IProduct } from "../../types";
+import COLORS from "../../constants/colors";
 
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [
@@ -22,56 +24,85 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [searchNameProduct, setSearchNameProduct] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
-    categories[1].id
+    categories[0].id
   );
 
-  const menuItems: IMenuItem[] = [
-    {
-      text: "By rating",
-      value: SortType.RATING,
-    },
-    {
-      text: "Cheaper",
-      value: SortType.CHEAPER,
-    },
-    {
-      text: "Expensive",
-      value: SortType.EXPENSIVE,
-    },
-  ];
+  function onSelectSortType(item: IMenuItem) {
+    setSortType(item.value);
+  }
 
   useEffect(() => {
     sortAndFilterProducts(selectedCategoryId, searchNameProduct, sortType);
   }, [selectedCategoryId, searchNameProduct, sortType]);
 
   return (
-    <View style={containerStyles.i1}>
-      <DropDown
-        style={{ borderColor: "green", borderWidth: 1, padding: 12 }}
-        textStyle={typographyStyle_i1}
-        onSelect={(item) => {
-          alert(item.text);
+    <View style={styles.container}>
+      <View style={styles.searchContainer}>
+        <TextInput
+          style={styles.inputSearchNameProduct}
+          onChangeText={setSearchNameProduct}
+          value={searchNameProduct}
+        />
+        <DropDown
+          style={styles.sortSelector}
+          textStyle={typographyStyle_i1}
+          onSelect={onSelectSortType}
+        >
+          {[
+            {
+              text: "By rating",
+              value: SortType.RATING,
+            },
+            {
+              text: "Cheaper",
+              value: SortType.CHEAPER,
+            },
+            {
+              text: "Expensive",
+              value: SortType.EXPENSIVE,
+            },
+          ]}
+        </DropDown>
+      </View>
+
+      <FlatList
+        horizontal={true}
+        style={{
+          maxHeight: 45,
         }}
-      >
-        {menuItems}
-      </DropDown>
-      <Typography style={typographyStyle_i1}>
-        Count {categories.length}
-      </Typography>
+        data={categories}
+        renderItem={(category: ListRenderItemInfo<ICategory>) => (
+          <Typography
+            key={category.item.id}
+            style={[
+              typographyStyle_i1,
+              {
+                padding: 12,
+                backgroundColor: "silver",
+                height: 45,
+              },
+              selectedCategoryId === category.item.id && {
+                backgroundColor: "red",
+                color: "neutral_0",
+              },
+            ]}
+            onPress={() => setSelectedCategoryId(category.item.id)}
+          >
+            {category.item.name}
+          </Typography>
+        )}
+        keyExtractor={(product: ICategory) => product.id}
+      />
 
-      <Typography style={typographyStyle_i1}>
-        Count {filteredProducts.length}
-      </Typography>
-
-      {filteredProducts.map((product, index) => (
-        <Typography key={index} style={typographyStyle_i1}>
-          {product.name} {product.rating} {product.price}
-        </Typography>
-      ))}
-
-      <Typography style={typographyStyle_i1}>
-        {filteredProducts.length == 0 ? "not found" : ""}
-      </Typography>
+      <FlatList
+        data={filteredProducts}
+        renderItem={(product: ListRenderItemInfo<IProduct>) => (
+          <Typography key={product.item.id} style={typographyStyle_i1}>
+            {product.item.name} {product.item.rating} {product.item.price}
+          </Typography>
+        )}
+        keyExtractor={(product: IProduct) => product.id}
+      />
     </View>
   );
 };
