@@ -1,9 +1,9 @@
-import { useContext, useState, useCallback } from "react";
+import { useState } from "react";
 
 import { IProduct } from "../types";
 import { SortType } from "../enums";
 import { sortAndFilterProducts } from "../helpers";
-import { useProducts } from "./index";
+import { useProducts } from "./useProducts";
 
 export const useFilterProducts = (): [
   IProduct[],

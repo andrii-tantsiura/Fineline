@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
+import { MenuProvider } from "react-native-popup-menu";
 import { FontWeightAliases } from "./constants/typography";
 import { CategoriesContextProvider, ProductsContextProvider } from "./store";
 
@@ -27,10 +28,14 @@ export default function App() {
   }, [isFontsLoaded]);
 
   return (
-    <CategoriesContextProvider>
-      <ProductsContextProvider>
-        {isAppResourcesLoaded ? <AppRoutes onReady={onLayoutRootView} /> : null}
-      </ProductsContextProvider>
-    </CategoriesContextProvider>
+    <MenuProvider>
+      <CategoriesContextProvider>
+        <ProductsContextProvider>
+          {isAppResourcesLoaded ? (
+            <AppRoutes onReady={onLayoutRootView} />
+          ) : null}
+        </ProductsContextProvider>
+      </CategoriesContextProvider>
+    </MenuProvider>
   );
 }

@@ -5,6 +5,7 @@ import { SortType } from "../../enums";
 import { containerStyles } from "../../constants/globalStyles";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { Typography } from "../../components/common";
+import { DropDown, IMenuItem } from "../../components/common/DropDown";
 import { typographyStyle_i1 } from "../../constants/typography";
 import { useCategories, useFilterProducts } from "../../hooks";
 
@@ -24,14 +25,36 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     categories[1].id
   );
 
+  const menuItems: IMenuItem[] = [
+    {
+      text: "By rating",
+      value: SortType.RATING,
+    },
+    {
+      text: "Cheaper",
+      value: SortType.CHEAPER,
+    },
+    {
+      text: "Expensive",
+      value: SortType.EXPENSIVE,
+    },
+  ];
+
   useEffect(() => {
     sortAndFilterProducts(selectedCategoryId, searchNameProduct, sortType);
   }, [selectedCategoryId, searchNameProduct, sortType]);
 
   return (
     <View style={containerStyles.i1}>
-      <Typography style={typographyStyle_i1}>Fine Line</Typography>
-
+      <DropDown
+        style={{ borderColor: "green", borderWidth: 1, padding: 12 }}
+        textStyle={typographyStyle_i1}
+        onSelect={(item) => {
+          alert(item.text);
+        }}
+      >
+        {menuItems}
+      </DropDown>
       <Typography style={typographyStyle_i1}>
         Count {categories.length}
       </Typography>
