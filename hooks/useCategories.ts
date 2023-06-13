@@ -12,26 +12,20 @@ export const useCategories = (): [
 ] => {
   const categoriesContext = useContext(CategoriesContext);
 
-  const [isCategoriesLoaded, setIsCategoriesLoaded] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-
   const loadProductsCategories = useCallback(async (): Promise<void> => {
     const categories = await CategoriesService.getCategories();
 
     if (categories.isSuccess && categories.result) {
       categoriesContext.setCategories(categories.result);
-      setErrorMessage("");
     } else {
-      setErrorMessage(categories.getErrorDescription());
+      categoriesContext.setErrorMessage(categories.getErrorDescription());
     }
-
-    setIsCategoriesLoaded(categories.isSuccess);
-  }, [categoriesContext, isCategoriesLoaded]);
+  }, [categoriesContext]);
 
   return [
     categoriesContext.categories,
-    isCategoriesLoaded,
-    errorMessage,
+    categoriesContext.isCategoriesLoaded,
+    categoriesContext.errorMessage,
     loadProductsCategories,
   ];
 };

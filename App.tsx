@@ -1,9 +1,10 @@
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
+import { MenuProvider } from "react-native-popup-menu";
+import FlashMessage from "react-native-flash-message";
 
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
-import { MenuProvider } from "react-native-popup-menu";
 import { FontWeightAliases } from "./constants/typography";
 import { CategoriesContextProvider, ProductsContextProvider } from "./store";
 
@@ -36,6 +37,7 @@ export default function App() {
           ) : null}
         </ProductsContextProvider>
       </CategoriesContextProvider>
+      <FlashMessage position="top" />
     </MenuProvider>
   );
 }

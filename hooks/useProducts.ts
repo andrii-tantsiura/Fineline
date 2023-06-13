@@ -12,26 +12,20 @@ export const useProducts = (): [
 ] => {
   const productsContext = useContext(ProductsContext);
 
-  const [isProductsLoaded, setIsProductsLoaded] = useState<boolean>(false);
-  const [errorMessage, setErrorMessage] = useState<string>("");
-
   const loadProducts = useCallback(async (): Promise<void> => {
     const products = await ProductsService.getProducts();
 
     if (products.isSuccess && products.result) {
       productsContext.setProducts(products.result);
-      setErrorMessage("");
     } else {
-      setErrorMessage(products.getErrorDescription());
+      productsContext.setErrorMessage(products.getErrorDescription());
     }
-
-    setIsProductsLoaded(products.isSuccess);
-  }, [productsContext, isProductsLoaded]);
+  }, [productsContext]);
 
   return [
     productsContext.products,
-    isProductsLoaded,
-    errorMessage,
+    productsContext.isProductsLoaded,
+    productsContext.errorMessage,
     loadProducts,
   ];
 };
