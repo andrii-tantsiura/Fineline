@@ -12,7 +12,7 @@ import { SortType } from "../../enums";
 import { ICategory, IProduct } from "../../types";
 import { CategoryItem } from "./components/CategoryItem";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { DropDown, IMenuItem } from "../../components/common/DropDown";
+import { EmptyList, DropDown, IMenuItem } from "../../components/common";
 import { typographyStyle_i19 } from "../../constants/typography";
 import { ProductItem } from "./components/ProductItem";
 import { useCategories, useFilterProducts } from "../../hooks";
@@ -42,8 +42,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   }, [selectedCategoryId, searchNameProduct, sortType]);
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <ScrollView style={styles.container}>
+      <View>
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.inputSearchNameProduct}
@@ -92,6 +92,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         <FlatList
           scrollEnabled={false}
           style={styles.productsList}
+          ListEmptyComponent={<EmptyList />}
           data={filteredProducts}
           renderItem={(product: ListRenderItemInfo<IProduct>) => (
             <ProductItem product={product.item} onPress={() => {}} />

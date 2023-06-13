@@ -16,7 +16,9 @@ export function sortAndFilterProducts(
     var regex = RegExp(searchNameProduct, "i");
 
     filteredProducts = filteredProducts.filter(
-      (product) => product.name.search(regex) !== -1
+      (product) =>
+        product.name.search(regex) !== -1 ||
+        product.ingredients.search(regex) !== -1
     );
   }
 

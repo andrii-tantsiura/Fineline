@@ -2,12 +2,11 @@ import { View, Image } from "react-native";
 
 import styles from "./styles";
 import { IProduct } from "../../../../types";
-import { Typography } from "../../../../components/common";
+import { IconButton, Typography } from "../../../../components/common";
 import {
   typographyStyle_i17,
   typographyStyle_i12,
 } from "../../../../constants/typography";
-import { IconButton } from "../../../../components/common/IconButton";
 import { IC_SHOPPING_CART_WHITE } from "../../../../assets/icons";
 
 interface IProductItem {

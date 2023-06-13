@@ -1,7 +1,4 @@
-import {
-  HeaderTitleProps,
-  HeaderButtonProps,
-} from "@react-navigation/elements";
+import { HeaderTitleProps } from "@react-navigation/elements";
 import {
   StackNavigationOptions,
   createStackNavigator,
@@ -9,8 +6,7 @@ import {
 import React, { FC } from "react";
 
 import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
-import { IconButton } from "../../components/common/IconButton";
-import { Typography } from "../../components/common";
+import { IconButton, Typography } from "../../components/common";
 import { typographyStyle_i4 } from "../../constants/typography";
 import { HomeScreen, AppDataLoaderScreen } from "../../screens";
 import { HomeStackParamList } from "./types";

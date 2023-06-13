@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  selectContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  container: {
+    alignItems: "center",
   },
   image: {
-    width: "15%",
-    height: "100%",
+    marginTop: 50,
+    height: 132,
+    resizeMode: "contain",
   },
 });
 
