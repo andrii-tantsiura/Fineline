@@ -1,0 +1,39 @@
+import { StyleSheet } from "react-native";
+
+import COLORS from "../../../constants/colors";
+import { textInputStyles } from "../../../constants/globalStyles";
+import {
+  typographyStyle_i13,
+  typographyStyle_i2,
+} from "../../../constants/typography";
+import { scaleSize } from "../../../utils/dimensions";
+
+const styles = StyleSheet.create({
+  titleLabel: {
+    marginBottom: scaleSize(6),
+    ...typographyStyle_i13,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingRight: scaleSize(7),
+    paddingVertical: 14,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderColor: COLORS.neutral_40,
+  },
+  errorInputContainer: {
+    borderColor: COLORS.error,
+  },
+  input: {
+    flex: 1,
+    paddingLeft: scaleSize(12),
+    ...textInputStyles.i1,
+  },
+  errorLabel: {
+    marginTop: scaleSize(6),
+    ...typographyStyle_i2,
+  },
+});
+
+export default styles;

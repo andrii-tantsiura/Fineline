@@ -2,7 +2,7 @@ import {
   IFontHeights,
   IFontSizes,
   IFontWeights,
-  TypographyStyle,
+  ITypographyStyle,
 } from "../components/common/Typography/types";
 import { scaleSize } from "../utils/dimensions";
 
@@ -35,14 +35,14 @@ export const FontHeights: IFontHeights = {
 
 // WEIGHT 600 - semiBold
 // SIZE 12
-const typographyStyle_i1: TypographyStyle = {
+const typographyStyle_i1: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i12",
   color: "primary",
   lineHeight: "i18",
 };
 
-const typographyStyle_i2: TypographyStyle = {
+const typographyStyle_i2: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i12",
   color: "error",
@@ -50,7 +50,7 @@ const typographyStyle_i2: TypographyStyle = {
 };
 
 // SIZE 14
-const typographyStyle_i3: TypographyStyle = {
+const typographyStyle_i3: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i14",
   color: "neutral_0",
@@ -58,7 +58,7 @@ const typographyStyle_i3: TypographyStyle = {
 };
 
 // SIZE 16
-const typographyStyle_i4: TypographyStyle = {
+const typographyStyle_i4: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i16",
   color: "neutral_90",
@@ -66,14 +66,14 @@ const typographyStyle_i4: TypographyStyle = {
 };
 
 // SIZE 18
-const typographyStyle_i5: TypographyStyle = {
+const typographyStyle_i5: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i18",
   color: "neutral_80",
   lineHeight: "i28",
 };
 
-const typographyStyle_i6: TypographyStyle = {
+const typographyStyle_i6: ITypographyStyle = {
   fontWeight: "semiBold",
   fontSize: "i18",
   color: "neutral_100",
@@ -82,28 +82,28 @@ const typographyStyle_i6: TypographyStyle = {
 
 // WEIGHT 500 - medium
 // SIZE 14
-const typographyStyle_i7: TypographyStyle = {
+const typographyStyle_i7: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i14",
   color: "primary",
   lineHeight: "i22",
 };
 
-const typographyStyle_i8: TypographyStyle = {
+const typographyStyle_i8: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i14",
   color: "neutral_70",
   lineHeight: "i22",
 };
 
-const typographyStyle_i9: TypographyStyle = {
+const typographyStyle_i9: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i14",
   color: "neutral_90",
   lineHeight: "i22",
 };
 
-const typographyStyle_i10: TypographyStyle = {
+const typographyStyle_i10: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i14",
   color: "neutral_100",
@@ -111,13 +111,13 @@ const typographyStyle_i10: TypographyStyle = {
 };
 
 // SIZE 16
-const typographyStyle_i11: TypographyStyle = {
+const typographyStyle_i11: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i16",
   color: "neutral_80",
 };
 
-const typographyStyle_i12: TypographyStyle = {
+const typographyStyle_i12: ITypographyStyle = {
   fontWeight: "medium",
   fontSize: "i16",
   color: "neutral_100",
@@ -126,7 +126,7 @@ const typographyStyle_i12: TypographyStyle = {
 
 // WEIGHT 400 - regular
 // SIZE 12
-const typographyStyle_i13: TypographyStyle = {
+const typographyStyle_i13: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i12",
   color: "neutral_60",
@@ -134,42 +134,42 @@ const typographyStyle_i13: TypographyStyle = {
 };
 
 // SIZE 14
-const typographyStyle_i14: TypographyStyle = {
+const typographyStyle_i14: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_50",
   lineHeight: "i21",
 };
 
-const typographyStyle_i15: TypographyStyle = {
+const typographyStyle_i15: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_60",
   lineHeight: "i18",
 };
 
-const typographyStyle_i16: TypographyStyle = {
+const typographyStyle_i16: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_60",
   lineHeight: "i21",
 };
 
-const typographyStyle_i17: TypographyStyle = {
+const typographyStyle_i17: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_70",
   lineHeight: "i21",
 };
 
-const typographyStyle_i18: TypographyStyle = {
+const typographyStyle_i18: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_80",
   lineHeight: "i21",
 };
 
-const typographyStyle_i19: TypographyStyle = {
+const typographyStyle_i19: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i14",
   color: "neutral_100",
@@ -177,7 +177,7 @@ const typographyStyle_i19: TypographyStyle = {
 };
 
 // SIZE 18
-const typographyStyle_i20: TypographyStyle = {
+const typographyStyle_i20: ITypographyStyle = {
   fontWeight: "regular",
   fontSize: "i18",
   color: "neutral_80",

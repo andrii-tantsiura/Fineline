@@ -7,13 +7,13 @@ import {
   FontSizes,
   FontWeights,
 } from "../../../constants/typography";
-import { TypographyStyle } from "./types";
+import { ITypographyStyle } from "./types";
 
-const createCustomStyle = (style: StyleProp<TypographyStyle>): TextStyle => {
+const createCustomStyle = (style: StyleProp<ITypographyStyle>): TextStyle => {
   let customStyle: TextStyle = {};
 
   if (style) {
-    let unionStyles: TypographyStyle = {};
+    let unionStyles: ITypographyStyle = {};
 
     if (Array.isArray(style)) {
       unionStyles = Object.assign({}, ...style);
@@ -39,7 +39,7 @@ const createCustomStyle = (style: StyleProp<TypographyStyle>): TextStyle => {
 
 export interface ITypographyProps extends Omit<TextProps, "style"> {
   textAlign?: TextStyle["textAlign"];
-  style?: StyleProp<TypographyStyle>;
+  style?: StyleProp<ITypographyStyle>;
 }
 
 export const Typography: React.FC<ITypographyProps> = ({

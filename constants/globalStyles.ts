@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
+
 import COLORS from "./colors";
+import { FontSizes, FontWeightAliases } from "./typography";
 
 const iconButtonStyles = StyleSheet.create({
   i1: {
@@ -18,4 +20,19 @@ const containerStyles = StyleSheet.create({
   },
 });
 
-export { iconButtonStyles, containerStyles };
+const separatorStyles = StyleSheet.create({
+  i1: {
+    height: 1,
+    backgroundColor: COLORS.neutral_40,
+  },
+});
+
+const textInputStyles = {
+  i1: {
+    fontSize: FontSizes.i14,
+    fontFamily: FontWeightAliases.Regular,
+    color: COLORS.neutral_100,
+  },
+};
+
+export { containerStyles, iconButtonStyles, separatorStyles, textInputStyles };
