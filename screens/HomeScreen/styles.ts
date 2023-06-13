@@ -5,24 +5,37 @@ import COLORS from "../../constants/colors";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 13,
     backgroundColor: COLORS.neutral_0,
   },
   searchContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     columnGap: 13,
+    paddingTop: 18,
+    paddingHorizontal: 18,
   },
   inputSearchNameProduct: {
-    borderColor: "silver",
+    flex: 1,
+    borderColor: COLORS.neutral_40,
+    borderRadius: 8,
     borderWidth: 1,
-    flex: 2,
+    paddingHorizontal: 15,
   },
   sortSelector: {
-    borderColor: "gray",
+    borderColor: COLORS.neutral_40,
+    borderRadius: 8,
     borderWidth: 1,
-    padding: 5,
+    width: 120,
+    padding: 8,
+  },
+  categoriesList: {
+    maxHeight: 45,
+    marginTop: 24,
+    marginLeft: 18,
+  },
+  productsList: {
     flex: 1,
+    margin: 18,
   },
 });
 

@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  image: { width: "10%", height: "100%" },
+  image: { width: "15%", height: "100%" },
 });
 
 export default styles;
