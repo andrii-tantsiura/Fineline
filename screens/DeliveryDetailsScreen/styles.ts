@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.neutral_0,
   },
   formContainer: {
-    marginTop: 16,
+    marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
   },
   namesContainer: {
@@ -20,19 +20,15 @@ const styles = StyleSheet.create({
     width: "49%",
   },
   inputContainer: {
-    marginTop: scaleSize(18),
+    marginBottom: scaleSize(18),
   },
-  comment: {
-    alignItems: "flex-start",
+  commentTextInput: {
     height: scaleSize(129),
-  },
-  buttonContainer: {
-    flex: 1,
-    justifyContent: "flex-end",
-    marginVertical: scaleSize(16),
+    textAlignVertical: "top",
   },
   button: {
     marginHorizontal: scaleSize(16),
+    marginVertical: scaleSize(16),
     height: scaleSize(48),
     backgroundColor: COLORS.primary,
     borderRadius: 8,

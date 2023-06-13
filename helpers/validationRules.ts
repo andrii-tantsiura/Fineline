@@ -26,14 +26,14 @@ const ADDRESS_RULES = {
   required: ValidationErrorMessages.REQUIRED,
   maxLength: {
     value: 150,
-    message: ValidationErrorMessages.LONGER_THAN_50_CHARS,
+    message: ValidationErrorMessages.LONGER_THAN_150_CHARS,
   },
 };
 
 const COMMENT_RULES = {
   maxLength: {
     value: 200,
-    message: ValidationErrorMessages.LONGER_THAN_50_CHARS,
+    message: ValidationErrorMessages.LONGER_THAN_200_CHARS,
   },
 };
 

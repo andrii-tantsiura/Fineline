@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: "row",
-    alignItems: "center",
     paddingRight: scaleSize(7),
     paddingVertical: 14,
     borderWidth: 1,
@@ -29,6 +28,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: scaleSize(12),
     ...textInputStyles.i1,
+  },
+  clearButton: {
+    marginTop: 4,
   },
   errorLabel: {
     marginTop: scaleSize(6),

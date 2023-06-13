@@ -5,20 +5,18 @@ import {
   UseControllerProps,
   UseFormResetField,
 } from "react-hook-form";
+import { UseFormTrigger } from "react-hook-form/dist/types";
 import {
   StyleProp,
   TextInput,
   TextInputProps,
+  TextStyle,
   View,
   ViewStyle,
 } from "react-native";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
 import COLORS from "../../../constants/colors";
-import {
-  typographyStyle_i13,
-  typographyStyle_i2,
-} from "../../../constants/typography";
 import { IconButton } from "../IconButton";
 import { Typography } from "../Typography";
 import styles from "./styles";
@@ -27,9 +25,11 @@ interface IValidatedInputTextProps extends TextInputProps {
   title?: string;
   name: string;
   rules: UseControllerProps["rules"];
+  trigger: UseFormTrigger<any>;
   control: Control<any, any>;
   resetField: UseFormResetField<any>;
   containerStyle?: StyleProp<ViewStyle>;
+  textInputStyle?: StyleProp<TextStyle>;
 }
 
 export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
@@ -37,6 +37,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   name,
   rules = {},
   control,
+  trigger,
   resetField,
   placeholder,
   autoFocus,
@@ -44,11 +45,16 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   placeholderTextColor = COLORS.neutral_50,
   keyboardType = "default",
   maxLength,
+  multiline,
   containerStyle,
+  textInputStyle,
   onFocus,
   onSubmitEditing,
 }) => {
-  const clearHandler = () => resetField(name);
+  const clearHandler = () => {
+    resetField(name);
+    trigger(name);
+  };
 
   return (
     <Controller
@@ -71,12 +77,13 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
             ]}
           >
             <TextInput
-              style={styles.input}
+              style={[styles.input, textInputStyle]}
               maxLength={maxLength}
               keyboardType={keyboardType}
               autoCapitalize={autoCapitalize}
               placeholderTextColor={placeholderTextColor}
               placeholder={placeholder}
+              multiline={multiline}
               value={value}
               onChangeText={onChange}
               onSubmitEditing={onSubmitEditing}
@@ -90,7 +97,11 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
             />
 
             {value && (
-              <IconButton source={IC_CLOSE_DARK} onPress={clearHandler} />
+              <IconButton
+                style={styles.clearButton}
+                source={IC_CLOSE_DARK}
+                onPress={clearHandler}
+              />
             )}
           </View>
 
