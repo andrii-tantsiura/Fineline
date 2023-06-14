@@ -2,7 +2,7 @@ import { useContext, useState, useCallback } from "react";
 
 import { ICategory } from "../types";
 import CategoriesService from "../services/CategoriesService";
-import { CategoriesContext } from "../store/CategoriesContextProvider";
+import { CategoriesContext } from "../store/CategoriesContext/CategoriesContextProvider";
 
 export const useCategories = (): [
   ICategory[],

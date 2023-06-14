@@ -19,6 +19,21 @@ import { ProductItem } from "./components/ProductItem";
 import { useCategories, useFilterProducts } from "../../hooks";
 import AlertService from "../../services/AlertService";
 
+const sortTypes: IMenuItem[] = [
+  {
+    text: "By rating",
+    value: SortType.RATING,
+  },
+  {
+    text: "Cheaper",
+    value: SortType.CHEAPER,
+  },
+  {
+    text: "Expensive",
+    value: SortType.EXPENSIVE,
+  },
+];
+
 export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [
     categories,
@@ -41,7 +56,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     categories[0].id
   );
 
-  const [refreshingData, setRefreshingData] = useState<boolean>(false);
+  const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
+  const [countPullToRefresh, setCountPullToRefresh] = useState<number>(0);
 
   function onSelectSortType(item: IMenuItem) {
     setSortType(item.value);
@@ -59,15 +75,18 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   }
 
   const onRefreshData = useCallback(async () => {
-    setRefreshingData(true);
+    setIsRefreshingData(true);
 
     await loadProductsCategories();
     await loadProducts();
 
-    setRefreshingData(false);
+    setIsRefreshingData(false);
 
-    alertIfNeeded();
+    setCountPullToRefresh(
+      (currentCountPullToRefresh) => currentCountPullToRefresh + 1
+    );
   }, [
+    countPullToRefresh,
     isCategoriesLoaded,
     isProductsLoaded,
     errorMessageForCategories,
@@ -76,12 +95,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   useEffect(() => {
     alertIfNeeded();
-  }, [
-    isCategoriesLoaded,
-    isProductsLoaded,
-    errorMessageForCategories,
-    errorMessageForProducts,
-  ]);
+  }, [countPullToRefresh]);
 
   useEffect(() => {
     sortAndFilterProducts(selectedCategoryId, searchNameProduct, sortType);
@@ -91,7 +105,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     <ScrollView
       style={styles.container}
       refreshControl={
-        <RefreshControl refreshing={refreshingData} onRefresh={onRefreshData} />
+        <RefreshControl
+          refreshing={isRefreshingData}
+          onRefresh={onRefreshData}
+        />
       }
     >
       <View>
@@ -107,20 +124,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
             textStyle={typographyStyle_i19}
             onSelect={onSelectSortType}
           >
-            {[
-              {
-                text: "By rating",
-                value: SortType.RATING,
-              },
-              {
-                text: "Cheaper",
-                value: SortType.CHEAPER,
-              },
-              {
-                text: "Expensive",
-                value: SortType.EXPENSIVE,
-              },
-            ]}
+            {sortTypes}
           </DropDown>
         </View>
 

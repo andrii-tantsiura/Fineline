@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useReducer } from "react";
 
-import { ICategory } from "../types";
+import { ICategory } from "../../types";
 
 interface ICategoriesContextProps {
   categories: ICategory[];

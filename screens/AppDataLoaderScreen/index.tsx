@@ -7,7 +7,10 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [errorMessageDataLoad, setErrorMessageDataLoad] = useState<string>("");
 
-  function onInitData(isDataLoaded: boolean, errorMessage: string): void {
+  function onInitDataHandler(
+    isDataLoaded: boolean,
+    errorMessage: string
+  ): void {
     setErrorMessageDataLoad(errorMessage);
 
     if (isDataLoaded) {
@@ -17,7 +20,8 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <>
-      <AppInitDataComponent onInitData={onInitData} />
+      <AppInitDataComponent onInitData={onInitDataHandler} />
+
       {errorMessageDataLoad ? (
         <EmptyView>{errorMessageDataLoad}</EmptyView>
       ) : (
