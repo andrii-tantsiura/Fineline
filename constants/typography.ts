@@ -133,6 +133,13 @@ const typographyStyle_i13: ITypographyStyle = {
   lineHeight: "i18",
 };
 
+const typographyStyle_i22: ITypographyStyle = {
+  fontWeight: "regular",
+  fontSize: "i12",
+  color: "neutral_40",
+  lineHeight: "i18",
+};
+
 // SIZE 14
 const typographyStyle_i14: ITypographyStyle = {
   fontWeight: "regular",
@@ -205,4 +212,5 @@ export {
   typographyStyle_i7,
   typographyStyle_i8,
   typographyStyle_i9,
+  typographyStyle_i22,
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Control,
   Controller,
@@ -17,6 +17,7 @@ import {
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
 import COLORS from "../../../constants/colors";
+import { typographyStyle_i22 } from "../../../constants/typography";
 import { IconButton } from "../IconButton";
 import { Typography } from "../Typography";
 import styles from "./styles";
@@ -51,6 +52,8 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   onFocus,
   onSubmitEditing,
 }) => {
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
   const clearHandler = () => {
     resetField(name);
     trigger(name);
@@ -66,18 +69,28 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
         fieldState: { error },
       }) => (
         <View style={containerStyle}>
-          <Typography textAlign="left" style={styles.titleLabel}>
-            {title}
-          </Typography>
+          <View style={styles.headerContainer}>
+            <Typography textAlign="left" style={styles.titleLabel}>
+              {title}
+            </Typography>
+
+            {!rules.required && (
+              <Typography textAlign="left" style={typographyStyle_i22}>
+                Optional
+              </Typography>
+            )}
+          </View>
 
           <View
             style={[
               styles.inputContainer,
-              Boolean(error) && styles.errorInputContainer,
+              (isFocused || Boolean(error)) && styles.errorInputContainer,
             ]}
           >
             <TextInput
               style={[styles.input, textInputStyle]}
+              cursorColor={COLORS.primary}
+              selectionColor={COLORS.primary}
               maxLength={maxLength}
               keyboardType={keyboardType}
               autoCapitalize={autoCapitalize}
@@ -89,9 +102,11 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
               onSubmitEditing={onSubmitEditing}
               onFocus={(e) => {
                 onFocus?.(e);
+                setIsFocused(true);
               }}
               onBlur={() => {
                 onBlur();
+                setIsFocused(false);
               }}
               autoFocus={autoFocus}
             />
