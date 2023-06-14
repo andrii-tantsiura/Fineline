@@ -14,6 +14,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { TextInputMask, TextInputMaskTypeProp } from "react-native-masked-text";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
 import COLORS from "../../../constants/colors";
@@ -22,8 +23,13 @@ import { IconButton } from "../IconButton";
 import { Typography } from "../Typography";
 import styles from "./styles";
 
+type MaskConfig =
+  | "none"
+  | { maskType: TextInputMaskTypeProp; maskValue?: string };
+
 interface IValidatedInputTextProps extends TextInputProps {
   title?: string;
+  maskConfig?: MaskConfig;
   name: string;
   rules: UseControllerProps["rules"];
   trigger: UseFormTrigger<any>;
@@ -35,6 +41,7 @@ interface IValidatedInputTextProps extends TextInputProps {
 
 export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   title = "",
+  maskConfig = "none",
   name,
   rules = {},
   control,
@@ -67,60 +74,74 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
       render={({
         field: { value, onChange, onBlur },
         fieldState: { error },
-      }) => (
-        <View style={containerStyle}>
-          <View style={styles.headerContainer}>
-            <Typography textAlign="left" style={styles.titleLabel}>
-              {title}
-            </Typography>
+      }) => {
+        const textInputProps: TextInputProps = {
+          style: [styles.input, textInputStyle],
+          cursorColor: COLORS.primary,
+          selectionColor: COLORS.primary,
+          maxLength: maxLength,
+          keyboardType: keyboardType,
+          autoCapitalize: autoCapitalize,
+          placeholderTextColor: placeholderTextColor,
+          placeholder: placeholder,
+          multiline: multiline,
+          value: value,
+          onChangeText: onChange,
+          onSubmitEditing: onSubmitEditing,
+          onFocus: (e) => {
+            onFocus?.(e);
+            setIsFocused(true);
+          },
+          onBlur: () => {
+            onBlur();
+            setIsFocused(false);
+          },
+          autoFocus: autoFocus,
+        };
 
-            {!rules.required && (
-              <Typography textAlign="left" style={typographyStyle_i22}>
-                Optional
+        return (
+          <View style={containerStyle}>
+            <View style={styles.headerContainer}>
+              <Typography textAlign="left" style={styles.titleLabel}>
+                {title}
+              </Typography>
+
+              {!rules.required && (
+                <Typography textAlign="left" style={typographyStyle_i22}>
+                  Optional
+                </Typography>
+              )}
+            </View>
+
+            <View
+              style={[
+                styles.inputContainer,
+                (isFocused || Boolean(error)) && styles.errorInputContainer,
+              ]}
+            >
+              {maskConfig === "none" ? (
+                <TextInput {...textInputProps} />
+              ) : (
+                <TextInputMask
+                  type={maskConfig?.maskType}
+                  options={{ mask: maskConfig?.maskValue }}
+                  {...textInputProps}
+                />
+              )}
+
+              {value && (
+                <IconButton source={IC_CLOSE_DARK} onPress={clearHandler} />
+              )}
+            </View>
+
+            {error?.message && (
+              <Typography style={styles.errorLabel}>
+                {error?.message}
               </Typography>
             )}
           </View>
-
-          <View
-            style={[
-              styles.inputContainer,
-              (isFocused || Boolean(error)) && styles.errorInputContainer,
-            ]}
-          >
-            <TextInput
-              style={[styles.input, textInputStyle]}
-              cursorColor={COLORS.primary}
-              selectionColor={COLORS.primary}
-              maxLength={maxLength}
-              keyboardType={keyboardType}
-              autoCapitalize={autoCapitalize}
-              placeholderTextColor={placeholderTextColor}
-              placeholder={placeholder}
-              multiline={multiline}
-              value={value}
-              onChangeText={onChange}
-              onSubmitEditing={onSubmitEditing}
-              onFocus={(e) => {
-                onFocus?.(e);
-                setIsFocused(true);
-              }}
-              onBlur={() => {
-                onBlur();
-                setIsFocused(false);
-              }}
-              autoFocus={autoFocus}
-            />
-
-            {value && (
-              <IconButton source={IC_CLOSE_DARK} onPress={clearHandler} />
-            )}
-          </View>
-
-          {error?.message && (
-            <Typography style={styles.errorLabel}>{error?.message}</Typography>
-          )}
-        </View>
-      )}
+        );
+      }}
     />
   );
 };

@@ -8,6 +8,7 @@ import {
   IconButton,
   ValidatedInputText,
 } from "../../components/common";
+import { PHONE_MASK } from "../../constants/constants";
 import {
   iconButtonStyles,
   separatorStyles,
@@ -19,10 +20,11 @@ import {
   PHONE_RULES,
 } from "../../helpers/validationRules";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import { DeliveryInfo } from "../../types/order";
 import styles from "./styles";
 
 export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
-  const { control, resetField, handleSubmit, trigger } = useForm({
+  const { control, resetField, handleSubmit, trigger } = useForm<DeliveryInfo>({
     defaultValues: {
       firstName: "",
       lastName: "",
@@ -37,8 +39,8 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     navigation.goBack();
   };
 
-  const goToPayHandler = handleSubmit(() => {
-    console.log("tap");
+  const openPaymentHandler = handleSubmit((deliveryForm: DeliveryInfo) => {
+    console.log("submit data", deliveryForm);
 
     // TODO: make navigation to the Payment Methods page
   });
@@ -96,9 +98,14 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
             resetField={resetField}
             name="mobileNumber"
             title="Mobile Number"
+            maskConfig={{
+              maskType: "custom",
+              maskValue: PHONE_MASK,
+            }}
             keyboardType="phone-pad"
             placeholder="Enter mobile number"
             rules={PHONE_RULES}
+            maxLength={17}
           />
 
           <ValidatedInputText
@@ -132,7 +139,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
       <CustomButton
         style={styles.button}
         imageSource={IC_ARROW_RIGHT_WHITE}
-        onPress={goToPayHandler}
+        onPress={openPaymentHandler}
       >
         Go to Pay
       </CustomButton>
