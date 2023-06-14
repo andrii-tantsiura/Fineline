@@ -34,9 +34,6 @@ const styles = StyleSheet.create({
     paddingLeft: scaleSize(12),
     ...textInputStyles.i1,
   },
-  clearButton: {
-    marginTop: 4,
-  },
   errorLabel: {
     marginTop: scaleSize(6),
     ...typographyStyle_i2,
