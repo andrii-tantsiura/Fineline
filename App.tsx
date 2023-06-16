@@ -1,14 +1,18 @@
 import { useFonts } from "expo-font";
-import { StatusBar } from "expo-status-bar";
-import { useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import { useEffect, useState } from "react";
+import { MenuProvider } from "react-native-popup-menu";
+import FlashMessage from "react-native-flash-message";
 
-import { Typography } from "./components/common";
-import { FontWeightAliases, typographyStyle_i1 } from "./constants/typography";
-import { useSplashScreen } from "./hooks/useSplashScreen";
+import { useSplashScreen } from "./hooks";
+import AppRoutes from "./navigation/AppRoutes";
+import { FontWeightAliases } from "./constants";
+import { CategoriesContextProvider, ProductsContextProvider } from "./store";
 
 export default function App() {
-  const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
+  const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
+    useState<boolean>(false);
+
+  const [hideSplashScreen, onLayoutRootView] = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -18,23 +22,21 @@ export default function App() {
 
   useEffect(() => {
     if (isFontsLoaded) {
-      setIsAppReady(true);
+      hideSplashScreen();
+      setIsAppResourcesLoaded(true);
     }
   }, [isFontsLoaded]);
 
-  return isAppReady ? (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar style="auto" />
-      <Typography style={typographyStyle_i1}>Fine Line</Typography>
-    </View>
-  ) : null;
+  return (
+    <MenuProvider>
+      <CategoriesContextProvider>
+        <ProductsContextProvider>
+          {isAppResourcesLoaded ? (
+            <AppRoutes onReady={onLayoutRootView} />
+          ) : null}
+        </ProductsContextProvider>
+      </CategoriesContextProvider>
+      <FlashMessage position="top" />
+    </MenuProvider>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 
-import COLORS from "../../../constants/colors";
 import {
+  COLORS,
   FontHeights,
   FontSizes,
   FontWeights,
-} from "../../../constants/typography";
+} from "../../../constants";
 import { TypographyStyle } from "./types";
 
 const createCustomStyle = (style: StyleProp<TypographyStyle>): TextStyle => {

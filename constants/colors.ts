@@ -3,6 +3,8 @@ export interface IColors {
   neutral_0: string;
   neutral_10: string;
   neutral_20: string;
+  neutral_30: string;
+  neutral_40: string;
   neutral_50: string;
   neutral_60: string;
   neutral_70: string;
@@ -15,11 +17,13 @@ export interface IColors {
   error: string;
 }
 
-const COLORS: IColors = {
+export const COLORS: IColors = {
   primary: "#F54748",
   neutral_0: "#FFFFFF",
   neutral_10: "#F6F8FC",
   neutral_20: "#F1F4F9",
+  neutral_30: "#E2E8F0",
+  neutral_40: "#CBD4E1",
   neutral_50: "#94A3B8",
   neutral_60: "#64748B",
   neutral_70: "#475569",
@@ -31,5 +35,3 @@ const COLORS: IColors = {
   warning: "#F0AD4E",
   error: "#D8093B",
 };
-
-export default COLORS;
