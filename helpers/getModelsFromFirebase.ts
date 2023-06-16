@@ -7,6 +7,7 @@ import { firebaseResponseToModels } from "./firebaseResponseToModels";
 export interface IModels<T> {
   [index: string]: T;
 }
+
 export const getModelsFromFirebase = <T>(
   path: string
 ): Promise<AOResult<T[]>> =>

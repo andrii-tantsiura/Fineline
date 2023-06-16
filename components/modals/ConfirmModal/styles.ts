@@ -1,12 +1,11 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS } from "../../../constants";
-import { containerStyles, shadowStyles } from "../../../constants/globalStyles";
+import { COLORS, containerStyles, shadowStyles } from "../../../constants";
 
 const styles = StyleSheet.create({
   rootContainer: {
     ...containerStyles.i1,
-    backgroundColor: "#ffffffa5",
+    backgroundColor: COLORS.neutral_0_60_opacity,
   },
   dialogContainer: {
     margin: 32,

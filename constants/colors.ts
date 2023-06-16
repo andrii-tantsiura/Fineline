@@ -1,6 +1,7 @@
 export interface IColors {
   primary: string;
   neutral_0: string;
+  neutral_0_60_opacity: string;
   neutral_10: string;
   neutral_20: string;
   neutral_30: string;
@@ -20,6 +21,7 @@ export interface IColors {
 export const COLORS: IColors = {
   primary: "#F54748",
   neutral_0: "#FFFFFF",
+  neutral_0_60_opacity: "#FFFFFFa5",
   neutral_10: "#F6F8FC",
   neutral_20: "#F1F4F9",
   neutral_30: "#E2E8F0",

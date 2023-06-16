@@ -1,12 +1,12 @@
 import { ActivityIndicator, View } from "react-native";
 
-import { Typography } from "../../common";
 import {
   COLORS,
   IColors,
-  typographyStyle_i1,
   containerStyles,
+  typographyStyle_i1,
 } from "../../../constants";
+import { Typography } from "../../common";
 
 interface ILoaderView {
   message?: string;

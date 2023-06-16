@@ -17,8 +17,11 @@ import {
 import { TextInputMask, TextInputMaskTypeProp } from "react-native-masked-text";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
-import { COLORS, iconButtonStyles } from "../../../constants";
-import { typographyStyle_i22 } from "../../../constants/typography";
+import {
+  COLORS,
+  iconButtonStyles,
+  typographyStyle_i22,
+} from "../../../constants";
 import { IconButton } from "../IconButton";
 import { Typography } from "../Typography";
 import styles from "./styles";

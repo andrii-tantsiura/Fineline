@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS } from "../../../constants";
-import { textInputStyles } from "../../../constants/globalStyles";
 import {
+  COLORS,
+  textInputStyles,
   typographyStyle_i13,
   typographyStyle_i2,
-} from "../../../constants/typography";
+} from "../../../constants";
 import { scaleSize } from "../../../utils/dimensions";
 
 const styles = StyleSheet.create({

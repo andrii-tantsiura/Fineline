@@ -2,14 +2,16 @@ import React from "react";
 import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 
 import {
+  COLORS,
   FontHeights,
   FontSizes,
   FontWeights,
-} from "../../../constants/typography";
+} from "../../../constants";
 import { ITypographyStyle } from "./types";
-import { COLORS } from "../../../constants";
 
-const createCustomStyle = (style: StyleProp<ITypographyStyle>): TextStyle => {
+const typographyStyleToTextStyle = (
+  style: StyleProp<ITypographyStyle>
+): TextStyle => {
   let customStyle: TextStyle = {};
 
   if (style) {
@@ -48,7 +50,7 @@ export const Typography: React.FC<ITypographyProps> = ({
   children,
   ...props
 }) => {
-  const textStyles = [createCustomStyle(style), { textAlign }];
+  const textStyles = [typographyStyleToTextStyle(style), { textAlign }];
 
   return (
     <Text {...props} style={textStyles}>

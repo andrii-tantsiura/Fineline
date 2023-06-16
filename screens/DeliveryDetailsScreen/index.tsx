@@ -9,19 +9,15 @@ import {
   ValidatedInputText,
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
-import { PHONE_MASK } from "../../constants/constants";
-import {
-  iconButtonStyles,
-  separatorStyles,
-} from "../../constants/globalStyles";
+import { PHONE_MASK, iconButtonStyles, separatorStyles } from "../../constants";
 import {
   ADDRESS_RULES,
   COMMENT_RULES,
   NAME_RULES,
   PHONE_RULES,
-} from "../../helpers/validationRules";
+} from "../../helpers";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { DeliveryInfo } from "../../types/order";
+import { Delivery } from "../../types";
 import styles from "./styles";
 
 export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
@@ -38,7 +34,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const { control, resetField, handleSubmit, trigger, watch } =
-    useForm<DeliveryInfo>({
+    useForm<Delivery>({
       defaultValues: {
         firstName: "",
         lastName: "",
@@ -65,7 +61,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     }
   };
 
-  const openPaymentHandler = handleSubmit((deliveryForm: DeliveryInfo) => {
+  const openPaymentPageHandler = handleSubmit((deliveryForm: Delivery) => {
     console.log("submit data", deliveryForm);
 
     // TODO: make navigation to the Payment Methods page
@@ -176,7 +172,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
         <CustomButton
           style={styles.button}
           imageSource={IC_ARROW_RIGHT_WHITE}
-          onPress={openPaymentHandler}
+          onPress={openPaymentPageHandler}
         >
           Go to Pay
         </CustomButton>

@@ -1,5 +1,5 @@
-import { NAME_REGEX, PHONE_REGEX } from "../constants/validationRegex";
-import { ValidationErrorMessages } from "../enums/validationMessages";
+import { NAME_REGEX, PHONE_REGEX } from "../constants";
+import { ValidationErrorMessages } from "../enums";
 
 const NAME_RULES = {
   required: ValidationErrorMessages.REQUIRED,
@@ -37,4 +37,4 @@ const COMMENT_RULES = {
   },
 };
 
-export { NAME_RULES, PHONE_RULES, ADDRESS_RULES, COMMENT_RULES };
+export { ADDRESS_RULES, COMMENT_RULES, NAME_RULES, PHONE_RULES };

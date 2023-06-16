@@ -159,12 +159,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           }
           data={filteredProducts}
           renderItem={(product: ListRenderItemInfo<IProduct>) => (
-            <ProductItem
-              product={product.item}
-              onPress={() => {
-                navigation.navigate("DeliveryDetails");
-              }}
-            />
+            <ProductItem product={product.item} onPress={() => {}} />
           )}
           keyExtractor={(product: IProduct) => product.id}
         />

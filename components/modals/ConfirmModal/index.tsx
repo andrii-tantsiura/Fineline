@@ -1,11 +1,11 @@
 import { FC } from "react";
 import { Modal, StyleProp, View, ViewStyle } from "react-native";
 
-import { customButtonStyles } from "../../../constants/globalStyles";
 import {
+  customButtonStyles,
   typographyStyle_i4,
   typographyStyle_i9,
-} from "../../../constants/typography";
+} from "../../../constants";
 import { CustomButton, Typography } from "../../common";
 import { ITypographyStyle } from "../../common/Typography/types";
 import styles from "./styles";
