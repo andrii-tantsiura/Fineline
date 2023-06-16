@@ -20,6 +20,10 @@ const containerStyles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: COLORS.neutral_0,
   },
+  i2: {
+    flex: 1,
+    backgroundColor: COLORS.neutral_0,
+  },
 });
 
 export { iconButtonStyles, containerStyles };

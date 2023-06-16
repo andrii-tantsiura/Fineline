@@ -1,14 +1,15 @@
 import { View } from "react-native";
 
-import { containerStyles, typographyStyle_i1 } from "../../../constants";
+import styles from "./styles";
 import { Typography } from "../../common";
+import { typographyStyle_i1 } from "../../../constants";
 
 interface IEmptyViewProps {
   children: React.ReactNode;
 }
 
 export const EmptyView: React.FC<IEmptyViewProps> = ({ children }) => (
-  <View style={containerStyles.i1}>
+  <View style={styles.container}>
     <Typography style={typographyStyle_i1}>{children}</Typography>
   </View>
 );

@@ -1,28 +1,8 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
-import { IProduct } from "../types";
-
-interface IProductsContextProps {
-  products: IProduct[];
-  isProductsLoaded: boolean;
-  errorMessage: string;
-  setProducts: (products: IProduct[]) => void;
-  setErrorMessage: (errorMessage: string) => void;
-}
-
-interface IProductsContextProviderProps {
-  children: ReactNode;
-}
-
-interface IProductsState {
-  products: IProduct[];
-  isProductsLoaded: boolean;
-  errorMessage: string;
-}
-
-type Action =
-  | { type: "SET_PRODUCTS"; payload: IProduct[] }
-  | { type: "SET_ERROR"; payload: string };
+import { IProduct } from "../../types";
+import { IProductsContextProviderProps, IProductsContextProps } from "./types";
+import { productsReducer } from "./reducer";
 
 export const ProductsContext = createContext<IProductsContextProps>({
   products: [],
@@ -31,28 +11,6 @@ export const ProductsContext = createContext<IProductsContextProps>({
   setProducts: (products: IProduct[]) => {},
   setErrorMessage: (errorMessage: string) => {},
 });
-
-function productsReducer(
-  state: IProductsState,
-  action: Action
-): IProductsState {
-  switch (action.type) {
-    case "SET_PRODUCTS":
-      return {
-        products: action.payload,
-        isProductsLoaded: true,
-        errorMessage: "",
-      };
-    case "SET_ERROR":
-      return {
-        products: state.products,
-        isProductsLoaded: false,
-        errorMessage: action.payload,
-      };
-    default:
-      return state;
-  }
-}
 
 export const ProductsContextProvider: React.FC<
   IProductsContextProviderProps

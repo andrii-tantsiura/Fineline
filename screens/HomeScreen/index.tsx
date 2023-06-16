@@ -15,7 +15,7 @@ import { ICategory, IProduct } from "../../types";
 import { CategoryItem } from "./components/CategoryItem";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { EmptyList, DropDownList, IMenuItem } from "../../components/common";
-import { typographyStyle_i19 } from "../../constants";
+import { typographyStyle_i19, containerStyles } from "../../constants";
 import { ProductItem } from "./components/ProductItem";
 import { useCategories, useFilterProducts } from "../../hooks";
 import AlertService from "../../services/AlertService";
@@ -105,7 +105,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <ScrollView
-      style={styles.container}
+      style={containerStyles.i2}
       refreshControl={
         <RefreshControl
           refreshing={isRefreshingData}

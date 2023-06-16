@@ -2,7 +2,7 @@ import { useContext, useCallback } from "react";
 
 import { IProduct } from "../types";
 import ProductsService from "../services/ProductsService";
-import { ProductsContext } from "../store/ProductsContextProvider";
+import { ProductsContext } from "../store/ProductsContext";
 
 export const useProducts = (): [
   IProduct[],
