@@ -1,28 +1,11 @@
-import { ReactNode, createContext, useReducer } from "react";
+import { createContext, useReducer } from "react";
 
+import {
+  ICategoriesContextProviderProps,
+  ICategoriesContextProps,
+} from "./types";
 import { ICategory } from "../../types";
-
-interface ICategoriesContextProps {
-  categories: ICategory[];
-  isCategoriesLoaded: boolean;
-  errorMessage: string;
-  setCategories: (categories: ICategory[]) => void;
-  setErrorMessage: (errorMessage: string) => void;
-}
-
-interface ICategoriesContextProviderProps {
-  children: ReactNode;
-}
-
-interface ICategoriesState {
-  categories: ICategory[];
-  isCategoriesLoaded: boolean;
-  errorMessage: string;
-}
-
-type Action =
-  | { type: "SET_CATEGORIES"; payload: ICategory[] }
-  | { type: "SET_ERROR"; payload: string };
+import { categoriesReducer } from "./reducer";
 
 export const CategoriesContext = createContext<ICategoriesContextProps>({
   categories: [],
@@ -31,28 +14,6 @@ export const CategoriesContext = createContext<ICategoriesContextProps>({
   setCategories: (categories: ICategory[]) => {},
   setErrorMessage: (errorMessage: string) => {},
 });
-
-function categoriesReducer(
-  state: ICategoriesState,
-  action: Action
-): ICategoriesState {
-  switch (action.type) {
-    case "SET_CATEGORIES":
-      return {
-        categories: action.payload,
-        isCategoriesLoaded: true,
-        errorMessage: "",
-      };
-    case "SET_ERROR":
-      return {
-        categories: state.categories,
-        isCategoriesLoaded: false,
-        errorMessage: action.payload,
-      };
-    default:
-      return state;
-  }
-}
 
 export const CategoriesContextProvider: React.FC<
   ICategoriesContextProviderProps

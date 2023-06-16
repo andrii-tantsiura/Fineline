@@ -1,9 +1,10 @@
+import { RefreshControl, ScrollView } from "react-native";
 import { FC, useState, useEffect, useCallback } from "react";
 
 import { useAppInitData } from "../../hooks";
+import { containerStyles } from "../../constants";
 import { EmptyView, LoaderView } from "../../components/sections";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { RefreshControl, ScrollView } from "react-native";
 
 export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
@@ -32,6 +33,7 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
     <>
       {errorMessageDataLoad ? (
         <ScrollView
+          style={containerStyles.i2}
           refreshControl={
             <RefreshControl
               refreshing={isRefreshingData}

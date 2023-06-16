@@ -3,7 +3,7 @@ import { AOResult, getModelsFromFirebase } from "../helpers";
 
 class CategoriesService {
   getCategories = (): Promise<AOResult<ICategory[]>> => {
-    return getModelsFromFirebase("categories.json");
+    return getModelsFromFirebase("/categories.json");
   };
 }
 

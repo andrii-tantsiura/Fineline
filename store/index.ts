@@ -1,2 +1,2 @@
-export * from "./CategoriesContext/CategoriesContextProvider";
-export * from "./ProductsContextProvider";
+export * from "./CategoriesContext";
+export * from "./ProductsContext";
