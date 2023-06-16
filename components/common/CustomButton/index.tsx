@@ -17,7 +17,7 @@ interface ICustomButtonProps {
   children: ViewProps["children"];
   imageSource?: ImageProps["source"];
   disabled?: boolean;
-  style: ViewProps["style"];
+  style?: ViewProps["style"];
   textStyle?: StyleProp<ITypographyStyle>;
   onPress?: () => void;
 }
