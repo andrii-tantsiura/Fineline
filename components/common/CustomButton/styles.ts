@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
+
 import { scaleSize } from "../../../utils/dimensions";
+import { imageStyles } from "../../../constants/globalStyles";
 
 const styles = StyleSheet.create({
   container: {
@@ -9,8 +11,7 @@ const styles = StyleSheet.create({
     columnGap: scaleSize(8),
   },
   icon: {
-    height: scaleSize(20),
-    width: scaleSize(20),
+    ...imageStyles.i1,
   },
   pressed: {
     opacity: 0.75,

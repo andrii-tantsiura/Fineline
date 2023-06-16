@@ -30,6 +30,21 @@ const iconButtonStyles = StyleSheet.create({
   },
 });
 
+const imageStyles = StyleSheet.create({
+  i1: {
+    height: scaleSize(20),
+    width: scaleSize(20),
+  },
+});
+
+const textInputStyles = {
+  i1: {
+    fontSize: FontSizes.i14,
+    fontFamily: FontWeightAliases.Regular,
+    color: COLORS.neutral_100,
+  },
+};
+
 const containerStyles = StyleSheet.create({
   i1: {
     flex: 1,
@@ -44,14 +59,6 @@ const separatorStyles = StyleSheet.create({
     backgroundColor: COLORS.neutral_40,
   },
 });
-
-const textInputStyles = {
-  i1: {
-    fontSize: FontSizes.i14,
-    fontFamily: FontWeightAliases.Regular,
-    color: COLORS.neutral_100,
-  },
-};
 
 const shadowStyles = StyleSheet.create({
   i1: {
@@ -70,4 +77,5 @@ export {
   textInputStyles,
   shadowStyles,
   customButtonStyles,
+  imageStyles,
 };

@@ -13,8 +13,10 @@ const Theme = {
   colors: {
     ...DefaultTheme.colors,
     background: COLORS.neutral_0,
+    primary: COLORS.primary,
   },
 };
+
 const AppRoutes: React.FC<AppRoutesProps> = ({ onReady }) => {
   return (
     <>

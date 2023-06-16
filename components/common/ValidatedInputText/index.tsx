@@ -99,6 +99,11 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
           autoFocus: autoFocus,
         };
 
+        const inputContainerStyle = [
+          styles.inputContainer,
+          (isFocused || Boolean(error)) && styles.errorInputContainer,
+        ];
+
         return (
           <View style={containerStyle}>
             <View style={styles.headerContainer}>
@@ -113,12 +118,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
               )}
             </View>
 
-            <View
-              style={[
-                styles.inputContainer,
-                (isFocused || Boolean(error)) && styles.errorInputContainer,
-              ]}
-            >
+            <View style={inputContainerStyle}>
               {maskConfig === "none" ? (
                 <TextInput {...textInputProps} />
               ) : (

@@ -12,12 +12,12 @@ import styles from "./styles";
 
 interface IConfirmModalProps {
   visible: boolean;
-  title: string;
-  description: string;
+  titleText: string;
+  descriptionText: string;
   confirmText?: string;
+  cancelText?: string;
   confirmButtonTextStyle?: StyleProp<ITypographyStyle>;
   confirmButtonStyle?: StyleProp<ViewStyle>;
-  cancelText?: string;
   cancelButtonTextStyle?: StyleProp<ITypographyStyle>;
   cancelButtonStyle?: StyleProp<ViewStyle>;
   onConfirm: () => void;
@@ -26,12 +26,12 @@ interface IConfirmModalProps {
 
 export const ConfirmModal: FC<IConfirmModalProps> = ({
   visible = false,
-  title,
-  description,
+  titleText,
+  descriptionText,
   confirmText = "Confirm",
+  cancelText = "Cancel",
   confirmButtonStyle = customButtonStyles.i2,
   confirmButtonTextStyle,
-  cancelText = "Cancel",
   cancelButtonTextStyle,
   cancelButtonStyle = customButtonStyles.i3,
   onConfirm,
@@ -46,9 +46,9 @@ export const ConfirmModal: FC<IConfirmModalProps> = ({
   >
     <View style={styles.rootContainer}>
       <View style={styles.dialogContainer}>
-        <Typography style={typographyStyle_i4}>{title}</Typography>
+        <Typography style={typographyStyle_i4}>{titleText}</Typography>
 
-        <Typography style={typographyStyle_i9}>{description}</Typography>
+        <Typography style={typographyStyle_i9}>{descriptionText}</Typography>
 
         <View style={styles.buttonsContainer}>
           <CustomButton

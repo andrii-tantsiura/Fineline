@@ -10,7 +10,7 @@ const NAME_RULES = {
   },
   pattern: {
     value: NAME_REGEX,
-    message: ValidationErrorMessages.UNCORRECTED_FORMAT,
+    message: ValidationErrorMessages.INCORRECT_NAME_FORMAT,
   },
 };
 
@@ -18,7 +18,7 @@ const PHONE_RULES = {
   required: ValidationErrorMessages.REQUIRED,
   pattern: {
     value: PHONE_REGEX,
-    message: ValidationErrorMessages.UNCORRECTED_FORMAT,
+    message: ValidationErrorMessages.INCORRECT_PHONE_FORMAT,
   },
 };
 

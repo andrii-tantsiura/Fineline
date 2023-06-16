@@ -84,8 +84,8 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     <>
       <ConfirmModal
         visible={isClosingPageConfirmationVisible}
-        title="The data will not be saved"
-        description="Do you really want to close the page?"
+        titleText="The data will not be saved"
+        descriptionText="Do you really want to close the page?"
         confirmText="Close"
         onConfirm={confirmClosingPageHandler}
         onCancel={cancelClosingPageHandler}
