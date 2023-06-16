@@ -1,5 +1,6 @@
+import { AOResult } from "../helpers";
 import { IProduct } from "../types";
-import { AOResult, getModelsFromFirebase } from "../helpers";
+import { getModelsFromFirebase } from "../utils";
 
 class ProductsService {
   getProducts = (): Promise<AOResult<IProduct[]>> => {

@@ -1,5 +1,6 @@
+import { AOResult } from "../helpers";
 import { ICategory } from "../types";
-import { AOResult, getModelsFromFirebase } from "../helpers";
+import { getModelsFromFirebase } from "../utils";
 
 class CategoriesService {
   getCategories = (): Promise<AOResult<ICategory[]>> => {

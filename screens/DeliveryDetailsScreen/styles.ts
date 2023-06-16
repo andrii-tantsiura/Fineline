@@ -4,8 +4,7 @@ import {
   customButtonStyles,
   iconButtonStyles,
 } from "../../constants/globalStyles";
-import { scaleSize } from "../../utils/dimensions";
-import { COLORS } from "../../constants";
+import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
   rootContainer: {

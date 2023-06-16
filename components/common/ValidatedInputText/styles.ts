@@ -6,7 +6,7 @@ import {
   typographyStyle_i13,
   typographyStyle_i2,
 } from "../../../constants";
-import { scaleSize } from "../../../utils/dimensions";
+import { scaleSize } from "../../../utils";
 
 const styles = StyleSheet.create({
   headerContainer: {
