@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import COLORS from "../../../constants/colors";
+import { COLORS } from "../../../constants";
 import { textInputStyles } from "../../../constants/globalStyles";
 import {
   typographyStyle_i13,

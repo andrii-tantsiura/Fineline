@@ -1,8 +1,9 @@
 import { StackScreenProps } from "@react-navigation/stack";
 
 export type HomeStackParamList = {
-  Home: undefined;
   DeliveryDetails: undefined;
+  Homepage: undefined;
+  AppDataLoader: undefined;
 };
 
 export type HomeScreenProps = StackScreenProps<HomeStackParamList>;

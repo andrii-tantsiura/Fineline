@@ -15,9 +15,6 @@ import PIC_COURIER from "../../assets/icons/pic_courier.png";
 import PIC_FINE_LINE from "../../assets/icons/pic_fine_line.png";
 import PIC_LOGO from "../../assets/icons/pic_logo.png";
 import PIC_NO_SEARCH_RESULT from "../../assets/icons/pic_no_search_result.png";
-import PIC_PASTRY from "../../assets/icons/pic_pastry.png";
-import PIC_SALAD from "../../assets/icons/pic_salad.png";
-import PIC_SOUP from "../../assets/icons/pic_soup.png";
 import PIC_THANK_YOU from "../../assets/icons/pic_thank_you.png";
 
 export {
@@ -38,8 +35,5 @@ export {
   PIC_FINE_LINE,
   PIC_LOGO,
   PIC_NO_SEARCH_RESULT,
-  PIC_PASTRY,
-  PIC_SALAD,
-  PIC_SOUP,
   PIC_THANK_YOU,
 };

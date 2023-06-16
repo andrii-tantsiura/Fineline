@@ -1,6 +1,6 @@
 import { TextStyle } from "react-native";
 
-import { IColors } from "../../../constants/colors";
+import { IColors } from "../../../constants";
 
 export interface IFontWeights {
   semiBold: string;

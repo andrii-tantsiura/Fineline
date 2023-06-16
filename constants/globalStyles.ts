@@ -1,8 +1,8 @@
 import { StyleSheet } from "react-native";
 
-import COLORS from "./colors";
-import { FontSizes, FontWeightAliases } from "./typography";
 import { scaleSize } from "../utils/dimensions";
+import { COLORS } from "./colors";
+import { FontSizes, FontWeightAliases } from "./typography";
 
 const customButtonStyles = StyleSheet.create({
   i1: {
@@ -28,6 +28,10 @@ const iconButtonStyles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: COLORS.neutral_10,
   },
+  i2: {
+    height: 24,
+    width: 24,
+  },
 });
 
 const imageStyles = StyleSheet.create({
@@ -50,6 +54,11 @@ const containerStyles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: COLORS.neutral_0,
+  },
+  i2: {
+    flex: 1,
+    backgroundColor: COLORS.neutral_0,
   },
 });
 
@@ -71,11 +80,11 @@ const shadowStyles = StyleSheet.create({
 });
 
 export {
-  containerStyles,
   iconButtonStyles,
+  containerStyles,
   separatorStyles,
-  textInputStyles,
   shadowStyles,
-  customButtonStyles,
+  textInputStyles,
   imageStyles,
+  customButtonStyles,
 };

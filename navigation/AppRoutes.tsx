@@ -1,8 +1,8 @@
-import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import { DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
+import { COLORS } from "../constants";
 import HomeStackNavigator from "./HomeStackNavigator";
-import COLORS from "../constants/colors";
 
 type AppRoutesProps = {
   onReady: () => void;

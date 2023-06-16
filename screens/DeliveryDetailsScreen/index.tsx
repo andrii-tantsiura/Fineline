@@ -10,7 +10,10 @@ import {
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
 import { PHONE_MASK } from "../../constants/constants";
-import { separatorStyles } from "../../constants/globalStyles";
+import {
+  iconButtonStyles,
+  separatorStyles,
+} from "../../constants/globalStyles";
 import {
   ADDRESS_RULES,
   COMMENT_RULES,
@@ -72,9 +75,10 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     navigation.setOptions({
       headerLeft: () => (
         <IconButton
-          style={styles.backButton}
           source={IC_ARROW_LEFT_RED}
           onPress={goBackHandler}
+          style={styles.backButton}
+          imageStyle={iconButtonStyles.i2}
         />
       ),
     });

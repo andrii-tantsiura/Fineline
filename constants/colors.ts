@@ -17,7 +17,7 @@ export interface IColors {
   error: string;
 }
 
-const COLORS: IColors = {
+export const COLORS: IColors = {
   primary: "#F54748",
   neutral_0: "#FFFFFF",
   neutral_10: "#F6F8FC",
@@ -35,5 +35,3 @@ const COLORS: IColors = {
   warning: "#F0AD4E",
   error: "#D8093B",
 };
-
-export default COLORS;

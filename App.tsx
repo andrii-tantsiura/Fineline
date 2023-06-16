@@ -1,12 +1,18 @@
 import { useFonts } from "expo-font";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import FlashMessage from "react-native-flash-message";
+import { MenuProvider } from "react-native-popup-menu";
 
-import { FontWeightAliases } from "./constants/typography";
-import { useSplashScreen } from "./hooks/useSplashScreen";
+import { FontWeightAliases } from "./constants";
+import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
+import { CategoriesContextProvider, ProductsContextProvider } from "./store";
 
 export default function App() {
-  const [isAppReady, setIsAppReady, onLayoutRootView] = useSplashScreen();
+  const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
+    useState<boolean>(false);
+
+  const [hideSplashScreen, onLayoutRootView] = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -16,9 +22,21 @@ export default function App() {
 
   useEffect(() => {
     if (isFontsLoaded) {
-      setIsAppReady(true);
+      hideSplashScreen();
+      setIsAppResourcesLoaded(true);
     }
   }, [isFontsLoaded]);
 
-  return isAppReady ? <AppRoutes onReady={onLayoutRootView} /> : null;
+  return (
+    <MenuProvider>
+      <CategoriesContextProvider>
+        <ProductsContextProvider>
+          {isAppResourcesLoaded ? (
+            <AppRoutes onReady={onLayoutRootView} />
+          ) : null}
+        </ProductsContextProvider>
+      </CategoriesContextProvider>
+      <FlashMessage position="top" />
+    </MenuProvider>
+  );
 }

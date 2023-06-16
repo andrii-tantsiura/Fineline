@@ -1,13 +1,13 @@
 import React from "react";
 import { StyleProp, Text, TextProps, TextStyle } from "react-native";
 
-import COLORS from "../../../constants/colors";
 import {
   FontHeights,
   FontSizes,
   FontWeights,
 } from "../../../constants/typography";
 import { ITypographyStyle } from "./types";
+import { COLORS } from "../../../constants";
 
 const createCustomStyle = (style: StyleProp<ITypographyStyle>): TextStyle => {
   let customStyle: TextStyle = {};
