@@ -9,12 +9,13 @@ import {
 } from "react-native";
 
 import styles from "./styles";
+import { PIC_NO_SEARCH_RESULT } from "../../assets/icons";
 import { SortType } from "../../enums";
 import { ICategory, IProduct } from "../../types";
 import { CategoryItem } from "./components/CategoryItem";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { EmptyList, DropDown, IMenuItem } from "../../components/common";
-import { typographyStyle_i19 } from "../../constants/typography";
+import { EmptyList, DropDownList, IMenuItem } from "../../components/common";
+import { typographyStyle_i19 } from "../../constants";
 import { ProductItem } from "./components/ProductItem";
 import { useCategories, useFilterProducts } from "../../hooks";
 import AlertService from "../../services/AlertService";
@@ -50,20 +51,21 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     loadProducts,
   ] = useFilterProducts();
 
-  const [searchNameProduct, setSearchNameProduct] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
     categories[0].id
   );
 
   const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
-  const [countPullToRefresh, setCountPullToRefresh] = useState<number>(0);
+  const [manualDataRefreshCounter, setManualDataRefreshCounter] =
+    useState<number>(0);
 
-  function onSelectSortType(item: IMenuItem) {
+  function onSelectSortTypeHandler(item: IMenuItem) {
     setSortType(item.value);
   }
 
-  function alertIfNeeded() {
+  function showAlertIfNeeded() {
     const isDataLoaded = isCategoriesLoaded && isProductsLoaded;
     const errorMessage = isCategoriesLoaded
       ? errorMessageForCategories
@@ -74,7 +76,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     }
   }
 
-  const onRefreshData = useCallback(async () => {
+  const onRefreshDataHandler = useCallback(async () => {
     setIsRefreshingData(true);
 
     await loadProductsCategories();
@@ -82,11 +84,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
     setIsRefreshingData(false);
 
-    setCountPullToRefresh(
-      (currentCountPullToRefresh) => currentCountPullToRefresh + 1
+    setManualDataRefreshCounter(
+      (currentManualDataRefreshCounter) => currentManualDataRefreshCounter + 1
     );
   }, [
-    countPullToRefresh,
+    manualDataRefreshCounter,
     isCategoriesLoaded,
     isProductsLoaded,
     errorMessageForCategories,
@@ -94,12 +96,12 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   ]);
 
   useEffect(() => {
-    alertIfNeeded();
-  }, [countPullToRefresh]);
+    showAlertIfNeeded();
+  }, [manualDataRefreshCounter]);
 
   useEffect(() => {
-    sortAndFilterProducts(selectedCategoryId, searchNameProduct, sortType);
-  }, [selectedCategoryId, searchNameProduct, sortType]);
+    sortAndFilterProducts(selectedCategoryId, searchQuery, sortType);
+  }, [selectedCategoryId, searchQuery, sortType]);
 
   return (
     <ScrollView
@@ -107,25 +109,26 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       refreshControl={
         <RefreshControl
           refreshing={isRefreshingData}
-          onRefresh={onRefreshData}
+          onRefresh={onRefreshDataHandler}
         />
       }
     >
       <View>
         <View style={styles.searchContainer}>
           <TextInput
-            style={styles.inputSearchNameProduct}
-            onChangeText={setSearchNameProduct}
+            style={styles.inputSearchQuery}
+            onChangeText={setSearchQuery}
             placeholder="Search for food"
-            value={searchNameProduct}
+            value={searchQuery}
           />
-          <DropDown
+
+          <DropDownList
             style={styles.sortSelector}
             textStyle={typographyStyle_i19}
-            onSelect={onSelectSortType}
+            onSelect={onSelectSortTypeHandler}
           >
             {sortTypes}
-          </DropDown>
+          </DropDownList>
         </View>
 
         <FlatList
@@ -147,7 +150,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
         <FlatList
           scrollEnabled={false}
           style={styles.productsList}
-          ListEmptyComponent={<EmptyList />}
+          ListEmptyComponent={
+            <EmptyList
+              imageSource={PIC_NO_SEARCH_RESULT}
+              title="Nothing Found"
+              description="Try to change the request"
+            />
+          }
           data={filteredProducts}
           renderItem={(product: ListRenderItemInfo<IProduct>) => (
             <ProductItem product={product.item} onPress={() => {}} />

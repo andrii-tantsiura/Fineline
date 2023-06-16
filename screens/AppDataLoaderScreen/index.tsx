@@ -1,29 +1,46 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect, useCallback } from "react";
 
-import { AppInitDataComponent } from "./components/AppInitDataComponent";
+import { useAppInitData } from "../../hooks";
 import { EmptyView, LoaderView } from "../../components/sections";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import { RefreshControl, ScrollView } from "react-native";
 
 export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
-  const [errorMessageDataLoad, setErrorMessageDataLoad] = useState<string>("");
+  const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
 
-  function onInitDataHandler(
-    isDataLoaded: boolean,
-    errorMessage: string
-  ): void {
-    setErrorMessageDataLoad(errorMessage);
+  const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
 
+  const onRefreshDataHandler = useCallback(async () => {
+    setIsRefreshingData(true);
+
+    await loadData();
+
+    setIsRefreshingData(false);
+  }, []);
+
+  useEffect(() => {
     if (isDataLoaded) {
       navigation.replace("Homepage");
     }
-  }
+  }, [isDataLoaded]);
+
+  useEffect(() => {
+    loadData();
+  }, []);
 
   return (
     <>
-      <AppInitDataComponent onInitData={onInitDataHandler} />
-
       {errorMessageDataLoad ? (
-        <EmptyView>{errorMessageDataLoad}</EmptyView>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshingData}
+              onRefresh={onRefreshDataHandler}
+            />
+          }
+        >
+          <EmptyView>{errorMessageDataLoad}</EmptyView>
+        </ScrollView>
       ) : (
         <LoaderView />
       )}

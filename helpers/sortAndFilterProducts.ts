@@ -5,15 +5,15 @@ import { sortProductsByType } from "./sortProductsByType";
 export function sortAndFilterProducts(
   products: IProduct[],
   categoryId: string,
-  searchNameProduct: string,
+  searchQuery: string,
   sortType: SortType
 ): IProduct[] {
   let filteredProducts: IProduct[] = products.filter(
     (product) => product.categoryId === categoryId
   );
 
-  if (searchNameProduct !== "") {
-    var regex = RegExp(searchNameProduct, "i");
+  if (searchQuery !== "") {
+    var regex = RegExp(searchQuery, "i");
 
     filteredProducts = filteredProducts.filter(
       (product) =>

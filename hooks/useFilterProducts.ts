@@ -16,32 +16,27 @@ export const useFilterProducts = (): [
     useProducts();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
-  const [searchNameProduct, setSearchNameProduct] = useState<string>("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
 
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
   const sortAndFilter = useCallback(
-    (categoryId: string, searchNameProduct: string, sortType: SortType) => {
+    (categoryId: string, searchQuery: string, sortType: SortType) => {
       setSelectedCategoryId(categoryId);
-      setSearchNameProduct(searchNameProduct);
+      setSearchQuery(searchQuery);
       setSortType(sortType);
 
       setFilteredProducts(
-        sortAndFilterProducts(products, categoryId, searchNameProduct, sortType)
+        sortAndFilterProducts(products, categoryId, searchQuery, sortType)
       );
     },
-    [products, selectedCategoryId, searchNameProduct, sortType]
+    [products, selectedCategoryId, searchQuery, sortType]
   );
 
   useEffect(() => {
     setFilteredProducts(
-      sortAndFilterProducts(
-        products,
-        selectedCategoryId,
-        searchNameProduct,
-        sortType
-      )
+      sortAndFilterProducts(products, selectedCategoryId, searchQuery, sortType)
     );
   }, [products]);
 

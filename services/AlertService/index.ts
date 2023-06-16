@@ -4,7 +4,7 @@ import {
 } from "react-native-flash-message";
 
 import styles from "./styles";
-import COLORS from "../../constants/colors";
+import { COLORS } from "../../constants";
 
 const showMessage = (message: string, type: MessageType) =>
   showFlashMessage({

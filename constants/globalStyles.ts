@@ -1,11 +1,15 @@
 import { StyleSheet } from "react-native";
-import COLORS from "./colors";
+import { COLORS } from "./colors";
 
 const iconButtonStyles = StyleSheet.create({
   i1: {
     padding: 8,
     borderRadius: 8,
     backgroundColor: COLORS.neutral_10,
+  },
+  i2: {
+    height: 24,
+    width: 24,
   },
 });
 

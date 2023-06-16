@@ -6,8 +6,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   image: {
-    width: "15%",
-    height: "100%",
+    resizeMode: "contain",
+    width: 22,
+    height: 22,
   },
 });
 

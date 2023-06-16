@@ -6,7 +6,8 @@ import { IconButton, Typography } from "../../../../components/common";
 import {
   typographyStyle_i17,
   typographyStyle_i12,
-} from "../../../../constants/typography";
+  iconButtonStyles,
+} from "../../../../constants";
 import { IC_SHOPPING_CART_WHITE } from "../../../../assets/icons";
 
 interface IProductItem {
@@ -16,30 +17,32 @@ interface IProductItem {
 
 export const ProductItem: React.FC<IProductItem> = ({
   product,
-  onPress = (product) => {},
+  onPress = (product: IProduct) => {},
 }) => {
-  function onCartPress() {
+  function onCartPressHandler() {
     onPress(product);
   }
 
   return (
-    <View key={product.id} style={styles.wrapperContainer}>
+    <View style={styles.wrapperContainer}>
       <Image
         style={styles.imageProduct}
         source={{
           uri: product.imageUrl,
         }}
       />
+
       <View style={styles.container}>
         <View style={styles.info}>
           <Typography style={typographyStyle_i17}>{product.name}</Typography>
           <Typography style={typographyStyle_i12}>$ {product.price}</Typography>
         </View>
+
         <IconButton
-          onPress={onCartPress}
+          onPress={onCartPressHandler}
           source={IC_SHOPPING_CART_WHITE}
           style={styles.shoppingCart}
-          imageStyle={styles.shoppingCartImage}
+          imageStyle={iconButtonStyles.i2}
         />
       </View>
     </View>

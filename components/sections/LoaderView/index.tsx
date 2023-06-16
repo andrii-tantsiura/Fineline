@@ -1,9 +1,12 @@
-import { ActivityIndicator, Text, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 
-import COLORS, { IColors } from "../../../constants/colors";
 import { Typography } from "../../common";
-import { typographyStyle_i1 } from "../../../constants/typography";
-import styles from "./styles";
+import {
+  COLORS,
+  IColors,
+  typographyStyle_i1,
+  containerStyles,
+} from "../../../constants";
 
 interface ILoaderView {
   message?: string;
@@ -14,7 +17,7 @@ export const LoaderView: React.FC<ILoaderView> = ({
   message = "Loading...",
   spinnerColor = COLORS.neutral_100,
 }) => (
-  <View style={styles.container}>
+  <View style={containerStyles.i1}>
     <ActivityIndicator color={spinnerColor} size="large" />
     <Typography style={typographyStyle_i1}>{message}</Typography>
   </View>

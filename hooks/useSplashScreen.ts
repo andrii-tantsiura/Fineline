@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
-export const useSplashScreen = (): [boolean, () => void, () => void] => {
+export const useSplashScreen = (): [() => void, () => void] => {
   const [isHiddenSplashScreen, setIsHiddenSplashScreen] =
     useState<boolean>(false);
 
@@ -17,5 +17,5 @@ export const useSplashScreen = (): [boolean, () => void, () => void] => {
     }
   }, [isHiddenSplashScreen]);
 
-  return [isHiddenSplashScreen, hideSplashScreen, onLayoutRootView];
+  return [hideSplashScreen, onLayoutRootView];
 };

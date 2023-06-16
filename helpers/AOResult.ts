@@ -1,4 +1,4 @@
-import ERRORS from "../constants/errors";
+import { ERRORS } from "../constants";
 
 export class AOResult<T> {
   public isSuccess: boolean = false;
@@ -22,14 +22,15 @@ export class AOResult<T> {
   }
 
   public getErrorDescription(): string {
-    return (
-      this.exception?.message ?? this.message ?? ERRORS.some_error_occurred
-    );
+    return this.exception?.message ?? this.message ?? ERRORS.someErrorOccurred;
   }
 }
 
+export type FailureCallback = (message: string) => void;
+type AsyncFunc<T> = (onFailure: FailureCallback) => Promise<T>;
+
 export async function ExecuteAsync<T>(
-  func: (onFailure: (message: string) => void) => Promise<T>
+  func: AsyncFunc<T>
 ): Promise<AOResult<T>> {
   const result = new AOResult<T>();
 

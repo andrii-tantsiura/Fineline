@@ -2,20 +2,25 @@ import { View, Image } from "react-native";
 
 import styles from "./styles";
 import { Typography } from "../../../components/common/Typography";
-import {
-  typographyStyle_i6,
-  typographyStyle_i8,
-} from "../../../constants/typography";
-import { PIC_NO_SEARCH_RESULT } from "../../../assets/icons";
+import { typographyStyle_i6, typographyStyle_i8 } from "../../../constants";
 
-export const EmptyList: React.FC = () => {
+interface IEmptyList {
+  imageSource: any;
+  title: string;
+  description: string;
+}
+
+export const EmptyList: React.FC<IEmptyList> = ({
+  imageSource,
+  title,
+  description,
+}) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={PIC_NO_SEARCH_RESULT} />
-      <Typography style={typographyStyle_i6}>Nothing Found</Typography>
-      <Typography style={typographyStyle_i8}>
-        Try to change the request
-      </Typography>
+      <Image style={styles.image} source={imageSource} />
+
+      <Typography style={typographyStyle_i6}>{title}</Typography>
+      <Typography style={typographyStyle_i8}>{description}</Typography>
     </View>
   );
 };

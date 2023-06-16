@@ -17,7 +17,7 @@ export interface IMenuItem {
   value?: any;
 }
 
-interface IDropDown {
+interface IDropDownList {
   children: IMenuItem[];
   style?: StyleProp<ViewStyle>;
   textStyle?: TypographyStyle;
@@ -25,51 +25,52 @@ interface IDropDown {
   onSelect?: (item: IMenuItem) => void;
 }
 
-export const DropDown: React.FC<IDropDown> = ({
-  children,
+export const DropDownList: React.FC<IDropDownList> = ({
+  children: items,
   style,
   textStyle,
   selectedItem,
   onSelect = (item) => {},
 }) => {
-  const items = children;
-
-  if (selectedItem) {
-    selectedItem = items.find((item) => item.value === selectedItem?.value);
-  }
-
-  if (!selectedItem) {
-    selectedItem = items[0];
-  }
+  selectedItem =
+    items.find((item) => item.value === selectedItem?.value) ?? items[0];
 
   const [isOpenedMenu, setIsOpenedMenu] = useState<boolean>(false);
   const [currentSelectedItem, setCurrentSelectedItem] =
     useState<IMenuItem>(selectedItem);
 
-  function onPress(): void {
+  function onToggleMenuVisibilityHandler(): void {
     setIsOpenedMenu(!isOpenedMenu);
   }
 
-  function onSelectedItem(item: IMenuItem): void {
+  function onSelectItemHandler(item: IMenuItem): void {
     setCurrentSelectedItem(item);
     onSelect(item);
   }
 
   return (
     <View style={style}>
-      <View style={styles.selectContainer} onTouchEnd={onPress}>
+      <View
+        style={styles.selectContainer}
+        onTouchEnd={onToggleMenuVisibilityHandler}
+      >
         <Typography style={textStyle}>{currentSelectedItem.text}</Typography>
+
         <Image style={styles.image} source={IC_CHEVRON_DOWN_RED} />
       </View>
-      <Menu opened={isOpenedMenu} onBackdropPress={onPress}>
+
+      <Menu
+        opened={isOpenedMenu}
+        onBackdropPress={onToggleMenuVisibilityHandler}
+      >
         <MenuTrigger text="" />
         <MenuOptions>
           {items.map((item) => (
             <MenuOption
               key={item.value}
               onSelect={() => {
-                onPress();
-                onSelectedItem(item);
+                onToggleMenuVisibilityHandler();
+                onSelectItemHandler(item);
               }}
               text={item.text}
               value={item.value}

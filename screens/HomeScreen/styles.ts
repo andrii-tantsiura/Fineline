@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import COLORS from "../../constants/colors";
+import { COLORS } from "../../constants";
 
 const styles = StyleSheet.create({
   container: {
@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     paddingHorizontal: 18,
   },
-  inputSearchNameProduct: {
+  inputSearchQuery: {
     flex: 1,
     borderColor: COLORS.neutral_40,
     borderRadius: 8,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderColor: COLORS.neutral_40,
     borderRadius: 8,
     borderWidth: 1,
-    width: 120,
+    width: 124,
     padding: 8,
   },
   categoriesList: {

@@ -1,4 +1,4 @@
-import { useContext, useState, useCallback } from "react";
+import { useContext, useCallback } from "react";
 
 import { ICategory } from "../types";
 import CategoriesService from "../services/CategoriesService";
@@ -10,22 +10,23 @@ export const useCategories = (): [
   string,
   () => Promise<void>
 ] => {
-  const categoriesContext = useContext(CategoriesContext);
+  const {
+    categories,
+    isCategoriesLoaded,
+    errorMessage,
+    setCategories,
+    setErrorMessage,
+  } = useContext(CategoriesContext);
 
   const loadProductsCategories = useCallback(async (): Promise<void> => {
     const categories = await CategoriesService.getCategories();
 
     if (categories.isSuccess && categories.result) {
-      categoriesContext.setCategories(categories.result);
+      setCategories(categories.result);
     } else {
-      categoriesContext.setErrorMessage(categories.getErrorDescription());
+      setErrorMessage(categories.getErrorDescription());
     }
-  }, [categoriesContext]);
+  }, []);
 
-  return [
-    categoriesContext.categories,
-    categoriesContext.isCategoriesLoaded,
-    categoriesContext.errorMessage,
-    loadProductsCategories,
-  ];
+  return [categories, isCategoriesLoaded, errorMessage, loadProductsCategories];
 };

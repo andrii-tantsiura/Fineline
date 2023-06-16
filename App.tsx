@@ -5,15 +5,14 @@ import FlashMessage from "react-native-flash-message";
 
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
-import { FontWeightAliases } from "./constants/typography";
+import { FontWeightAliases } from "./constants";
 import { CategoriesContextProvider, ProductsContextProvider } from "./store";
 
 export default function App() {
   const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
     useState<boolean>(false);
 
-  const [isHiddenSplashScreen, hideSplashScreen, onLayoutRootView] =
-    useSplashScreen();
+  const [hideSplashScreen, onLayoutRootView] = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),

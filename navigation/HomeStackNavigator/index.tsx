@@ -5,12 +5,11 @@ import {
 } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
-import { IconButton, Typography } from "../../components/common";
-import { typographyStyle_i4 } from "../../constants/typography";
-import { HomeScreen, AppDataLoaderScreen } from "../../screens";
 import { HomeStackParamList } from "./types";
-import COLORS from "../../constants/colors";
+import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
+import { COLORS, typographyStyle_i4, iconButtonStyles } from "../../constants";
+import { IconButton, Typography } from "../../components/common";
+import { HomeScreen, AppDataLoaderScreen } from "../../screens";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -49,10 +48,7 @@ const HomeStackNavigator: FC = () => (
               marginRight: 18,
               borderRadius: 8,
             }}
-            imageStyle={{
-              height: 24,
-              width: 24,
-            }}
+            imageStyle={iconButtonStyles.i2}
             onPress={() => navigation.navigate("AppDataLoader")}
           />
         ),

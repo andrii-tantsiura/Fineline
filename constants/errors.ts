@@ -1,9 +1,7 @@
 export interface IErrors {
-  some_error_occurred: string;
+  someErrorOccurred: string;
 }
 
-const ERRORS: IErrors = {
-  some_error_occurred: "some error occurred",
+export const ERRORS: IErrors = {
+  someErrorOccurred: "some error occurred",
 };
-
-export default ERRORS;

@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import COLORS from "../../../../constants/colors";
+import { COLORS } from "../../../../constants";
 
 const styles = StyleSheet.create({
   wrapperContainer: {
@@ -31,10 +31,6 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     backgroundColor: COLORS.primary,
-  },
-  shoppingCartImage: {
-    height: 24,
-    width: 24,
   },
 });
 
