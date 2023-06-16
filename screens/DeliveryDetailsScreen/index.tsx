@@ -10,10 +10,7 @@ import {
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
 import { PHONE_MASK } from "../../constants/constants";
-import {
-  iconButtonStyles,
-  separatorStyles,
-} from "../../constants/globalStyles";
+import { separatorStyles } from "../../constants/globalStyles";
 import {
   ADDRESS_RULES,
   COMMENT_RULES,
@@ -73,9 +70,9 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerBackImage: () => (
+      headerLeft: () => (
         <IconButton
-          style={iconButtonStyles.i1}
+          style={styles.backButton}
           source={IC_ARROW_LEFT_RED}
           onPress={goBackHandler}
         />
@@ -141,7 +138,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
               keyboardType="phone-pad"
               placeholder="Enter mobile number"
               rules={PHONE_RULES}
-              maxLength={17}
+              maxLength={16}
             />
 
             <ValidatedInputText

@@ -14,14 +14,11 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   titleLabel: {
-    marginBottom: scaleSize(6),
+    marginBottom: scaleSize(4),
     ...typographyStyle_i13,
   },
   inputContainer: {
     flexDirection: "row",
-    paddingRight: scaleSize(7),
-    paddingTop: 14,
-    paddingBottom: 10,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: COLORS.neutral_40,
@@ -32,7 +29,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingLeft: scaleSize(12),
+    paddingTop: 14,
+    paddingBottom: 10,
     ...textInputStyles.i1,
+  },
+  clearButton: {
+    marginTop: 14,
+    marginRight: scaleSize(7),
   },
   errorLabel: {
     marginTop: scaleSize(6),
