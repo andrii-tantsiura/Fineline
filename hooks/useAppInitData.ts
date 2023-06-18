@@ -15,7 +15,7 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
   const [products, isProductsLoaded, errorMessageForProducts, loadProducts] =
     useProducts();
 
-  const [ads, IsAdsLoaded, errorMessageForAds, loadAds] = useAds();
+  const [ads, isAdsLoaded, errorMessageForAds, loadAds] = useAds();
 
   const loadData = useCallback(async (): Promise<void> => {
     await loadProductsCategories();
@@ -23,7 +23,7 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
     await loadAds();
   }, []);
 
-  const isDataLoaded = isCategoriesLoaded && isProductsLoaded && IsAdsLoaded;
+  const isDataLoaded = isCategoriesLoaded && isProductsLoaded && isAdsLoaded;
   const errorMessage =
     errorMessageForCategories ?? errorMessageForProducts ?? errorMessageForAds;
 

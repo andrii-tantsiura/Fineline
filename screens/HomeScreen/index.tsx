@@ -17,7 +17,7 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { EmptyList, DropDownList, IMenuItem } from "../../components/common";
 import { typographyStyle_i19, containerStyles } from "../../constants";
 import { ProductItem } from "./components/ProductItem";
-import { useCategories, useFilterProducts } from "../../hooks";
+import { useCategories, useFilterProducts, useAds } from "../../hooks";
 import AlertService from "../../services/AlertService";
 
 const sortTypes: IMenuItem[] = [
@@ -35,7 +35,9 @@ const sortTypes: IMenuItem[] = [
   },
 ];
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+export const HomeScreen: FC<HomeScreenProps> = () => {
+  const [ads, isAdsLoaded, errorMessageForAds, loadAds] = useAds();
+
   const [
     categories,
     isCategoriesLoaded,
@@ -66,10 +68,11 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   }
 
   function showAlertIfNeeded() {
-    const isDataLoaded = isCategoriesLoaded && isProductsLoaded;
-    const errorMessage = isCategoriesLoaded
-      ? errorMessageForCategories
-      : errorMessageForProducts;
+    const isDataLoaded = isCategoriesLoaded && isProductsLoaded && isAdsLoaded;
+    const errorMessage =
+      errorMessageForCategories ??
+      errorMessageForProducts ??
+      errorMessageForAds;
 
     if (!isDataLoaded && errorMessage !== "") {
       AlertService.warning(errorMessage);
@@ -81,6 +84,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
     await loadProductsCategories();
     await loadProducts();
+    await loadAds();
 
     setIsRefreshingData(false);
 
@@ -91,8 +95,10 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
     manualDataRefreshCounter,
     isCategoriesLoaded,
     isProductsLoaded,
+    isAdsLoaded,
     errorMessageForCategories,
     errorMessageForProducts,
+    errorMessageForAds,
   ]);
 
   useEffect(() => {
