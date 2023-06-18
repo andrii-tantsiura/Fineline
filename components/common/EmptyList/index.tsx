@@ -1,7 +1,7 @@
 import { View, Image } from "react-native";
 
 import styles from "./styles";
-import { Typography } from "../../../components/common";
+import { Typography } from "../../../components/common/Typography";
 import { typographyStyle_i6, typographyStyle_i8 } from "../../../constants";
 
 interface IEmptyList {

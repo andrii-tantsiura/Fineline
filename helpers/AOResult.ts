@@ -1,4 +1,4 @@
-import { ERRORS } from "../constants";
+import { ERRORS } from "../constants/errors";
 
 export class AOResult<T> {
   public isSuccess: boolean = false;

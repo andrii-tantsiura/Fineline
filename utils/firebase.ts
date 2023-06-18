@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { API_URL } from "../config";
-import { AOResult, ExecuteAsync, FailureCallback } from "../helpers";
+import { AOResult, ExecuteAsync, FailureCallback } from "../helpers/AOResult";
 
 export function firebaseResponseToModels<T>(data: any) {
   const items: Array<T> = [];
