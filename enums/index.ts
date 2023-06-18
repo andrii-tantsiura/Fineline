@@ -1,2 +1,2 @@
 export * from "./SortType";
-export * from "./ValidationMessages";
+export * from "./ValidationErrorMessages";
