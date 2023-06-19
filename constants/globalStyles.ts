@@ -34,13 +34,6 @@ const iconButtonStyles = StyleSheet.create({
   },
 });
 
-const imageStyles = StyleSheet.create({
-  i1: {
-    height: scaleSize(20),
-    width: scaleSize(20),
-  },
-});
-
 const textInputStyles = {
   i1: {
     fontSize: FontSizes.i14,
@@ -85,6 +78,5 @@ export {
   separatorStyles,
   shadowStyles,
   textInputStyles,
-  imageStyles,
   customButtonStyles,
 };

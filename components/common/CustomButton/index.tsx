@@ -8,7 +8,7 @@ import {
   ViewProps,
 } from "react-native";
 
-import { imageStyles, typographyStyle_i3 } from "../../../constants";
+import { iconButtonStyles, typographyStyle_i3 } from "../../../constants";
 import { Typography } from "../Typography";
 import { ITypographyStyle } from "../Typography/types";
 import styles from "./styles";
@@ -39,7 +39,9 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
   return (
     <Pressable style={getStyle} disabled={disabled} onPress={onPress}>
       <Typography style={textStyle}>{children}</Typography>
-      {imageSource && <Image style={imageStyles.i1} source={imageSource} />}
+      {imageSource && (
+        <Image style={iconButtonStyles.i2} source={imageSource} />
+      )}
     </Pressable>
   );
 };

@@ -94,38 +94,32 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
       <View style={styles.rootContainer}>
         <ScrollView>
           <View style={styles.formContainer}>
-            <View style={styles.namesContainer}>
-              <View style={styles.nameContainer}>
-                <ValidatedInputText
-                  containerStyle={styles.inputContainer}
-                  control={control}
-                  trigger={trigger}
-                  resetField={resetField}
-                  name="firstName"
-                  autoCapitalize="words"
-                  autoFocus
-                  title="First Name"
-                  placeholder="Enter first name"
-                  rules={NAME_RULES}
-                />
-              </View>
+            <View style={styles.nameInputsContainer}>
+              <ValidatedInputText
+                control={control}
+                trigger={trigger}
+                resetField={resetField}
+                name="firstName"
+                autoCapitalize="words"
+                autoFocus
+                title="First Name"
+                placeholder="Enter first name"
+                rules={NAME_RULES}
+              />
 
-              <View style={styles.nameContainer}>
-                <ValidatedInputText
-                  control={control}
-                  trigger={trigger}
-                  resetField={resetField}
-                  name="lastName"
-                  title="Last Name"
-                  placeholder="Enter last name"
-                  autoCapitalize="words"
-                  rules={NAME_RULES}
-                />
-              </View>
+              <ValidatedInputText
+                control={control}
+                trigger={trigger}
+                resetField={resetField}
+                name="lastName"
+                title="Last Name"
+                placeholder="Enter last name"
+                autoCapitalize="words"
+                rules={NAME_RULES}
+              />
             </View>
 
             <ValidatedInputText
-              containerStyle={styles.inputContainer}
               control={control}
               trigger={trigger}
               resetField={resetField}
@@ -142,7 +136,6 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
             />
 
             <ValidatedInputText
-              containerStyle={styles.inputContainer}
               control={control}
               trigger={trigger}
               resetField={resetField}
@@ -153,7 +146,6 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
             />
 
             <ValidatedInputText
-              containerStyle={styles.inputContainer}
               textInputStyle={styles.commentTextInput}
               control={control}
               trigger={trigger}

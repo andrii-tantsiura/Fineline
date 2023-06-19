@@ -20,6 +20,9 @@ import { IC_CLOSE_DARK } from "../../../assets/icons";
 import {
   COLORS,
   iconButtonStyles,
+  textInputStyles,
+  typographyStyle_i13,
+  typographyStyle_i2,
   typographyStyle_i22,
 } from "../../../constants";
 import { IconButton } from "../IconButton";
@@ -34,11 +37,11 @@ interface IValidatedInputTextProps extends TextInputProps {
   title?: string;
   maskConfig?: MaskConfig;
   name: string;
+  control: Control<any, any>;
   rules: UseControllerProps["rules"];
   trigger: UseFormTrigger<any>;
-  control: Control<any, any>;
   resetField: UseFormResetField<any>;
-  containerStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   textInputStyle?: StyleProp<TextStyle>;
 }
 
@@ -46,21 +49,15 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   title = "",
   maskConfig = "none",
   name,
-  rules = {},
   control,
+  rules = {},
   trigger,
   resetField,
-  placeholder,
-  autoFocus,
-  autoCapitalize,
-  placeholderTextColor = COLORS.neutral_50,
-  keyboardType = "default",
-  maxLength,
-  multiline,
-  containerStyle,
+  style,
   textInputStyle,
+  placeholderTextColor = COLORS.neutral_50,
   onFocus,
-  onSubmitEditing,
+  ...rest
 }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -79,18 +76,13 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
         fieldState: { error },
       }) => {
         const textInputProps: TextInputProps = {
-          style: [styles.input, textInputStyle],
+          ...rest,
+          style: [textInputStyles.i1, styles.input, textInputStyle],
           cursorColor: COLORS.primary,
           selectionColor: COLORS.primary,
-          maxLength: maxLength,
-          keyboardType: keyboardType,
-          autoCapitalize: autoCapitalize,
           placeholderTextColor: placeholderTextColor,
-          placeholder: placeholder,
-          multiline: multiline,
           value: value,
           onChangeText: onChange,
-          onSubmitEditing: onSubmitEditing,
           onFocus: (e) => {
             onFocus?.(e);
             setIsFocused(true);
@@ -99,18 +91,17 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
             onBlur();
             setIsFocused(false);
           },
-          autoFocus: autoFocus,
         };
 
-        const inputContainerStyle = [
+        const containerStyle = [
           styles.inputContainer,
           (isFocused || Boolean(error)) && styles.errorInputContainer,
         ];
 
         return (
-          <View style={containerStyle}>
+          <View style={[styles.container, style]}>
             <View style={styles.headerContainer}>
-              <Typography textAlign="left" style={styles.titleLabel}>
+              <Typography textAlign="left" style={typographyStyle_i13}>
                 {title}
               </Typography>
 
@@ -121,7 +112,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
               )}
             </View>
 
-            <View style={inputContainerStyle}>
+            <View style={containerStyle}>
               {maskConfig === "none" ? (
                 <TextInput {...textInputProps} />
               ) : (
@@ -134,7 +125,6 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
 
               {value && (
                 <IconButton
-                  style={styles.clearButton}
                   imageStyle={iconButtonStyles.i2}
                   source={IC_CLOSE_DARK}
                   onPress={clearHandler}
@@ -143,7 +133,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
             </View>
 
             {error?.message && (
-              <Typography style={styles.errorLabel}>
+              <Typography style={typographyStyle_i2}>
                 {error?.message}
               </Typography>
             )}

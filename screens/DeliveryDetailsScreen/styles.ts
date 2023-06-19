@@ -15,26 +15,20 @@ const styles = StyleSheet.create({
     ...iconButtonStyles.i1,
   },
   formContainer: {
+    rowGap: scaleSize(18),
     marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
   },
-  namesContainer: {
-    justifyContent: "space-between",
+  nameInputsContainer: {
+    columnGap: 10,
     flexDirection: "row",
-  },
-  nameContainer: {
-    width: "49%",
-  },
-  inputContainer: {
-    marginBottom: scaleSize(18),
   },
   commentTextInput: {
     height: scaleSize(129),
     textAlignVertical: "top",
   },
   button: {
-    marginHorizontal: scaleSize(16),
-    marginVertical: scaleSize(16),
+    margin: scaleSize(16),
     ...customButtonStyles.i1,
   },
 });

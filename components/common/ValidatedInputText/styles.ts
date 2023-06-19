@@ -1,45 +1,31 @@
 import { StyleSheet } from "react-native";
 
-import {
-  COLORS,
-  textInputStyles,
-  typographyStyle_i13,
-  typographyStyle_i2,
-} from "../../../constants";
-import { scaleSize } from "../../../utils";
+import { COLORS } from "../../../constants";
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   headerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  titleLabel: {
-    marginBottom: scaleSize(4),
-    ...typographyStyle_i13,
-  },
   inputContainer: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    marginVertical: 6,
+    paddingTop: 14,
+    paddingBottom: 10,
+    paddingHorizontal: 10,
     borderWidth: 1,
     borderRadius: 8,
     borderColor: COLORS.neutral_40,
   },
-  errorInputContainer: {
-    borderColor: COLORS.error,
-  },
   input: {
     flex: 1,
-    paddingLeft: scaleSize(12),
-    paddingTop: 14,
-    paddingBottom: 10,
-    ...textInputStyles.i1,
   },
-  clearButton: {
-    marginTop: 14,
-    marginRight: scaleSize(7),
-  },
-  errorLabel: {
-    marginTop: scaleSize(6),
-    ...typographyStyle_i2,
+  errorInputContainer: {
+    borderColor: COLORS.error,
   },
 });
 
