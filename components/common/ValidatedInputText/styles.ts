@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../../constants";
 
 const styles = StyleSheet.create({
-  container: {
+  rootContainer: {
     flex: 1,
   },
   headerContainer: {
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
   },
-  errorInputContainer: {
+  highlightedInputContainer: {
     borderColor: COLORS.error,
   },
 });

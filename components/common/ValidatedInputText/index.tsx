@@ -93,13 +93,13 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
           },
         };
 
-        const containerStyle = [
+        const inputContainerStyle = [
           styles.inputContainer,
-          (isFocused || Boolean(error)) && styles.errorInputContainer,
+          (isFocused || Boolean(error)) && styles.highlightedInputContainer,
         ];
 
         return (
-          <View style={[styles.container, style]}>
+          <View style={[styles.rootContainer, style]}>
             <View style={styles.headerContainer}>
               <Typography textAlign="left" style={typographyStyle_i13}>
                 {title}
@@ -112,14 +112,14 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
               )}
             </View>
 
-            <View style={containerStyle}>
+            <View style={inputContainerStyle}>
               {maskConfig === "none" ? (
                 <TextInput {...textInputProps} />
               ) : (
                 <TextInputMask
+                  {...textInputProps}
                   type={maskConfig?.maskType}
                   options={{ mask: maskConfig?.maskValue }}
-                  {...textInputProps}
                 />
               )}
 
