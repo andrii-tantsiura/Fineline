@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
   },
   commentTextInput: {
     height: scaleSize(129),
-    textAlignVertical: "top",
   },
   button: {
     margin: scaleSize(16),

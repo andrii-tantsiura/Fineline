@@ -2,12 +2,17 @@ import { FC, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
-import { IC_ARROW_LEFT_RED, IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
+import {
+  IC_ARROW_LEFT_RED,
+  IC_ARROW_RIGHT_WHITE,
+  IC_SEARCH_LIGHT_GRAY,
+} from "../../assets/icons";
 import {
   CustomButton,
+  IFormController,
   IconButton,
-  ValidatedInputText,
 } from "../../components/common";
+import { CustomTextInput } from "../../components/common/CustomTextInput";
 import { ConfirmModal } from "../../components/modals";
 import { PHONE_MASK, iconButtonStyles, separatorStyles } from "../../constants";
 import {
@@ -26,6 +31,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   const confirmClosingPageHandler = () => {
     setIsClosingConfirmationVisible(false);
+
     navigation.goBack();
   };
 
@@ -33,7 +39,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     setIsClosingConfirmationVisible(false);
   };
 
-  const { control, resetField, handleSubmit, trigger, watch } =
+  const { control, resetField, handleSubmit, trigger, watch, formState } =
     useForm<Delivery>({
       defaultValues: {
         firstName: "",
@@ -45,6 +51,12 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
       mode: "onTouched",
     });
 
+  const hookFormController: IFormController = {
+    control,
+    trigger,
+    resetField,
+  };
+
   const goBackHandler = () => {
     const { firstName, lastName, mobileNumber, address, comment } = watch();
 
@@ -52,7 +64,8 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
       firstName !== "" ||
       lastName !== "" ||
       mobileNumber !== "" ||
-      address !== "";
+      address !== "" ||
+      comment !== "";
 
     if (isAnyDataEntered) {
       setIsClosingConfirmationVisible(true);
@@ -95,22 +108,19 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
         <ScrollView>
           <View style={styles.formContainer}>
             <View style={styles.nameInputsContainer}>
-              <ValidatedInputText
-                control={control}
-                trigger={trigger}
-                resetField={resetField}
+              <CustomTextInput
+                leftImageSource={IC_SEARCH_LIGHT_GRAY}
+                formController={hookFormController}
                 name="firstName"
+                title="First Name"
                 autoCapitalize="words"
                 autoFocus
-                title="First Name"
                 placeholder="Enter first name"
                 rules={NAME_RULES}
               />
 
-              <ValidatedInputText
-                control={control}
-                trigger={trigger}
-                resetField={resetField}
+              <CustomTextInput
+                formController={hookFormController}
                 name="lastName"
                 title="Last Name"
                 placeholder="Enter last name"
@@ -119,10 +129,8 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
               />
             </View>
 
-            <ValidatedInputText
-              control={control}
-              trigger={trigger}
-              resetField={resetField}
+            <CustomTextInput
+              formController={hookFormController}
               name="mobileNumber"
               title="Mobile Number"
               maskConfig={{
@@ -135,21 +143,17 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
               maxLength={16}
             />
 
-            <ValidatedInputText
-              control={control}
-              trigger={trigger}
-              resetField={resetField}
+            <CustomTextInput
+              formController={hookFormController}
               name="address"
               title="Address"
               placeholder="Enter address"
               rules={ADDRESS_RULES}
             />
 
-            <ValidatedInputText
-              textInputStyle={styles.commentTextInput}
-              control={control}
-              trigger={trigger}
-              resetField={resetField}
+            <CustomTextInput
+              style={styles.commentTextInput}
+              formController={hookFormController}
               name="comment"
               title="Comment"
               placeholder="Enter your comment"

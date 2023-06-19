@@ -28,7 +28,7 @@ const headerOptions: StackNavigationOptions = {
 };
 
 const HomeStackNavigator: FC = () => (
-  <HomeStack.Navigator initialRouteName="AppDataLoader">
+  <HomeStack.Navigator initialRouteName="DeliveryDetails">
     <HomeStack.Screen
       name="AppDataLoader"
       component={AppDataLoaderScreen}

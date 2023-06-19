@@ -3,16 +3,11 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "../../../constants";
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
-  headerContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   inputContainer: {
     flexDirection: "row",
+    columnGap: 10,
     justifyContent: "space-between",
+    alignItems: "flex-start",
     marginVertical: 6,
     paddingTop: 14,
     paddingBottom: 10,

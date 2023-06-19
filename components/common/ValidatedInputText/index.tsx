@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   Control,
   Controller,
@@ -7,6 +7,7 @@ import {
 } from "react-hook-form";
 import { UseFormTrigger } from "react-hook-form/dist/types";
 import {
+  Image,
   StyleProp,
   TextInput,
   TextInputProps,
@@ -17,42 +18,36 @@ import {
 import { TextInputMask, TextInputMaskTypeProp } from "react-native-masked-text";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
-import {
-  COLORS,
-  iconButtonStyles,
-  textInputStyles,
-  typographyStyle_i13,
-  typographyStyle_i2,
-  typographyStyle_i22,
-} from "../../../constants";
+import { COLORS, iconButtonStyles, textInputStyles } from "../../../constants";
 import { IconButton } from "../IconButton";
-import { Typography } from "../Typography";
 import styles from "./styles";
 
 type MaskConfig =
   | "none"
   | { maskType: TextInputMaskTypeProp; maskValue?: string };
 
-interface IValidatedInputTextProps extends TextInputProps {
-  title?: string;
-  maskConfig?: MaskConfig;
-  name: string;
+export type IFormController = {
   control: Control<any, any>;
-  rules: UseControllerProps["rules"];
   trigger: UseFormTrigger<any>;
   resetField: UseFormResetField<any>;
+};
+
+export interface IValidatedInputTextProps extends TextInputProps {
+  name: string;
+  maskConfig?: MaskConfig;
+  formController: IFormController;
+  rules?: UseControllerProps["rules"];
+  leftImageSource?: any;
   style?: StyleProp<ViewStyle>;
   textInputStyle?: StyleProp<TextStyle>;
 }
 
 export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
-  title = "",
-  maskConfig = "none",
   name,
-  control,
+  maskConfig = "none",
+  formController: { control, trigger, resetField },
   rules = {},
-  trigger,
-  resetField,
+  leftImageSource,
   style,
   textInputStyle,
   placeholderTextColor = COLORS.neutral_50,
@@ -93,49 +88,34 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
           },
         };
 
-        const inputContainerStyle = [
+        const containerStyle = [
+          style,
           styles.inputContainer,
           (isFocused || Boolean(error)) && styles.highlightedInputContainer,
         ];
 
         return (
-          <View style={[styles.rootContainer, style]}>
-            <View style={styles.headerContainer}>
-              <Typography textAlign="left" style={typographyStyle_i13}>
-                {title}
-              </Typography>
+          <View style={containerStyle}>
+            {leftImageSource && (
+              <Image style={iconButtonStyles.i2} source={leftImageSource} />
+            )}
 
-              {!rules.required && (
-                <Typography textAlign="left" style={typographyStyle_i22}>
-                  Optional
-                </Typography>
-              )}
-            </View>
+            {maskConfig === "none" ? (
+              <TextInput {...textInputProps} />
+            ) : (
+              <TextInputMask
+                {...textInputProps}
+                type={maskConfig?.maskType}
+                options={{ mask: maskConfig?.maskValue }}
+              />
+            )}
 
-            <View style={inputContainerStyle}>
-              {maskConfig === "none" ? (
-                <TextInput {...textInputProps} />
-              ) : (
-                <TextInputMask
-                  {...textInputProps}
-                  type={maskConfig?.maskType}
-                  options={{ mask: maskConfig?.maskValue }}
-                />
-              )}
-
-              {value && (
-                <IconButton
-                  imageStyle={iconButtonStyles.i2}
-                  source={IC_CLOSE_DARK}
-                  onPress={clearHandler}
-                />
-              )}
-            </View>
-
-            {error?.message && (
-              <Typography style={typographyStyle_i2}>
-                {error?.message}
-              </Typography>
+            {value && (
+              <IconButton
+                imageStyle={iconButtonStyles.i2}
+                source={IC_CLOSE_DARK}
+                onPress={clearHandler}
+              />
             )}
           </View>
         );
