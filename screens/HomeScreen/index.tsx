@@ -48,10 +48,6 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     setSortType(item.value);
   }
 
-  function onSelectCategoryHandler(id: string) {
-    setSelectedCategoryId(id);
-  }
-
   function showAlertIfNeeded() {
     if (!isDataLoaded && errorMessageDataLoad !== "") {
       AlertService.warning(errorMessageDataLoad);
@@ -106,7 +102,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
         <CategoriesList
           selectedCategoryId={selectedCategoryId}
-          onSelect={onSelectCategoryHandler}
+          onSelect={setSelectedCategoryId}
         />
 
         {/* TODO: onPressProduct */}

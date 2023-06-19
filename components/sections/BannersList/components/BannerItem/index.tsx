@@ -1,7 +1,10 @@
-import { Image, View } from "react-native";
+import { ImageBackground } from "react-native";
 
 import styles from "./styles";
+import { IC_CLOSE_WHITE } from "../../../../../assets/icons";
+import { iconButtonStyles } from "../../../../../constants";
 import { IBanner } from "../../../../../types";
+import { IconButton } from "../../../../common";
 
 interface IBannerItem {
   banner: IBanner;
@@ -13,13 +16,17 @@ export const BannerItem: React.FC<IBannerItem> = ({
   onClose = () => {},
 }) => {
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        source={{
-          uri: banner.imageUrl,
-        }}
+    <ImageBackground
+      style={styles.container}
+      source={{
+        uri: banner.imageUrl,
+      }}
+    >
+      <IconButton
+        imageStyle={iconButtonStyles.i2}
+        source={IC_CLOSE_WHITE}
+        onPress={onClose}
       />
-    </View>
+    </ImageBackground>
   );
 };

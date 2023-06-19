@@ -4,12 +4,10 @@ const styles = StyleSheet.create({
   container: {
     height: 125,
     borderRadius: 8,
+    overflow: "hidden",
+    padding: 8,
+    alignItems: "flex-end",
     marginBottom: 16,
-  },
-  image: {
-    resizeMode: "contain",
-    height: "100%",
-    width: "100%",
   },
 });
 
