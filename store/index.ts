@@ -1,3 +1,3 @@
 export * from "./CategoriesContext";
 export * from "./ProductsContext";
-export * from "./AdsContext";
+export * from "./BannersContext";

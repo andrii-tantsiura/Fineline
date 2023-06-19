@@ -1,3 +1,3 @@
 export * from "./category";
 export * from "./product";
-export * from "./ads";
+export * from "./banner";

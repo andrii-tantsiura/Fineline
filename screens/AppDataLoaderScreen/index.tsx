@@ -1,6 +1,7 @@
 import { RefreshControl, ScrollView } from "react-native";
 import { FC, useState, useEffect, useCallback } from "react";
 
+import styles from "./styles";
 import { useAppInitData } from "../../hooks";
 import { containerStyles } from "../../constants";
 import { EmptyView, LoaderView } from "../../components/sections";
@@ -31,21 +32,21 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <>
-      {errorMessageDataLoad ? (
-        <ScrollView
-          style={containerStyles.i2}
-          refreshControl={
-            <RefreshControl
-              refreshing={isRefreshingData}
-              onRefresh={onRefreshDataHandler}
-            />
-          }
-        >
-          <EmptyView>{errorMessageDataLoad}</EmptyView>
-        </ScrollView>
-      ) : (
-        <LoaderView />
-      )}
+      <ScrollView
+        style={containerStyles.i2}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshingData}
+            onRefresh={onRefreshDataHandler}
+          />
+        }
+      >
+        {errorMessageDataLoad ? (
+          <EmptyView style={styles.container}>{errorMessageDataLoad}</EmptyView>
+        ) : (
+          <LoaderView style={styles.container} />
+        )}
+      </ScrollView>
     </>
   );
 };

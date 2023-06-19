@@ -9,7 +9,7 @@ import { FontWeightAliases } from "./constants";
 import {
   CategoriesContextProvider,
   ProductsContextProvider,
-  AdsContextProvider,
+  BannersContextProvider,
 } from "./store";
 
 export default function App() {
@@ -33,7 +33,7 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <AdsContextProvider>
+      <BannersContextProvider>
         <CategoriesContextProvider>
           <ProductsContextProvider>
             {isAppResourcesLoaded ? (
@@ -41,7 +41,7 @@ export default function App() {
             ) : null}
           </ProductsContextProvider>
         </CategoriesContextProvider>
-      </AdsContextProvider>
+      </BannersContextProvider>
       <FlashMessage position="top" />
     </MenuProvider>
   );

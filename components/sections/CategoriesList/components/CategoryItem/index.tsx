@@ -1,13 +1,13 @@
 import { View, Image } from "react-native";
 
 import styles from "./styles";
-import { ICategory } from "../../../../types";
-import { Typography } from "../../../../components/common";
-import { typographyStyle_i9 } from "../../../../constants";
+import { ICategory } from "../../../../../types";
+import { Typography } from "../../../../common";
+import { typographyStyle_i9 } from "../../../../../constants";
 
 interface ICategoryItem {
   category: ICategory;
-  selectedCategoryId: string;
+  selectedCategoryId?: string;
   onPress: () => void;
 }
 
@@ -22,6 +22,7 @@ export const CategoryItem: React.FC<ICategoryItem> = ({
         styles.container,
         selectedCategoryId === category.id && styles.selectedContainer,
       ]}
+      onTouchStart={onPress}
     >
       <Image
         style={styles.image}
@@ -30,9 +31,7 @@ export const CategoryItem: React.FC<ICategoryItem> = ({
         }}
       />
 
-      <Typography style={typographyStyle_i9} onPress={onPress}>
-        {category.name}
-      </Typography>
+      <Typography style={typographyStyle_i9}>{category.name}</Typography>
     </View>
   );
 };
