@@ -1,10 +1,11 @@
 import { IBanner } from "../types";
 import { StorageItem } from "../enums";
 import {
+  AOResult,
   getItemFromAsyncStorage,
   storeItemToAsyncStorage,
-} from "../helpers/AsyncStorage";
-import { AOResult, getModelsFromFirebase } from "../helpers";
+} from "../helpers";
+import { getModelsFromFirebase } from "../utils";
 
 class BannersService {
   getBanners = async (): Promise<AOResult<IBanner[]>> => {

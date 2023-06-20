@@ -10,7 +10,7 @@ import { useState } from "react";
 import styles from "./styles";
 import { IC_CHEVRON_DOWN_RED } from "../../../assets/icons";
 import { Typography } from "../Typography";
-import { TypographyStyle } from "../Typography/types";
+import { ITypographyStyle } from "../Typography/types";
 
 export interface IMenuItem {
   text: string;
@@ -20,7 +20,7 @@ export interface IMenuItem {
 interface IDropDownList {
   children: IMenuItem[];
   style?: StyleProp<ViewStyle>;
-  textStyle?: TypographyStyle;
+  textStyle?: ITypographyStyle;
   selectedItem?: IMenuItem;
   onSelect?: (item: IMenuItem) => void;
 }

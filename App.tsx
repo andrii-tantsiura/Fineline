@@ -1,11 +1,11 @@
 import { useFonts } from "expo-font";
 import { useEffect, useState } from "react";
-import { MenuProvider } from "react-native-popup-menu";
 import FlashMessage from "react-native-flash-message";
+import { MenuProvider } from "react-native-popup-menu";
 
+import { FontWeightAliases } from "./constants";
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
-import { FontWeightAliases } from "./constants";
 import {
   CategoriesContextProvider,
   ProductsContextProvider,

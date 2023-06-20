@@ -5,11 +5,15 @@ import {
 } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { HomeStackParamList } from "./types";
 import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
-import { COLORS, typographyStyle_i4, iconButtonStyles } from "../../constants";
 import { IconButton, Typography } from "../../components/common";
-import { HomeScreen, AppDataLoaderScreen } from "../../screens";
+import { COLORS, iconButtonStyles, typographyStyle_i4 } from "../../constants";
+import {
+  AppDataLoaderScreen,
+  DeliveryDetailsScreen,
+  HomeScreen,
+} from "../../screens";
+import { HomeStackParamList } from "./types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -53,6 +57,15 @@ const HomeStackNavigator: FC = () => (
           />
         ),
       })}
+    />
+
+    <HomeStack.Screen
+      name="DeliveryDetails"
+      component={DeliveryDetailsScreen}
+      options={{
+        title: "Delivery Information",
+        ...headerOptions,
+      }}
     />
   </HomeStack.Navigator>
 );

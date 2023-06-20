@@ -23,7 +23,7 @@ export interface IFontHeights {
   i28: number;
 }
 
-export interface TypographyStyle
+export interface ITypographyStyle
   extends Omit<TextStyle, "fontWeight" | "fontSize" | "color" | "lineHeight"> {
   fontWeight?: keyof IFontWeights;
   fontSize?: keyof IFontSizes;
