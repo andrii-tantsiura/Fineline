@@ -8,15 +8,11 @@ import { useBanners } from "../../../hooks";
 interface IBannersList {}
 
 export const BannersList: React.FC<IBannersList> = () => {
-  const [banners] = useBanners();
-
-  function onCloseBannerHandler(bannerId: string) {
-    console.log(bannerId);
-  }
+  const [banners, isBannersLoaded, errorMessage, closeBanner] = useBanners();
 
   const renderBanner = (banner: ListRenderItemInfo<IBanner>) => (
     <BannerItem
-      onClose={() => onCloseBannerHandler(banner.item.id)}
+      onClose={() => closeBanner(banner.item.id)}
       banner={banner.item}
     />
   );

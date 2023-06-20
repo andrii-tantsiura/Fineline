@@ -15,8 +15,13 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
   const [products, isProductsLoaded, errorMessageForProducts, loadProducts] =
     useProducts();
 
-  const [banners, isBannersLoaded, errorMessageForBanners, loadBanners] =
-    useBanners();
+  const [
+    banners,
+    isBannersLoaded,
+    errorMessageForBanners,
+    closeBanner,
+    loadBanners,
+  ] = useBanners();
 
   const loadData = useCallback(async (): Promise<void> => {
     await loadProductsCategories();

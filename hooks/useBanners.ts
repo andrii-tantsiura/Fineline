@@ -8,6 +8,7 @@ export const useBanners = (): [
   IBanner[],
   boolean,
   string,
+  (bannerId: string) => Promise<void>,
   () => Promise<void>
 ] => {
   const {
@@ -19,14 +20,20 @@ export const useBanners = (): [
   } = useContext(BannersContext);
 
   const loadBanners = useCallback(async (): Promise<void> => {
-    const banners = await BannersService.getBanners();
+    const resultOfReceivingBanners = await BannersService.getBanners();
 
-    if (banners.isSuccess && banners.result) {
-      setBanners(banners.result);
+    if (resultOfReceivingBanners.isSuccess && resultOfReceivingBanners.result) {
+      setBanners(resultOfReceivingBanners.result);
     } else {
-      setErrorMessage(banners.getErrorDescription());
+      setErrorMessage(resultOfReceivingBanners.getErrorDescription());
     }
   }, []);
 
-  return [banners, isBannersLoaded, errorMessage, loadBanners];
+  const closeBanner = useCallback(async (bannerId: string): Promise<void> => {
+    await BannersService.closeBanner(bannerId);
+
+    setBanners(banners.filter((banner) => banner.id !== bannerId));
+  }, []);
+
+  return [banners, isBannersLoaded, errorMessage, closeBanner, loadBanners];
 };
