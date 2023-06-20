@@ -19,12 +19,13 @@ export const useCategories = (): [
   } = useContext(CategoriesContext);
 
   const loadProductsCategories = useCallback(async (): Promise<void> => {
-    const categories = await CategoriesService.getCategories();
+    const { isSuccess, result, getErrorDescription } =
+      await CategoriesService.getCategories();
 
-    if (categories.isSuccess && categories.result) {
-      setCategories(categories.result);
+    if (isSuccess && result) {
+      setCategories(result);
     } else {
-      setErrorMessage(categories.getErrorDescription());
+      setErrorMessage(getErrorDescription());
     }
   }, []);
 

@@ -20,12 +20,13 @@ export const useBanners = (): [
   } = useContext(BannersContext);
 
   const loadBanners = useCallback(async (): Promise<void> => {
-    const resultOfReceivingBanners = await BannersService.getBanners();
+    const { isSuccess, result, getErrorDescription } =
+      await BannersService.getBanners();
 
-    if (resultOfReceivingBanners.isSuccess && resultOfReceivingBanners.result) {
-      setBanners(resultOfReceivingBanners.result);
+    if (isSuccess && result) {
+      setBanners(result);
     } else {
-      setErrorMessage(resultOfReceivingBanners.getErrorDescription());
+      setErrorMessage(getErrorDescription());
     }
   }, []);
 

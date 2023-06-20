@@ -10,10 +10,10 @@ interface IBannersList {}
 export const BannersList: React.FC<IBannersList> = () => {
   const [banners, isBannersLoaded, errorMessage, closeBanner] = useBanners();
 
-  const renderBanner = (banner: ListRenderItemInfo<IBanner>) => (
+  const renderBanner = (bannerData: ListRenderItemInfo<IBanner>) => (
     <BannerItem
-      onClose={() => closeBanner(banner.item.id)}
-      banner={banner.item}
+      onClose={() => closeBanner(bannerData.item.id)}
+      banner={bannerData.item}
     />
   );
 

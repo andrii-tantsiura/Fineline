@@ -33,10 +33,10 @@ export const ProductsList: React.FC<IProductsList> = ({
     sortAndFilterProducts(selectedCategoryId, searchQuery, sortType);
   }, [selectedCategoryId, searchQuery, sortType]);
 
-  const renderProduct = (product: ListRenderItemInfo<IProduct>) => (
+  const renderProduct = (productData: ListRenderItemInfo<IProduct>) => (
     <ProductItem
-      product={product.item}
-      onPress={() => onPressProduct(product.item)}
+      product={productData.item}
+      onPress={() => onPressProduct(productData.item)}
     />
   );
 

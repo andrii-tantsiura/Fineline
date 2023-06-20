@@ -14,7 +14,7 @@ class BannersService {
 
     if (resultOfReceivingBanners.isSuccess && resultOfReceivingBanners.result) {
       const closedBanners: string[] | null = await getItemFromAsyncStorage(
-        StorageItem.BANNERS
+        StorageItem.CLOSED_BANNERS
       );
 
       if (closedBanners) {
@@ -30,13 +30,13 @@ class BannersService {
 
   closeBanner = async (bannerId: string): Promise<void> => {
     let closedBanners: string[] | null = await getItemFromAsyncStorage(
-      StorageItem.BANNERS
+      StorageItem.CLOSED_BANNERS
     );
 
     closedBanners ??= [];
     closedBanners.push(bannerId);
 
-    await storeItemToAsyncStorage(StorageItem.BANNERS, closedBanners);
+    await storeItemToAsyncStorage(StorageItem.CLOSED_BANNERS, closedBanners);
   };
 }
 

@@ -16,17 +16,17 @@ export const CategoriesList: React.FC<ICategoriesList> = ({
 }) => {
   const [categories] = useCategories();
 
-  const renderCategory = (category: ListRenderItemInfo<ICategory>) => (
+  const renderCategory = (categoryData: ListRenderItemInfo<ICategory>) => (
     <CategoryItem
-      onPress={() => onSelect(category.item.id)}
-      category={category.item}
+      onPress={() => onSelect(categoryData.item.id)}
+      category={categoryData.item}
       selectedCategoryId={selectedCategoryId}
     />
   );
 
   return (
     <FlatList
-      horizontal={true}
+      horizontal
       style={styles.container}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}

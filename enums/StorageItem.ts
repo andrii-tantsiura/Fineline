@@ -1,3 +1,3 @@
 export enum StorageItem {
-  BANNERS = "@storage_Banners",
+  CLOSED_BANNERS = "@storage_Banners",
 }

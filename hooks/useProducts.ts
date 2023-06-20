@@ -19,12 +19,13 @@ export const useProducts = (): [
   } = useContext(ProductsContext);
 
   const loadProducts = useCallback(async (): Promise<void> => {
-    const products = await ProductsService.getProducts();
+    const { isSuccess, result, getErrorDescription } =
+      await ProductsService.getProducts();
 
-    if (products.isSuccess && products.result) {
-      setProducts(products.result);
+    if (isSuccess && result) {
+      setProducts(result);
     } else {
-      setErrorMessage(products.getErrorDescription());
+      setErrorMessage(getErrorDescription());
     }
   }, []);
 

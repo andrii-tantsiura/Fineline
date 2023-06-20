@@ -14,19 +14,17 @@ interface IBannerItem {
 export const BannerItem: React.FC<IBannerItem> = ({
   banner,
   onClose = () => {},
-}) => {
-  return (
-    <ImageBackground
-      style={styles.container}
-      source={{
-        uri: banner.imageUrl,
-      }}
-    >
-      <IconButton
-        imageStyle={iconButtonStyles.i2}
-        source={IC_CLOSE_WHITE}
-        onPress={onClose}
-      />
-    </ImageBackground>
-  );
-};
+}) => (
+  <ImageBackground
+    style={styles.container}
+    source={{
+      uri: banner.imageUrl,
+    }}
+  >
+    <IconButton
+      imageStyle={iconButtonStyles.i2}
+      source={IC_CLOSE_WHITE}
+      onPress={onClose}
+    />
+  </ImageBackground>
+);
