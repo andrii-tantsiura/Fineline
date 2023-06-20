@@ -11,6 +11,7 @@ import { COLORS, iconButtonStyles, typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
+  SuccessfulPaymentScreen,
   HomeScreen,
 } from "../../screens";
 import { HomeStackParamList } from "./types";
@@ -33,8 +34,7 @@ const HomeStackNavigator: FC = () => (
       name="AppDataLoader"
       component={AppDataLoaderScreen}
       options={{
-        ...headerOptions,
-        headerTitle: "",
+        headerShown: false,
       }}
     />
 
@@ -53,7 +53,9 @@ const HomeStackNavigator: FC = () => (
               borderRadius: 8,
             }}
             imageStyle={iconButtonStyles.i2}
-            onPress={() => navigation.navigate("AppDataLoader")}
+            onPress={() =>
+              navigation.navigate("SuccessfulPaymentScreen", { orderId: 253 })
+            }
           />
         ),
       })}
@@ -65,6 +67,14 @@ const HomeStackNavigator: FC = () => (
       options={{
         title: "Delivery Information",
         ...headerOptions,
+      }}
+    />
+
+    <HomeStack.Screen
+      name="SuccessfulPaymentScreen"
+      component={SuccessfulPaymentScreen}
+      options={{
+        headerShown: false,
       }}
     />
   </HomeStack.Navigator>
