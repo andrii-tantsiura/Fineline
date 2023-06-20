@@ -16,13 +16,13 @@ export const CategoryItem: React.FC<ICategoryItem> = ({
   selectedCategoryId,
   onPress,
 }) => {
-  const stylesView = [
+  const viewStyles = [
     styles.container,
     selectedCategoryId === category.id && styles.selectedContainer,
   ];
 
   return (
-    <View style={stylesView} onTouchStart={onPress}>
+    <View style={viewStyles} onTouchStart={onPress}>
       <Image
         style={styles.image}
         source={{
