@@ -1,24 +1,19 @@
 import { FC, useState, useEffect, useCallback } from "react";
-import {
-  View,
-  TextInput,
-  FlatList,
-  ListRenderItemInfo,
-  ScrollView,
-  RefreshControl,
-} from "react-native";
+import { View, TextInput, ScrollView, RefreshControl } from "react-native";
 
 import styles from "./styles";
-import { PIC_NO_SEARCH_RESULT } from "../../assets/icons";
 import { SortType } from "../../enums";
-import { ICategory, IProduct } from "../../types";
-import { CategoryItem } from "./components/CategoryItem";
+import { IProduct } from "../../types";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { EmptyList, DropDownList, IMenuItem } from "../../components/common";
+import { DropDownList, IMenuItem } from "../../components/common";
 import { typographyStyle_i19, containerStyles } from "../../constants";
-import { ProductItem } from "./components/ProductItem";
-import { useCategories, useFilterProducts } from "../../hooks";
+import { useAppInitData, useCategories } from "../../hooks";
 import AlertService from "../../services/AlertService";
+import {
+  CategoriesList,
+  ProductsList,
+  BannersList,
+} from "../../components/sections";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -35,21 +30,9 @@ const sortTypes: IMenuItem[] = [
   },
 ];
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
-  const [
-    categories,
-    isCategoriesLoaded,
-    errorMessageForCategories,
-    loadProductsCategories,
-  ] = useCategories();
-
-  const [
-    filteredProducts,
-    isProductsLoaded,
-    errorMessageForProducts,
-    sortAndFilterProducts,
-    loadProducts,
-  ] = useFilterProducts();
+export const HomeScreen: FC<HomeScreenProps> = () => {
+  const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
+  const [categories] = useCategories();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
@@ -66,42 +49,26 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   }
 
   function showAlertIfNeeded() {
-    const isDataLoaded = isCategoriesLoaded && isProductsLoaded;
-    const errorMessage = isCategoriesLoaded
-      ? errorMessageForCategories
-      : errorMessageForProducts;
-
-    if (!isDataLoaded && errorMessage !== "") {
-      AlertService.warning(errorMessage);
+    if (!isDataLoaded && errorMessageDataLoad !== "") {
+      AlertService.warning(errorMessageDataLoad);
     }
   }
 
   const onRefreshDataHandler = useCallback(async () => {
     setIsRefreshingData(true);
 
-    await loadProductsCategories();
-    await loadProducts();
+    await loadData();
 
     setIsRefreshingData(false);
 
     setManualDataRefreshCounter(
       (currentManualDataRefreshCounter) => currentManualDataRefreshCounter + 1
     );
-  }, [
-    manualDataRefreshCounter,
-    isCategoriesLoaded,
-    isProductsLoaded,
-    errorMessageForCategories,
-    errorMessageForProducts,
-  ]);
+  }, [manualDataRefreshCounter, isDataLoaded, errorMessageDataLoad]);
 
   useEffect(() => {
     showAlertIfNeeded();
   }, [manualDataRefreshCounter]);
-
-  useEffect(() => {
-    sortAndFilterProducts(selectedCategoryId, searchQuery, sortType);
-  }, [selectedCategoryId, searchQuery, sortType]);
 
   return (
     <ScrollView
@@ -114,6 +81,8 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
       }
     >
       <View>
+        <BannersList />
+
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.inputSearchQuery}
@@ -131,37 +100,17 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           </DropDownList>
         </View>
 
-        <FlatList
-          horizontal={true}
-          style={styles.categoriesList}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          data={categories}
-          renderItem={(category: ListRenderItemInfo<ICategory>) => (
-            <CategoryItem
-              onPress={() => setSelectedCategoryId(category.item.id)}
-              category={category.item}
-              selectedCategoryId={selectedCategoryId}
-            />
-          )}
-          keyExtractor={(product: ICategory) => product.id}
+        <CategoriesList
+          selectedCategoryId={selectedCategoryId}
+          onSelect={setSelectedCategoryId}
         />
 
-        <FlatList
-          scrollEnabled={false}
-          style={styles.productsList}
-          ListEmptyComponent={
-            <EmptyList
-              imageSource={PIC_NO_SEARCH_RESULT}
-              title="Nothing Found"
-              description="Try to change the request"
-            />
-          }
-          data={filteredProducts}
-          renderItem={(product: ListRenderItemInfo<IProduct>) => (
-            <ProductItem product={product.item} onPress={() => {}} />
-          )}
-          keyExtractor={(product: IProduct) => product.id}
+        {/* TODO: onPressProduct */}
+        <ProductsList
+          selectedCategoryId={selectedCategoryId}
+          searchQuery={searchQuery}
+          sortType={sortType}
+          onPressProduct={(product: IProduct) => {}}
         />
       </View>
     </ScrollView>

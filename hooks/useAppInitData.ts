@@ -2,6 +2,7 @@ import { useCallback } from "react";
 
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
+import { useBanners } from "./useBanners";
 
 export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
   const [
@@ -14,15 +15,26 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
   const [products, isProductsLoaded, errorMessageForProducts, loadProducts] =
     useProducts();
 
+  const [
+    banners,
+    isBannersLoaded,
+    errorMessageForBanners,
+    closeBanner,
+    loadBanners,
+  ] = useBanners();
+
   const loadData = useCallback(async (): Promise<void> => {
     await loadProductsCategories();
     await loadProducts();
+    await loadBanners();
   }, []);
 
-  const isDataLoaded = isCategoriesLoaded && isProductsLoaded;
-  const errorMessage = isProductsLoaded
-    ? errorMessageForCategories
-    : errorMessageForProducts;
+  const isDataLoaded =
+    isCategoriesLoaded && isProductsLoaded && isBannersLoaded;
+  const errorMessage =
+    errorMessageForCategories ??
+    errorMessageForProducts ??
+    errorMessageForBanners;
 
   return [isDataLoaded, errorMessage, loadData];
 };

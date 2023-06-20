@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     columnGap: 13,
-    paddingTop: 18,
+    paddingTop: 16,
     paddingHorizontal: 18,
   },
   inputSearchQuery: {
@@ -23,15 +23,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 124,
     padding: 8,
-  },
-  categoriesList: {
-    maxHeight: 45,
-    marginTop: 24,
-    marginLeft: 18,
-  },
-  productsList: {
-    flex: 1,
-    margin: 18,
   },
 });
 
