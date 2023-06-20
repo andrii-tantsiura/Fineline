@@ -54,7 +54,7 @@ const HomeStackNavigator: FC = () => (
             }}
             imageStyle={iconButtonStyles.i2}
             onPress={() =>
-              navigation.navigate("SuccessfulPaymentScreen", { orderId: 253 })
+              navigation.navigate("SuccessfulPayment", { orderId: 253 })
             }
           />
         ),
@@ -71,7 +71,7 @@ const HomeStackNavigator: FC = () => (
     />
 
     <HomeStack.Screen
-      name="SuccessfulPaymentScreen"
+      name="SuccessfulPayment"
       component={SuccessfulPaymentScreen}
       options={{
         headerShown: false,

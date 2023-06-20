@@ -1,6 +1,7 @@
-import { FlatList, ListRenderItemInfo, Dimensions } from "react-native";
+import { FlatList, ListRenderItemInfo } from "react-native";
 
 import styles from "./styles";
+import { screenWidth } from "../../../utils";
 import { IBanner } from "../../../types";
 import { BannerItem } from "./components/BannerItem";
 import { useBanners } from "../../../hooks";
@@ -8,13 +9,13 @@ import { useBanners } from "../../../hooks";
 interface IBannersList {}
 
 export const BannersList: React.FC<IBannersList> = () => {
-  const { width: screenWidth } = Dimensions.get("window");
+  const flatListMargin = 36;
 
   const [banners, isBannersLoaded, errorMessage, closeBanner] = useBanners();
 
   const renderBanner = (bannerData: ListRenderItemInfo<IBanner>) => (
     <BannerItem
-      width={screenWidth - 36}
+      width={screenWidth - flatListMargin}
       banner={bannerData.item}
       onClose={() => closeBanner(bannerData.item.id)}
     />
