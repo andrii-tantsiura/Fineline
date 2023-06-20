@@ -31,21 +31,22 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   return (
     <>
-      {errorMessageDataLoad ? (
-        <ScrollView
-          style={containerStyles.i2}
-          refreshControl={
-            <RefreshControl
-              refreshing={isRefreshingData}
-              onRefresh={onRefreshDataHandler}
-            />
-          }
-        >
+      <ScrollView
+        contentContainerStyle={{ flexGrow: 1 }}
+        style={containerStyles.i2}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshingData}
+            onRefresh={onRefreshDataHandler}
+          />
+        }
+      >
+        {errorMessageDataLoad ? (
           <EmptyView>{errorMessageDataLoad}</EmptyView>
-        </ScrollView>
-      ) : (
-        <LoaderView />
-      )}
+        ) : (
+          <LoaderView />
+        )}
+      </ScrollView>
     </>
   );
 };

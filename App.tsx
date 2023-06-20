@@ -6,7 +6,11 @@ import FlashMessage from "react-native-flash-message";
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
 import { FontWeightAliases } from "./constants";
-import { CategoriesContextProvider, ProductsContextProvider } from "./store";
+import {
+  CategoriesContextProvider,
+  ProductsContextProvider,
+  BannersContextProvider,
+} from "./store";
 
 export default function App() {
   const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
@@ -29,13 +33,15 @@ export default function App() {
 
   return (
     <MenuProvider>
-      <CategoriesContextProvider>
-        <ProductsContextProvider>
-          {isAppResourcesLoaded ? (
-            <AppRoutes onReady={onLayoutRootView} />
-          ) : null}
-        </ProductsContextProvider>
-      </CategoriesContextProvider>
+      <BannersContextProvider>
+        <CategoriesContextProvider>
+          <ProductsContextProvider>
+            {isAppResourcesLoaded ? (
+              <AppRoutes onReady={onLayoutRootView} />
+            ) : null}
+          </ProductsContextProvider>
+        </CategoriesContextProvider>
+      </BannersContextProvider>
       <FlashMessage position="top" />
     </MenuProvider>
   );
