@@ -1,4 +1,4 @@
-import { useContext, useCallback } from "react";
+import { useContext } from "react";
 
 import { IBanner } from "../types";
 import { BannersContext } from "../store/BannersContext";
@@ -19,7 +19,7 @@ export const useBanners = (): [
     setErrorMessage,
   } = useContext(BannersContext);
 
-  const loadBanners = useCallback(async (): Promise<void> => {
+  async function loadBanners(): Promise<void> {
     const { isSuccess, result, getErrorDescription } =
       await BannersService.getBanners();
 
@@ -28,13 +28,13 @@ export const useBanners = (): [
     } else {
       setErrorMessage(getErrorDescription());
     }
-  }, []);
+  }
 
-  const closeBanner = useCallback(async (bannerId: string): Promise<void> => {
+  async function closeBanner(bannerId: string): Promise<void> {
     await BannersService.closeBanner(bannerId);
 
     setBanners(banners.filter((banner) => banner.id !== bannerId));
-  }, []);
+  }
 
   return [banners, isBannersLoaded, errorMessage, closeBanner, loadBanners];
 };
