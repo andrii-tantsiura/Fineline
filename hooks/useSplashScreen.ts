@@ -1,5 +1,5 @@
 import * as SplashScreen from "expo-splash-screen";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -11,11 +11,11 @@ export const useSplashScreen = (): [() => void, () => void] => {
     setIsHiddenSplashScreen(true);
   }
 
-  const onLayoutRootView = useCallback(async () => {
+  async function onLayoutRootView() {
     if (isHiddenSplashScreen) {
       await SplashScreen.hideAsync();
     }
-  }, [isHiddenSplashScreen]);
+  }
 
   return [hideSplashScreen, onLayoutRootView];
 };
