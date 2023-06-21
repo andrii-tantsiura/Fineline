@@ -13,6 +13,7 @@ import {
   DeliveryDetailsScreen,
   SuccessfulPaymentScreen,
   HomeScreen,
+  CardScreen,
 } from "../../screens";
 import { HomeStackParamList } from "./types";
 
@@ -53,9 +54,7 @@ const HomeStackNavigator: FC = () => (
               borderRadius: 8,
             }}
             imageStyle={iconButtonStyles.i2}
-            onPress={() =>
-              navigation.navigate("SuccessfulPayment", { orderId: 253 })
-            }
+            onPress={() => navigation.navigate("Card")}
           />
         ),
       })}
@@ -76,6 +75,12 @@ const HomeStackNavigator: FC = () => (
       options={{
         headerShown: false,
       }}
+    />
+
+    <HomeStack.Screen
+      name="Card"
+      component={CardScreen}
+      options={headerOptions}
     />
   </HomeStack.Navigator>
 );
