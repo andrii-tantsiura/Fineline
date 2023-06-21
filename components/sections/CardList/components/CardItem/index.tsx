@@ -33,7 +33,13 @@ export const CardItem: React.FC<IProductItem> = ({
       />
 
       <View style={styles.info}>
-        <Typography style={typographyStyle_i17}>{product.name}</Typography>
+        <Typography
+          style={typographyStyle_i17}
+          numberOfLines={2}
+          ellipsizeMode="tail"
+        >
+          {product.name}
+        </Typography>
 
         <View style={styles.container}>
           <View style={styles.actionsContainer}>
@@ -44,7 +50,9 @@ export const CardItem: React.FC<IProductItem> = ({
               imageStyle={iconButtonStyles.i2}
             />
 
-            <Typography style={typographyStyle_i18}>{product.count}</Typography>
+            <Typography style={[typographyStyle_i18, styles.action]}>
+              {product.count}
+            </Typography>
 
             <IconButton
               onPress={onCartPressHandler}
@@ -54,7 +62,7 @@ export const CardItem: React.FC<IProductItem> = ({
             />
           </View>
 
-          <Typography style={typographyStyle_i12}>$ {product.price}</Typography>
+          <Typography style={typographyStyle_i12}>${product.price}</Typography>
         </View>
       </View>
     </View>

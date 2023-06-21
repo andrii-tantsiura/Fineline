@@ -4,7 +4,7 @@ import { CardItem } from "./components/CardItem";
 
 const cardList = [
   {
-    name: "Product 1 er er er er er er er",
+    name: "Product 1 er er er er er er er dfvdf df fdf df df df xs ddfdf fd df",
     imageUrl:
       "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
     price: 12,
@@ -31,6 +31,20 @@ const cardList = [
     price: 23,
     count: 3,
   },
+  {
+    name: "Product 5",
+    imageUrl:
+      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
+    price: 23,
+    count: 3,
+  },
+  {
+    name: "Product 6",
+    imageUrl:
+      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
+    price: 23,
+    count: 3,
+  },
 ];
 
 interface ICardList {
@@ -49,7 +63,7 @@ export const CardList: React.FC<ICardList> = ({ style }) => {
       renderItem={renderProduct}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-      keyExtractor={(product: any) => product.id}
+      keyExtractor={(product: any) => product.name}
     />
   );
 };
