@@ -1,5 +1,11 @@
 import { useHeaderHeight } from "@react-navigation/elements";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Platform, ScrollView, StatusBar, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
@@ -11,14 +17,14 @@ import { WINDOW_HEIGHT } from "../../utils";
 import styles from "./styles";
 
 interface IProductDetailsProps {
-  product?: IProduct;
-  onConfirm: () => void;
-  onClose: () => void;
+  product?: IProduct | null;
+  setShown: Dispatch<SetStateAction<boolean>>;
+  onClose?: () => {};
 }
 
 const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   product,
-  onConfirm,
+  setShown,
   onClose,
 }) => {
   const modalRef = useRef<any>();
@@ -26,6 +32,15 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
 
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [subtotal, setSubtotal] = useState<number>(0);
+
+  const closeHandler = () => {
+    setShown(false);
+    onClose?.();
+  };
+
+  const addProductToCartHandler = () => {
+    closeHandler();
+  };
 
   useEffect(() => {
     if (product) {
@@ -49,7 +64,7 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
       animationType="slide"
       closeOnDragDown
       dragFromTopOnly
-      onClose={onClose}
+      onClose={closeHandler}
       customStyles={{
         container: styles.modalContainer,
         draggableIcon: styles.draggableIcon,
@@ -67,7 +82,10 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
             </Typography>
           </View>
 
-          <CustomButton style={styles.addToCartButton} onPress={onConfirm}>
+          <CustomButton
+            style={styles.addProductToCartButton}
+            onPress={addProductToCartHandler}
+          >
             Add To Cart
           </CustomButton>
         </ScrollView>

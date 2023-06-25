@@ -45,9 +45,9 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   const [manualDataRefreshCounter, setManualDataRefreshCounter] =
     useState<number>(0);
 
-  const [isDishDetailsOpened, setIsDishDetailsOpened] =
+  const [isCartItemSelectorModalShown, setIsCartItemSelectorShown] =
     useState<boolean>(false);
-  const [selectedProduct, setSelectedProduct] = useState<IProduct>();
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   function onSelectSortTypeHandler(item: IMenuItem) {
     setSortType(item.value);
@@ -71,9 +71,14 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     );
   }, [manualDataRefreshCounter, isDataLoaded, errorMessageDataLoad]);
 
-  const openDishDetailsHandler = (product: IProduct) => {
-    setIsDishDetailsOpened(true);
+  const openCartItemSelectorHandler = (product: IProduct) => {
     setSelectedProduct(product);
+    setIsCartItemSelectorShown(true);
+  };
+
+  const closeCartItemSelectorHandler = (product: IProduct) => {
+    setSelectedProduct(null);
+    setIsCartItemSelectorShown(false);
   };
 
   useEffect(() => {
@@ -82,10 +87,9 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   return (
     <>
-      {isDishDetailsOpened && (
+      {isCartItemSelectorModalShown && (
         <CartItemSelectorModal
-          onClose={() => setIsDishDetailsOpened(false)}
-          onConfirm={() => setIsDishDetailsOpened(false)}
+          setShown={setIsCartItemSelectorShown}
           product={selectedProduct}
         />
       )}
@@ -128,7 +132,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
             selectedCategoryId={selectedCategoryId}
             searchQuery={searchQuery}
             sortType={sortType}
-            onPressProduct={openDishDetailsHandler}
+            onPressProduct={openCartItemSelectorHandler}
           />
         </View>
       </ScrollView>

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     ...typographyStyle_i5,
     marginTop: 4,
   },
-  addToCartButton: {
+  addProductToCartButton: {
     marginVertical: scaleSize(16),
     ...customButtonStyles.i1,
   },
