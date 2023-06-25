@@ -1,1 +1,1 @@
-export * from "./AddProductToCartModal";
+export * from "./CartItemSelectorModal";

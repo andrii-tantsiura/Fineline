@@ -16,7 +16,7 @@ interface IProductDetailsProps {
   onClose: () => void;
 }
 
-const AddProductToCartModal: React.FC<IProductDetailsProps> = ({
+const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   product,
   onConfirm,
   onClose,
@@ -78,4 +78,4 @@ const AddProductToCartModal: React.FC<IProductDetailsProps> = ({
   );
 };
 
-export default AddProductToCartModal;
+export default CartItemSelectorModal;

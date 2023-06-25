@@ -10,7 +10,7 @@ import {
 import { containerStyles, typographyStyle_i19 } from "../../constants";
 import { SortType } from "../../enums";
 import { useAppInitData, useCategories } from "../../hooks";
-import AddProductToCartModal from "../../modals/AddProductToCartModal";
+import CartItemSelectorModal from "../../modals/CartItemSelectorModal";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import { IProduct } from "../../types";
@@ -83,7 +83,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   return (
     <>
       {isDishDetailsOpened && (
-        <AddProductToCartModal
+        <CartItemSelectorModal
           onClose={() => setIsDishDetailsOpened(false)}
           onConfirm={() => setIsDishDetailsOpened(false)}
           product={selectedProduct}
