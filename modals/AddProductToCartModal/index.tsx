@@ -1,31 +1,37 @@
 import { useHeaderHeight } from "@react-navigation/elements";
-import React, { useEffect, useRef } from "react";
-import { Platform, ScrollView, StatusBar } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Platform, ScrollView, StatusBar, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
-import { IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
-import { CustomButton } from "../../components/common";
+import { CustomButton, Stepper, Typography } from "../../components/common";
 import { LoaderView, ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
 import { IProduct } from "../../types";
 import { WINDOW_HEIGHT } from "../../utils";
 import styles from "./styles";
 
-// TODO: calculate actual height of header
-
 interface IProductDetailsProps {
   product?: IProduct;
-  onAddProductToCart: () => void;
+  onConfirm: () => void;
   onClose: () => void;
 }
 
 const AddProductToCartModal: React.FC<IProductDetailsProps> = ({
   product,
-  onAddProductToCart,
+  onConfirm,
   onClose,
 }) => {
   const modalRef = useRef<any>();
   const headerHeight = useHeaderHeight();
+
+  const [productQuantity, setProductQuantity] = useState<number>(1);
+  const [subtotal, setSubtotal] = useState<number>(0);
+
+  useEffect(() => {
+    if (product) {
+      setSubtotal(product.price * productQuantity);
+    }
+  }, [productQuantity]);
 
   useEffect(() => {
     modalRef.current.open();
@@ -40,8 +46,9 @@ const AddProductToCartModal: React.FC<IProductDetailsProps> = ({
     <RBSheet
       ref={modalRef}
       height={WINDOW_HEIGHT - headerHeight}
-      closeOnDragDown
       animationType="slide"
+      closeOnDragDown
+      dragFromTopOnly
       onClose={onClose}
       customStyles={{
         container: styles.modalContainer,
@@ -52,12 +59,16 @@ const AddProductToCartModal: React.FC<IProductDetailsProps> = ({
         <ScrollView showsVerticalScrollIndicator={false}>
           <ProductDetails product={product} />
 
-          <CustomButton
-            style={styles.addToCartButton}
-            imageSource={IC_ARROW_RIGHT_WHITE}
-            onPress={onAddProductToCart}
-          >
-            Go to Pay
+          <View style={styles.quantitySelectionContainer}>
+            <Stepper value={productQuantity} setValue={setProductQuantity} />
+
+            <Typography style={styles.subtotalText}>
+              ${subtotal.toFixed(2)}
+            </Typography>
+          </View>
+
+          <CustomButton style={styles.addToCartButton} onPress={onConfirm}>
+            Add To Cart
           </CustomButton>
         </ScrollView>
       ) : (

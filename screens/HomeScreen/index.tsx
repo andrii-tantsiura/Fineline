@@ -85,7 +85,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
       {isDishDetailsOpened && (
         <AddProductToCartModal
           onClose={() => setIsDishDetailsOpened(false)}
-          onAddProductToCart={() => setIsDishDetailsOpened(false)}
+          onConfirm={() => setIsDishDetailsOpened(false)}
           product={selectedProduct}
         />
       )}

@@ -1,6 +1,10 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, customButtonStyles } from "../../constants";
+import {
+  COLORS,
+  customButtonStyles,
+  typographyStyle_i5,
+} from "../../constants";
 import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
@@ -15,6 +19,16 @@ const styles = StyleSheet.create({
     width: scaleSize(65),
     borderRadius: 24,
     backgroundColor: COLORS.neutral_30,
+  },
+  quantitySelectionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 80,
+  },
+  subtotalText: {
+    ...typographyStyle_i5,
+    marginTop: 4,
   },
   addToCartButton: {
     marginVertical: scaleSize(16),
