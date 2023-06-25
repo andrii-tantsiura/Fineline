@@ -33,7 +33,10 @@ export const ProductDetails: FC<IProductDetailsProps> = ({ product }) => {
 
   return (
     <View>
-      <ProductPreview imageUrl={product.imageUrl} />
+      <ProductPreview
+        style={styles.productPreview}
+        imageUrl={product.imageUrl}
+      />
 
       <View style={styles.descriptionContainer}>
         <View style={styles.categoryContainer}>

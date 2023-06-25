@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
     height: 104,
     marginBottom: 12,
   },
-  imageProduct: {
-    resizeMode: "contain",
+  productPreview: {
     width: 72,
     marginRight: 16,
+    paddingHorizontal: 10,
   },
   container: {
     flex: 1,

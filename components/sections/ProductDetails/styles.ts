@@ -4,6 +4,11 @@ import { COLORS, typographyStyle_i10 } from "../../../constants";
 import { scaleSize } from "../../../utils";
 
 const styles = StyleSheet.create({
+  productPreview: {
+    paddingHorizontal: 100,
+    height: scaleSize(240),
+    marginBottom: scaleSize(24),
+  },
   descriptionContainer: {
     alignItems: "flex-start",
   },
