@@ -1,19 +1,20 @@
-import { FC, useState, useEffect, useCallback } from "react";
-import { View, TextInput, ScrollView, RefreshControl } from "react-native";
+import { FC, useCallback, useEffect, useState } from "react";
+import { RefreshControl, ScrollView, TextInput, View } from "react-native";
 
-import styles from "./styles";
-import { SortType } from "../../enums";
-import { IProduct } from "../../types";
-import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { DropDownList, IMenuItem } from "../../components/common";
-import { typographyStyle_i19, containerStyles } from "../../constants";
-import { useAppInitData, useCategories } from "../../hooks";
-import AlertService from "../../services/AlertService";
 import {
+  BannersList,
   CategoriesList,
   ProductsList,
-  BannersList,
 } from "../../components/sections";
+import { containerStyles, typographyStyle_i19 } from "../../constants";
+import { SortType } from "../../enums";
+import { useAppInitData, useCategories } from "../../hooks";
+import AddProductToCartModal from "../../modals/AddProductToCartModal";
+import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import AlertService from "../../services/AlertService";
+import { IProduct } from "../../types";
+import styles from "./styles";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -44,6 +45,10 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   const [manualDataRefreshCounter, setManualDataRefreshCounter] =
     useState<number>(0);
 
+  const [isDishDetailsOpened, setIsDishDetailsOpened] =
+    useState<boolean>(false);
+  const [selectedProduct, setSelectedProduct] = useState<IProduct>();
+
   function onSelectSortTypeHandler(item: IMenuItem) {
     setSortType(item.value);
   }
@@ -66,53 +71,67 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     );
   }, [manualDataRefreshCounter, isDataLoaded, errorMessageDataLoad]);
 
+  const openDishDetailsHandler = (product: IProduct) => {
+    setIsDishDetailsOpened(true);
+    setSelectedProduct(product);
+  };
+
   useEffect(() => {
     showAlertIfNeeded();
   }, [manualDataRefreshCounter]);
 
   return (
-    <ScrollView
-      style={containerStyles.i2}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshingData}
-          onRefresh={onRefreshDataHandler}
+    <>
+      {isDishDetailsOpened && (
+        <AddProductToCartModal
+          onClose={() => setIsDishDetailsOpened(false)}
+          onAddProductToCart={() => setIsDishDetailsOpened(false)}
+          product={selectedProduct}
         />
-      }
-    >
-      <View>
-        <BannersList />
+      )}
 
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.inputSearchQuery}
-            onChangeText={setSearchQuery}
-            placeholder="Search for food"
-            value={searchQuery}
+      <ScrollView
+        style={containerStyles.i2}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshingData}
+            onRefresh={onRefreshDataHandler}
+          />
+        }
+      >
+        <View>
+          <BannersList />
+
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.inputSearchQuery}
+              onChangeText={setSearchQuery}
+              placeholder="Search for food"
+              value={searchQuery}
+            />
+
+            <DropDownList
+              style={styles.sortSelector}
+              textStyle={typographyStyle_i19}
+              onSelect={onSelectSortTypeHandler}
+            >
+              {sortTypes}
+            </DropDownList>
+          </View>
+
+          <CategoriesList
+            selectedCategoryId={selectedCategoryId}
+            onSelect={setSelectedCategoryId}
           />
 
-          <DropDownList
-            style={styles.sortSelector}
-            textStyle={typographyStyle_i19}
-            onSelect={onSelectSortTypeHandler}
-          >
-            {sortTypes}
-          </DropDownList>
+          <ProductsList
+            selectedCategoryId={selectedCategoryId}
+            searchQuery={searchQuery}
+            sortType={sortType}
+            onPressProduct={openDishDetailsHandler}
+          />
         </View>
-
-        <CategoriesList
-          selectedCategoryId={selectedCategoryId}
-          onSelect={setSelectedCategoryId}
-        />
-
-        {/* TODO: onPressProduct */}
-        <ProductsList
-          selectedCategoryId={selectedCategoryId}
-          searchQuery={searchQuery}
-          sortType={sortType}
-          onPressProduct={(product: IProduct) => {}}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
