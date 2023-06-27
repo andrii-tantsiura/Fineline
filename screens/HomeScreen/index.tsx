@@ -10,7 +10,7 @@ import {
 import { containerStyles, typographyStyle_i19 } from "../../constants";
 import { SortType } from "../../enums";
 import { useAppInitData, useCategories } from "../../hooks";
-import CartItemSelectorModal from "../../modals/CartItemSelectorModal";
+import { CartItemSelectorModal } from "../../modals/";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import { IProduct } from "../../types";
@@ -45,7 +45,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   const [manualDataRefreshCounter, setManualDataRefreshCounter] =
     useState<number>(0);
 
-  const [isCartItemSelectorModalShown, setIsCartItemSelectorShown] =
+  const [isCartItemSelectorModalVisible, setIsCartItemSelectorVisible] =
     useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
@@ -73,12 +73,12 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   const openCartItemSelectorHandler = (product: IProduct) => {
     setSelectedProduct(product);
-    setIsCartItemSelectorShown(true);
+    setIsCartItemSelectorVisible(true);
   };
 
   const closeCartItemSelectorHandler = (product: IProduct) => {
     setSelectedProduct(null);
-    setIsCartItemSelectorShown(false);
+    setIsCartItemSelectorVisible(false);
   };
 
   useEffect(() => {
@@ -87,9 +87,9 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   return (
     <>
-      {isCartItemSelectorModalShown && (
+      {isCartItemSelectorModalVisible && (
         <CartItemSelectorModal
-          setShown={setIsCartItemSelectorShown}
+          setVisible={setIsCartItemSelectorVisible}
           product={selectedProduct}
         />
       )}

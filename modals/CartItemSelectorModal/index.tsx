@@ -13,20 +13,20 @@ import RBSheet from "react-native-raw-bottom-sheet";
 import { CustomButton, Stepper, Typography } from "../../components/common";
 import { LoaderView, ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
-import { CartContext } from "../../store/CartContext";
+import { CartContext } from "../../store";
 import { IProduct } from "../../types";
 import { WINDOW_HEIGHT } from "../../utils";
 import styles from "./styles";
 
 interface IProductDetailsProps {
   product?: IProduct | null;
-  setShown: Dispatch<SetStateAction<boolean>>;
+  setVisible: Dispatch<SetStateAction<boolean>>;
   onClose?: () => {};
 }
 
-const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
+export const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   product,
-  setShown,
+  setVisible,
   onClose,
 }) => {
   const modalRef = useRef<any>();
@@ -37,7 +37,7 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   const [subtotal, setSubtotal] = useState<number>(0);
 
   const closeHandler = () => {
-    setShown(false);
+    setVisible(false);
     onClose?.();
   };
 
@@ -107,5 +107,3 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
     </RBSheet>
   );
 };
-
-export default CartItemSelectorModal;

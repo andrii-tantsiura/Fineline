@@ -2,7 +2,7 @@ import { AxiosRequestConfig, AxiosResponse } from "axios";
 
 import { IBaseModel } from "../types";
 
-export interface IModels {
+interface IModels {
   [index: string]: IBaseModel;
 }
 
