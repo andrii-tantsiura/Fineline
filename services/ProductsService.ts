@@ -1,10 +1,11 @@
 import { AOResult } from "../helpers";
 import { IProduct } from "../types";
-import { getModelsFromFirebase } from "../utils";
+import { getArrayFromFirebase } from "../utils";
+import { productReviver } from "../utils";
 
 class ProductsService {
   getProducts = (): Promise<AOResult<IProduct[]>> => {
-    return getModelsFromFirebase<IProduct>("/products.json");
+    return getArrayFromFirebase<IProduct>("/products.json", productReviver);
   };
 }
 
