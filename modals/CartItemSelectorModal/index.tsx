@@ -7,7 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Platform, ScrollView, StatusBar, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { CustomButton, Stepper, Typography } from "../../components/common";
@@ -15,7 +15,7 @@ import { LoaderView, ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
 import { CartContext } from "../../store";
 import { IProduct } from "../../types";
-import { WINDOW_HEIGHT } from "../../utils";
+import { SCREEN_HEIGHT } from "../../utils";
 import styles from "./styles";
 
 interface IProductDetailsProps {
@@ -72,7 +72,7 @@ export const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   return (
     <RBSheet
       ref={modalRef}
-      height={WINDOW_HEIGHT - headerHeight}
+      height={SCREEN_HEIGHT - headerHeight}
       animationType="slide"
       closeOnDragDown
       dragFromTopOnly
