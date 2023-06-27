@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { RefreshControl, ScrollView, TextInput, View } from "react-native";
 
 import { DropDownList, IMenuItem } from "../../components/common";
@@ -59,7 +59,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     }
   }
 
-  const onRefreshDataHandler = useCallback(async () => {
+  async function onRefreshDataHandler() {
     setIsRefreshingData(true);
 
     await loadData();
@@ -69,7 +69,7 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     setManualDataRefreshCounter(
       (currentManualDataRefreshCounter) => currentManualDataRefreshCounter + 1
     );
-  }, [manualDataRefreshCounter, isDataLoaded, errorMessageDataLoad]);
+  }
 
   const openCartItemSelectorHandler = (product: IProduct) => {
     setSelectedProduct(product);

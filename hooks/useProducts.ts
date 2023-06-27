@@ -1,4 +1,4 @@
-import { useContext, useCallback } from "react";
+import { useContext } from "react";
 
 import { IProduct } from "../types";
 import ProductsService from "../services/ProductsService";
@@ -18,7 +18,7 @@ export const useProducts = (): [
     setErrorMessage,
   } = useContext(ProductsContext);
 
-  const loadProducts = useCallback(async (): Promise<void> => {
+  async function loadProducts(): Promise<void> {
     const { isSuccess, result, getErrorDescription } =
       await ProductsService.getProducts();
 
@@ -27,7 +27,7 @@ export const useProducts = (): [
     } else {
       setErrorMessage(getErrorDescription());
     }
-  }, []);
+  }
 
   return [products, isProductsLoaded, errorMessage, loadProducts];
 };

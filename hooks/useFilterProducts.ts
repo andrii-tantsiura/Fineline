@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 import { IProduct } from "../types";
 import { SortType } from "../enums";
@@ -21,18 +21,19 @@ export const useFilterProducts = (): [
 
   const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
-  const sortAndFilter = useCallback(
-    (categoryId: string, searchQuery: string, sortType: SortType) => {
-      setSelectedCategoryId(categoryId);
-      setSearchQuery(searchQuery);
-      setSortType(sortType);
+  function sortAndFilter(
+    categoryId: string,
+    searchQuery: string,
+    sortType: SortType
+  ) {
+    setSelectedCategoryId(categoryId);
+    setSearchQuery(searchQuery);
+    setSortType(sortType);
 
-      setFilteredProducts(
-        sortAndFilterProducts(products, categoryId, searchQuery, sortType)
-      );
-    },
-    [products, selectedCategoryId, searchQuery, sortType]
-  );
+    setFilteredProducts(
+      sortAndFilterProducts(products, categoryId, searchQuery, sortType)
+    );
+  }
 
   useEffect(() => {
     setFilteredProducts(

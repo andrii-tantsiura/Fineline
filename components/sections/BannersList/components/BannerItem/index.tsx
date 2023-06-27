@@ -7,16 +7,18 @@ import { IBanner } from "../../../../../types";
 import { IconButton } from "../../../../common";
 
 interface IBannerItem {
+  width: number;
   banner: IBanner;
   onClose: () => void;
 }
 
 export const BannerItem: React.FC<IBannerItem> = ({
+  width,
   banner,
   onClose = () => {},
 }) => (
   <ImageBackground
-    style={styles.container}
+    style={[styles.container, { width }]}
     source={{
       uri: banner.imageUrl,
     }}

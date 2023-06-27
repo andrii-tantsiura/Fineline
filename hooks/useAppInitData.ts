@@ -1,5 +1,3 @@
-import { useCallback } from "react";
-
 import { useProducts } from "../hooks/useProducts";
 import { useCategories } from "../hooks/useCategories";
 import { useBanners } from "./useBanners";
@@ -23,11 +21,11 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
     loadBanners,
   ] = useBanners();
 
-  const loadData = useCallback(async (): Promise<void> => {
+  async function loadData(): Promise<void> {
     await loadProductsCategories();
     await loadProducts();
     await loadBanners();
-  }, []);
+  }
 
   const isDataLoaded =
     isCategoriesLoaded && isProductsLoaded && isBannersLoaded;

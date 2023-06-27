@@ -1,5 +1,5 @@
 import { RefreshControl, ScrollView } from "react-native";
-import { FC, useState, useEffect, useCallback } from "react";
+import { FC, useState, useEffect } from "react";
 
 import { useAppInitData } from "../../hooks";
 import { containerStyles } from "../../constants";
@@ -11,13 +11,13 @@ export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
   const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
 
-  const onRefreshDataHandler = useCallback(async () => {
+  async function onRefreshDataHandler() {
     setIsRefreshingData(true);
 
     await loadData();
 
     setIsRefreshingData(false);
-  }, []);
+  }
 
   useEffect(() => {
     if (isDataLoaded) {

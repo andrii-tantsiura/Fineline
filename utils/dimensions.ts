@@ -1,8 +1,7 @@
 import { Dimensions } from "react-native";
 
-const windowDimensions = Dimensions.get("window");
-
-export const WINDOW_HEIGHT = windowDimensions.height;
+export const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } =
+  Dimensions.get("window");
 
 const SCALE_FACTOR: number = 1.2;
 
