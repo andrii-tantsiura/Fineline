@@ -4,7 +4,7 @@ import { getModelsFromFirebase } from "../utils";
 
 class ProductsService {
   getProducts = (): Promise<AOResult<IProduct[]>> => {
-    return getModelsFromFirebase("/products.json");
+    return getModelsFromFirebase<IProduct>("/products.json");
   };
 }
 

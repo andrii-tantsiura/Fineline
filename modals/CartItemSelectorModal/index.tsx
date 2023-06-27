@@ -2,16 +2,18 @@ import { useHeaderHeight } from "@react-navigation/elements";
 import React, {
   Dispatch,
   SetStateAction,
+  useContext,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { Platform, ScrollView, StatusBar, View } from "react-native";
+import { Platform, ScrollView, StatusBar, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { CustomButton, Stepper, Typography } from "../../components/common";
 import { LoaderView, ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
+import { CartContext } from "../../store/CartContext";
 import { IProduct } from "../../types";
 import { WINDOW_HEIGHT } from "../../utils";
 import styles from "./styles";
@@ -29,6 +31,7 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
 }) => {
   const modalRef = useRef<any>();
   const headerHeight = useHeaderHeight();
+  const cartContext = useContext(CartContext);
 
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [subtotal, setSubtotal] = useState<number>(0);
@@ -39,7 +42,15 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   };
 
   const addProductToCartHandler = () => {
-    closeHandler();
+    if (product) {
+      if (cartContext.products.find((x) => x.product.id === product.id)) {
+        cartContext.increaseProductQuantity(product.id, productQuantity);
+      } else {
+        cartContext.addProduct(product, productQuantity);
+      }
+
+      closeHandler();
+    }
   };
 
   useEffect(() => {
@@ -50,6 +61,7 @@ const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
 
   useEffect(() => {
     modalRef.current.open();
+
     if (Platform.OS === "android") {
       StatusBar.setBackgroundColor(COLORS.neutral_55);
 

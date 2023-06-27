@@ -7,9 +7,10 @@ import { FontWeightAliases } from "./constants";
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
 import {
+  BannersContextProvider,
+  CartContextProvider,
   CategoriesContextProvider,
   ProductsContextProvider,
-  BannersContextProvider,
 } from "./store";
 
 export default function App() {
@@ -36,9 +37,11 @@ export default function App() {
       <BannersContextProvider>
         <CategoriesContextProvider>
           <ProductsContextProvider>
-            {isAppResourcesLoaded ? (
-              <AppRoutes onReady={onLayoutRootView} />
-            ) : null}
+            <CartContextProvider>
+              {isAppResourcesLoaded ? (
+                <AppRoutes onReady={onLayoutRootView} />
+              ) : null}
+            </CartContextProvider>
           </ProductsContextProvider>
         </CategoriesContextProvider>
       </BannersContextProvider>

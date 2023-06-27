@@ -4,7 +4,7 @@ import { getModelsFromFirebase } from "../utils";
 
 class CategoriesService {
   getCategories = (): Promise<AOResult<ICategory[]>> => {
-    return getModelsFromFirebase("/categories.json");
+    return getModelsFromFirebase<ICategory>("/categories.json");
   };
 
   getCategoryName = (categoryId: string, categories: ICategory[]): string =>
