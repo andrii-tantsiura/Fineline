@@ -1,4 +1,5 @@
-export interface IBanner {
-  id: string;
+import { IBaseModel } from "./baseModel";
+
+export interface IBanner extends IBaseModel {
   imageUrl: string;
 }

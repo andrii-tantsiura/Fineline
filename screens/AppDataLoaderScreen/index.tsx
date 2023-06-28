@@ -9,7 +9,11 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
   const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
 
-  const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
+  const {
+    isDataLoaded,
+    errorMessage: errorMessageDataLoad,
+    loadData,
+  } = useAppInitData();
 
   async function onRefreshDataHandler() {
     setIsRefreshingData(true);

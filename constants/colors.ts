@@ -7,6 +7,7 @@ export interface IColors {
   neutral_30: string;
   neutral_40: string;
   neutral_50: string;
+  neutral_55: string;
   neutral_60: string;
   neutral_70: string;
   neutral_80: string;
@@ -27,6 +28,7 @@ export const COLORS: IColors = {
   neutral_30: "#E2E8F0",
   neutral_40: "#CBD4E1",
   neutral_50: "#94A3B8",
+  neutral_55: "#888888",
   neutral_60: "#64748B",
   neutral_70: "#475569",
   neutral_80: "#27364B",
