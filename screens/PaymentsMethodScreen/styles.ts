@@ -16,12 +16,9 @@ const styles = StyleSheet.create({
     marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
   },
-  nameInputsContainer: {
+  expiryDateAndCvcContainer: {
     columnGap: 10,
     flexDirection: "row",
-  },
-  commentTextInput: {
-    height: scaleSize(129),
   },
   button: {
     margin: scaleSize(16),

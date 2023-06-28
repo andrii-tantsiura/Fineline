@@ -74,10 +74,9 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
     }
   };
 
-  const openPaymentPageHandler = handleSubmit((deliveryForm: Delivery) => {
-    console.log("submit data", deliveryForm);
-
-    // TODO: make navigation to the Payment Methods page
+  const openPaymentPageHandler = handleSubmit((delivery: Delivery) => {
+    // TODO: add passing deliveryInfo to PaymentsMethod
+    navigation.navigate("PaymentsMethod");
   });
 
   useLayoutEffect(() => {

@@ -4,6 +4,7 @@ export type HomeStackParamList = {
   DeliveryDetails: undefined;
   Homepage: undefined;
   AppDataLoader: undefined;
+  PaymentsMethod: undefined;
   SuccessfulPayment: { orderId: string };
 };
 

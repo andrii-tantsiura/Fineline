@@ -11,8 +11,9 @@ import { COLORS, iconButtonStyles, typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
-  SuccessfulPaymentScreen,
   HomeScreen,
+  PaymentsMethodScreen,
+  SuccessfulPaymentScreen,
 } from "../../screens";
 import { HomeStackParamList } from "./types";
 
@@ -66,6 +67,15 @@ const HomeStackNavigator: FC = () => (
       component={DeliveryDetailsScreen}
       options={{
         title: "Delivery Information",
+        ...headerOptions,
+      }}
+    />
+
+    <HomeStack.Screen
+      name="PaymentsMethod"
+      component={PaymentsMethodScreen}
+      options={{
+        title: "Payments method",
         ...headerOptions,
       }}
     />

@@ -1,9 +1,21 @@
-import { NAME_REGEX, PHONE_REGEX } from "../constants";
+import { UseControllerProps } from "react-hook-form";
+import {
+  CARD_NUMBER_REGEX,
+  CVC_REGEX,
+  MM_YY_DATE_REGEX,
+  NAME_REGEX,
+  PHONE_REGEX,
+} from "../constants";
 import { ValidationErrorMessages } from "../enums";
 
-const NAME_RULES = {
+type RulesType = UseControllerProps["rules"];
+
+const NAME_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
-  minLength: { value: 2, message: ValidationErrorMessages.LESS_THAN_2_CHARS },
+  minLength: {
+    value: 2,
+    message: ValidationErrorMessages.LESS_THAN_2_CHARS,
+  },
   maxLength: {
     value: 50,
     message: ValidationErrorMessages.LONGER_THAN_50_CHARS,
@@ -14,7 +26,7 @@ const NAME_RULES = {
   },
 };
 
-const PHONE_RULES = {
+const PHONE_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
   pattern: {
     value: PHONE_REGEX,
@@ -22,7 +34,7 @@ const PHONE_RULES = {
   },
 };
 
-const ADDRESS_RULES = {
+const ADDRESS_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
   maxLength: {
     value: 150,
@@ -30,11 +42,43 @@ const ADDRESS_RULES = {
   },
 };
 
-const COMMENT_RULES = {
+const COMMENT_RULES: RulesType = {
   maxLength: {
     value: 200,
     message: ValidationErrorMessages.LONGER_THAN_200_CHARS,
   },
 };
 
-export { ADDRESS_RULES, COMMENT_RULES, NAME_RULES, PHONE_RULES };
+const CARD_NUMBER_RULES: RulesType = {
+  required: ValidationErrorMessages.REQUIRED,
+  pattern: {
+    value: CARD_NUMBER_REGEX,
+    message: ValidationErrorMessages.INCORRECT_CARD_NUMBER_FORMAT,
+  },
+};
+
+const MM_YY_DATE_RULES: RulesType = {
+  required: ValidationErrorMessages.REQUIRED,
+  pattern: {
+    value: MM_YY_DATE_REGEX,
+    message: ValidationErrorMessages.INCORRECT_DATE_FORMAT,
+  },
+};
+
+const CVC_RULES: RulesType = {
+  required: ValidationErrorMessages.REQUIRED,
+  pattern: {
+    value: CVC_REGEX,
+    message: ValidationErrorMessages.INCORRECT_CVC_FORMAT,
+  },
+};
+
+export {
+  ADDRESS_RULES,
+  CARD_NUMBER_RULES,
+  COMMENT_RULES,
+  CVC_RULES,
+  MM_YY_DATE_RULES,
+  NAME_RULES,
+  PHONE_RULES,
+};
