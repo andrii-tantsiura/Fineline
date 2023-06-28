@@ -2,14 +2,16 @@ import { useContext } from "react";
 
 import { ICategory } from "../types";
 import CategoriesService from "../services/CategoriesService";
-import { CategoriesContext } from "../store/CategoriesContext";
+import { CategoriesContext } from "../store";
 
-export const useCategories = (): [
-  ICategory[],
-  boolean,
-  string,
-  () => Promise<void>
-] => {
+interface IUseCategoriesValues {
+  categories: ICategory[];
+  isCategoriesLoaded: boolean;
+  errorMessage: string;
+  loadProductsCategories: () => Promise<void>;
+}
+
+export const useCategories = (): IUseCategoriesValues => {
   const {
     categories,
     isCategoriesLoaded,
@@ -29,5 +31,10 @@ export const useCategories = (): [
     }
   }
 
-  return [categories, isCategoriesLoaded, errorMessage, loadProductsCategories];
+  return {
+    categories,
+    isCategoriesLoaded,
+    errorMessage,
+    loadProductsCategories,
+  };
 };

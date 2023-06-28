@@ -11,7 +11,7 @@ interface IBannersList {}
 export const BannersList: React.FC<IBannersList> = () => {
   const flatListMargin = 36;
 
-  const [banners, isBannersLoaded, errorMessage, closeBanner] = useBanners();
+  const { banners, closeBanner } = useBanners();
 
   const renderBanner = (bannerData: ListRenderItemInfo<IBanner>) => (
     <BannerItem

@@ -19,7 +19,7 @@ interface IProductDetailsProps {
 }
 
 export const ProductDetails: FC<IProductDetailsProps> = ({ product }) => {
-  const [categories] = useCategories();
+  const { categories } = useCategories();
   const [categoryName, setCategoryName] = useState<string>();
 
   useEffect(() => {

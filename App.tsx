@@ -17,7 +17,7 @@ export default function App() {
   const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
     useState<boolean>(false);
 
-  const [hideSplashScreen, onLayoutRootView] = useSplashScreen();
+  const { hideSplashScreen, onLayoutRootView } = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),

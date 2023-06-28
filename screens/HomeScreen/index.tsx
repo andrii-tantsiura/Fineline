@@ -32,8 +32,12 @@ const sortTypes: IMenuItem[] = [
 ];
 
 export const HomeScreen: FC<HomeScreenProps> = () => {
-  const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
-  const [categories] = useCategories();
+  const {
+    isDataLoaded,
+    errorMessage: errorMessageDataLoad,
+    loadData,
+  } = useAppInitData();
+  const { categories } = useCategories();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
