@@ -21,8 +21,9 @@ import {
   NAME_RULES,
   PHONE_RULES,
 } from "../../helpers";
+import { useBackHandler } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { Delivery } from "../../types";
+import { IDelivery } from "../../types";
 import styles from "./styles";
 
 export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
@@ -40,7 +41,7 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const { control, resetField, handleSubmit, trigger, watch, formState } =
-    useForm<Delivery>({
+    useForm<IDelivery>({
       defaultValues: {
         firstName: "",
         lastName: "",
@@ -69,15 +70,23 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
     if (isAnyDataEntered) {
       setIsClosingConfirmationVisible(true);
-    } else {
+    } else if (navigation.canGoBack()) {
       navigation.goBack();
     }
   };
 
-  const openPaymentPageHandler = handleSubmit((delivery: Delivery) => {
+  const openPaymentPageHandler = handleSubmit((delivery: IDelivery) => {
     // TODO: add passing deliveryInfo to PaymentsMethod
     navigation.navigate("PaymentsMethod");
   });
+
+  const backButtonPressedHandler = () => {
+    goBackHandler();
+
+    return true;
+  };
+
+  useBackHandler(backButtonPressedHandler);
 
   useLayoutEffect(() => {
     navigation.setOptions({

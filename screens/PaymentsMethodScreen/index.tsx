@@ -24,6 +24,7 @@ import {
   MM_YY_DATE_RULES,
   NAME_RULES,
 } from "../../helpers";
+import { useBackHandler } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IPayment } from "../../types";
 import styles from "./styles";
@@ -70,10 +71,18 @@ export const PaymentsMethodScreen: FC<HomeScreenProps> = ({ navigation }) => {
 
     if (isAnyDataEntered) {
       setIsClosingConfirmationVisible(true);
-    } else {
+    } else if (navigation.canGoBack()) {
       navigation.goBack();
     }
   };
+
+  const backButtonPressedHandler = () => {
+    goBackHandler();
+
+    return true;
+  };
+
+  useBackHandler(backButtonPressedHandler);
 
   const confirmAndPayHandler = handleSubmit((paymentForm: IPayment) => {
     console.log("submit data", paymentForm);
