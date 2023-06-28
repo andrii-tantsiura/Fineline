@@ -45,8 +45,6 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   const [manualDataRefreshCounter, setManualDataRefreshCounter] =
     useState<number>(0);
 
-  const [isCartItemSelectorModalVisible, setIsCartItemSelectorVisible] =
-    useState<boolean>(false);
   const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   function onSelectSortTypeHandler(item: IMenuItem) {
@@ -73,12 +71,10 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   const openCartItemSelectorHandler = (product: IProduct) => {
     setSelectedProduct(product);
-    setIsCartItemSelectorVisible(true);
   };
 
-  const closeCartItemSelectorHandler = (product: IProduct) => {
+  const cartItemsSelectorClosedHandler = () => {
     setSelectedProduct(null);
-    setIsCartItemSelectorVisible(false);
   };
 
   useEffect(() => {
@@ -87,10 +83,10 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
 
   return (
     <>
-      {isCartItemSelectorModalVisible && (
+      {selectedProduct && (
         <CartItemSelectorModal
-          setVisible={setIsCartItemSelectorVisible}
           product={selectedProduct}
+          onClosed={cartItemsSelectorClosedHandler}
         />
       )}
 

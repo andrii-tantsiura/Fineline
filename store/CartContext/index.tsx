@@ -1,13 +1,13 @@
 import { createContext, useReducer } from "react";
 
-import { ICartContextProps, ICartContextProviderProps } from "./types";
+import { ICartItem } from "../../types";
 import { cartReducer } from "./reducer";
-import { IProduct } from "../../types";
+import { ICartContextProps, ICartContextProviderProps } from "./types";
 
 export const CartContext = createContext<ICartContextProps>({
   products: [],
   subtotal: 0,
-  addProduct: (product: IProduct, quantity: number) => {},
+  addProduct: (cartItem: ICartItem) => {},
   increaseProductQuantity: (productId: string, quantity: number) => {},
 });
 
@@ -19,13 +19,10 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     subtotal: 0,
   });
 
-  function addProduct(product: IProduct, quantity: number): void {
+  function addProduct(cartItem: ICartItem): void {
     dispatch({
       type: "ADD_PRODUCT_TO_CART",
-      payload: {
-        product,
-        quantity,
-      },
+      payload: cartItem,
     });
   }
 

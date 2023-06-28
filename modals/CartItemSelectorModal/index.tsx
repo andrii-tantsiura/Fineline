@@ -1,62 +1,44 @@
 import { useHeaderHeight } from "@react-navigation/elements";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { Platform, ScrollView, StatusBar, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Platform, ScrollView, StatusBar, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { CustomButton, Stepper, Typography } from "../../components/common";
 import { LoaderView, ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
-import { CartContext } from "../../store";
-import { IProduct } from "../../types";
+import { useCart } from "../../hooks";
+import { ICartItem, IProduct } from "../../types";
 import { SCREEN_HEIGHT } from "../../utils";
 import styles from "./styles";
 
 interface ICartItemSelectorModalProps {
-  product?: IProduct | null;
-  setVisible: Dispatch<SetStateAction<boolean>>;
-  onClose?: () => {};
+  product: IProduct;
+  onClosed: () => void;
 }
 
 export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
   product,
-  setVisible,
-  onClose,
+  onClosed,
 }) => {
   const modalRef = useRef<RBSheet>(null);
   const headerHeight = useHeaderHeight();
-  const cartContext = useContext(CartContext);
 
+  const { addToCart } = useCart();
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [subtotal, setSubtotal] = useState<number>(0);
 
-  const closeHandler = () => {
-    setVisible(false);
-    onClose?.();
-  };
-
   const addProductToCartHandler = () => {
-    if (product) {
-      if (cartContext.products.find((x) => x.product.id === product.id)) {
-        cartContext.increaseProductQuantity(product.id, productQuantity);
-      } else {
-        cartContext.addProduct(product, productQuantity);
-      }
+    const cartItem: ICartItem = {
+      product,
+      quantity: productQuantity,
+    };
 
-      closeHandler();
-    }
+    addToCart(cartItem);
+    onClosed();
   };
 
   useEffect(() => {
-    if (product) {
-      setSubtotal(product.price * productQuantity);
-    }
+    setSubtotal(product.price * productQuantity);
   }, [productQuantity]);
 
   useEffect(() => {
@@ -76,7 +58,7 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
       animationType="slide"
       closeOnDragDown
       dragFromTopOnly
-      onClose={closeHandler}
+      onClose={onClosed}
       customStyles={{
         container: styles.modalContainer,
         draggableIcon: styles.draggableIcon,
