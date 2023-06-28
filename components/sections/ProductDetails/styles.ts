@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 100,
     height: scaleSize(240),
     marginBottom: scaleSize(24),
+    borderRadius: 16,
   },
   descriptionContainer: {
     alignItems: "flex-start",

@@ -10,7 +10,7 @@ import { useCategories } from "../../../hooks";
 import CategoriesService from "../../../services/CategoriesService";
 import { IProduct } from "../../../types";
 import { Typography } from "../../common";
-import { ProductPreview } from "../ProductPreview";
+import { ImagePlaceholder } from "../ImagePlaceholder";
 import { Rating } from "../Rating";
 import styles from "./styles";
 
@@ -33,7 +33,7 @@ export const ProductDetails: FC<IProductDetailsProps> = ({ product }) => {
 
   return (
     <View>
-      <ProductPreview
+      <ImagePlaceholder
         style={styles.productPreview}
         imageUrl={product.imageUrl}
       />
@@ -49,10 +49,8 @@ export const ProductDetails: FC<IProductDetailsProps> = ({ product }) => {
 
         <Typography style={styles.containsTitle}>Contains</Typography>
 
-        {/* TODO: replace to product.ingredients */}
         <Typography style={typographyStyle_i17}>
-          Avocado, Flying fish roe, Cream cheese, Onion crumbs, Nori, Cucumber,
-          Rice, Unagi sauce, Eel
+          {product.ingredients}
         </Typography>
       </View>
     </View>

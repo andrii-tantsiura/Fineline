@@ -8,7 +8,7 @@ import {
 } from "../../../../../constants";
 import { IProduct } from "../../../../../types";
 import { IconButton, Typography } from "../../../../common";
-import { ProductPreview } from "../../../ProductPreview";
+import { ImagePlaceholder } from "../../../ImagePlaceholder";
 import styles from "./styles";
 
 interface IProductItem {
@@ -26,7 +26,7 @@ export const ProductItem: React.FC<IProductItem> = ({
 
   return (
     <View style={styles.wrapperContainer}>
-      <ProductPreview
+      <ImagePlaceholder
         style={styles.productPreview}
         imageUrl={product.imageUrl}
       />
@@ -34,7 +34,7 @@ export const ProductItem: React.FC<IProductItem> = ({
       <View style={styles.container}>
         <View style={styles.info}>
           <Typography style={typographyStyle_i17}>{product.name}</Typography>
-          <Typography style={typographyStyle_i12}>$ {product.price}</Typography>
+          <Typography style={typographyStyle_i12}>${product.price}</Typography>
         </View>
 
         <IconButton

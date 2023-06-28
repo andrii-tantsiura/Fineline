@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 16,
     backgroundColor: COLORS.neutral_20,
   },
   image: {

@@ -87,7 +87,10 @@ export const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
           <ProductDetails product={product} />
 
           <View style={styles.quantitySelectionContainer}>
-            <Stepper value={productQuantity} setValue={setProductQuantity} />
+            <Stepper
+              value={productQuantity}
+              onValueChanged={setProductQuantity}
+            />
 
             <Typography style={styles.subtotalText}>
               ${subtotal.toFixed(2)}
