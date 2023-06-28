@@ -4,7 +4,7 @@ import { Platform, ScrollView, StatusBar, Text, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { CustomButton, Stepper, Typography } from "../../components/common";
-import { LoaderView, ProductDetails } from "../../components/sections";
+import { ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
 import { useCart } from "../../hooks";
 import { ICartItem, IProduct } from "../../types";
@@ -64,40 +64,36 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
         draggableIcon: styles.draggableIcon,
       }}
     >
-      {product ? (
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <ProductDetails product={product} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <ProductDetails product={product} />
 
-          {productsInCart.map((x) => (
-            <>
-              <Text>name: {x.product.name}</Text>
-              <Text>quantity: {x.quantity}</Text>
-              <Text>price: {x.product.price}</Text>
-            </>
-          ))}
-          <Text>subtotal {cartSubtotal}</Text>
+        {productsInCart.map((x) => (
+          <>
+            <Text>name: {x.product.name}</Text>
+            <Text>quantity: {x.quantity}</Text>
+            <Text>price: {x.product.price}</Text>
+          </>
+        ))}
+        <Text>subtotal {cartSubtotal}</Text>
 
-          <View style={styles.quantitySelectionContainer}>
-            <Stepper
-              value={productQuantity}
-              onValueChanged={setProductQuantity}
-            />
+        <View style={styles.quantitySelectionContainer}>
+          <Stepper
+            value={productQuantity}
+            onValueChanged={setProductQuantity}
+          />
 
-            <Typography style={styles.subtotalText}>
-              ${subtotal.toFixed(2)}
-            </Typography>
-          </View>
+          <Typography style={styles.subtotalText}>
+            ${subtotal.toFixed(2)}
+          </Typography>
+        </View>
 
-          <CustomButton
-            style={styles.addProductToCartButton}
-            onPress={addProductToCartHandler}
-          >
-            Add To Cart
-          </CustomButton>
-        </ScrollView>
-      ) : (
-        <LoaderView />
-      )}
+        <CustomButton
+          style={styles.addProductToCartButton}
+          onPress={addProductToCartHandler}
+        >
+          Add To Cart
+        </CustomButton>
+      </ScrollView>
     </RBSheet>
   );
 };
