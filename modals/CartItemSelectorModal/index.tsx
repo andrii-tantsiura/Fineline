@@ -18,18 +18,18 @@ import { IProduct } from "../../types";
 import { SCREEN_HEIGHT } from "../../utils";
 import styles from "./styles";
 
-interface IProductDetailsProps {
+interface ICartItemSelectorModalProps {
   product?: IProduct | null;
   setVisible: Dispatch<SetStateAction<boolean>>;
   onClose?: () => {};
 }
 
-export const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
+export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
   product,
   setVisible,
   onClose,
 }) => {
-  const modalRef = useRef<any>();
+  const modalRef = useRef<RBSheet>(null);
   const headerHeight = useHeaderHeight();
   const cartContext = useContext(CartContext);
 
@@ -60,7 +60,7 @@ export const CartItemSelectorModal: React.FC<IProductDetailsProps> = ({
   }, [productQuantity]);
 
   useEffect(() => {
-    modalRef.current.open();
+    modalRef.current?.open();
 
     if (Platform.OS === "android") {
       StatusBar.setBackgroundColor(COLORS.neutral_55);
