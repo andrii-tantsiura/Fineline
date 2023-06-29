@@ -1,15 +1,14 @@
-import { CommonActions } from "@react-navigation/native";
 import { FC, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 
+import { CommonActions } from "@react-navigation/native";
 import { IC_ARROW_LEFT_RED } from "../../assets/icons";
 import {
   CustomButton,
   CustomTextInput,
   IFormController,
   IconButton,
-  Typography,
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
 import {
@@ -18,8 +17,6 @@ import {
   MM_YY_DATE_FORMAT_MASK,
   iconButtonStyles,
   separatorStyles,
-  typographyStyle_i12,
-  typographyStyle_i16,
 } from "../../constants";
 import {
   CARD_NUMBER_RULES,
@@ -119,42 +116,44 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
 
   return (
     <>
+      <ConfirmModal
+        visible={isClosingPageConfirmationVisible}
+        titleText="The data will not be saved"
+        descriptionText="Do you really want to close the page?"
+        confirmText="Close"
+        onConfirm={confirmClosingPageHandler}
+        onCancel={cancelClosingPageHandler}
+      />
+
       <View style={styles.rootContainer}>
-        <ConfirmModal
-          visible={isClosingPageConfirmationVisible}
-          titleText="The data will not be saved"
-          descriptionText="Do you really want to close the page?"
-          confirmText="Close"
-          onConfirm={confirmClosingPageHandler}
-          onCancel={cancelClosingPageHandler}
-        />
-        <View style={styles.formContainer}>
-          <CustomTextInput
-            formController={hookFormController}
-            name="cardNumber"
-            title="Card Number"
-            placeholder="Enter card number"
-            keyboardType="numeric"
-            maxLength={19}
-            rules={CARD_NUMBER_RULES}
-            maskConfig={{
-              maskType: "custom",
-              maskValue: CARD_NUMBER_MASK,
-            }}
-          />
+        <ScrollView>
+          <View style={styles.formContainer}>
+            <CustomTextInput
+              formController={hookFormController}
+              name="cardNumber"
+              title="Card Number"
+              autoFocus
+              placeholder="Enter card number"
+              keyboardType="numeric"
+              maxLength={19}
+              rules={CARD_NUMBER_RULES}
+              maskConfig={{
+                maskType: "custom",
+                maskValue: CARD_NUMBER_MASK,
+              }}
+            />
 
-          <CustomTextInput
-            formController={hookFormController}
-            name="cardHolder"
-            title="Card Holder"
-            placeholder="Enter card holder"
-            autoCapitalize="words"
-            maxLength={50}
-            rules={NAME_RULES}
-          />
+            <CustomTextInput
+              formController={hookFormController}
+              name="cardHolder"
+              title="Card Holder"
+              placeholder="Enter card holder"
+              autoCapitalize="words"
+              maxLength={50}
+              rules={NAME_RULES}
+            />
 
-          <View style={styles.inputsRowContainer}>
-            <View style={styles.expiryDateInput}>
+            <View style={styles.inputsRowContainer}>
               <CustomTextInput
                 formController={hookFormController}
                 name="expirationDate"
@@ -168,9 +167,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
                   maskValue: MM_YY_DATE_FORMAT_MASK,
                 }}
               />
-            </View>
 
-            <View style={styles.cvcInput}>
               <CustomTextInput
                 formController={hookFormController}
                 name="cvc"
@@ -186,35 +183,16 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
               />
             </View>
           </View>
-        </View>
+        </ScrollView>
 
-        <View>
-          <View style={separatorStyles.i1} />
+        <View style={separatorStyles.i1} />
 
-          <View style={styles.totalContainer}>
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i16}>Subtotal</Typography>
-              <Typography style={typographyStyle_i16}>$31.98</Typography>
-            </View>
-
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i16}>Delivery</Typography>
-              <Typography style={typographyStyle_i16}>$5.00</Typography>
-            </View>
-
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i12}>Total to Pay</Typography>
-              <Typography style={typographyStyle_i12}>$36.00</Typography>
-            </View>
-
-            <CustomButton
-              style={styles.confirmAndPayButton}
-              onPress={confirmAndPayHandler}
-            >
-              Confirm and Pay
-            </CustomButton>
-          </View>
-        </View>
+        <CustomButton
+          style={styles.confirmAndPayButton}
+          onPress={confirmAndPayHandler}
+        >
+          Confirm and Pay
+        </CustomButton>
       </View>
     </>
   );

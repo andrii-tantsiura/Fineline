@@ -41,17 +41,11 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
   const { control, resetField, handleSubmit, trigger, watch, formState } =
     useForm<IDeliveryInfo>({
       defaultValues: {
-        // firstName: "",
-        // lastName: "",
-        // mobileNumber: "",
-        // address: "",
-        // comment: "",
-        // TODO: replace with empty strings when the task is completed
-        firstName: "first name",
-        lastName: "last name",
-        mobileNumber: "380987334325",
-        address: "address",
-        comment: "comment",
+        firstName: "",
+        lastName: "",
+        mobileNumber: "",
+        address: "",
+        comment: "",
       },
       mode: "onTouched",
     });
@@ -175,7 +169,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
           </View>
         </ScrollView>
 
-        <View style={separatorStyles.i1}></View>
+        <View style={separatorStyles.i1} />
 
         <CustomButton
           style={styles.button}

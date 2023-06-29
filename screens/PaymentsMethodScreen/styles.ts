@@ -6,6 +6,7 @@ import { scaleSize } from "../../utils";
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
+    justifyContent: "space-between",
   },
   backButton: {
     marginLeft: scaleSize(16),
@@ -16,12 +17,28 @@ const styles = StyleSheet.create({
     marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
   },
-  expiryDateAndCvcContainer: {
-    columnGap: 10,
+  inputsRowContainer: {
+    columnGap: scaleSize(8),
     flexDirection: "row",
+    justifyContent: "space-between",
   },
-  button: {
-    margin: scaleSize(16),
+  expiryDateInput: {
+    flex: 1,
+  },
+  cvcInput: {
+    flex: 1,
+  },
+  totalContainer: {
+    rowGap: scaleSize(8),
+    marginVertical: scaleSize(16),
+    marginHorizontal: scaleSize(16),
+  },
+  totalRowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  confirmAndPayButton: {
+    marginTop: 4,
     ...customButtonStyles.i1,
   },
 });

@@ -15,6 +15,7 @@ import {
   PaymentsMethodScreen,
   SuccessfulPaymentScreen,
 } from "../../screens";
+import { IDeliveryInfo } from "../../types";
 import { HomeScreenProps, HomeStackParamList } from "./types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -45,6 +46,14 @@ const HomeStackNavigator: FC = () => (
       options={({ navigation }: HomeScreenProps<"Homepage">) => ({
         ...headerOptions,
         headerRight: () => {
+          const deliveryInfo: IDeliveryInfo = {
+            firstName: "first name",
+            lastName: "last name",
+            mobileNumber: "380987334325",
+            address: "address",
+            comment: "comment",
+          };
+
           return (
             <IconButton
               source={IC_SHOPPING_CART_PINK}
@@ -56,7 +65,10 @@ const HomeStackNavigator: FC = () => (
               }}
               imageStyle={iconButtonStyles.i2}
               // TODO: replace by navigation to the shopping cart page when it is completed
-              onPress={() => navigation.navigate("DeliveryDetails")}
+              onPress={
+                () => navigation.navigate("PaymentsMethod", { deliveryInfo })
+                // navigation.navigate("DeliveryDetails")
+              }
             />
           );
         },
