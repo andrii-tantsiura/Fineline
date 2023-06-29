@@ -1,4 +1,4 @@
-export interface IDelivery {
+export interface IDeliveryInfo {
   firstName: string;
   lastName: string;
   mobileNumber: string;

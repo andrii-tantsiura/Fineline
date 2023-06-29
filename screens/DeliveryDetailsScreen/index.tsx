@@ -19,7 +19,7 @@ import {
 } from "../../helpers";
 import { useBackHandler } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { IDelivery } from "../../types";
+import { IDeliveryInfo } from "../../types";
 import styles from "./styles";
 
 type Props = HomeScreenProps<"DeliveryDetails">;
@@ -39,13 +39,19 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
   };
 
   const { control, resetField, handleSubmit, trigger, watch, formState } =
-    useForm<IDelivery>({
+    useForm<IDeliveryInfo>({
       defaultValues: {
-        firstName: "",
-        lastName: "",
-        mobileNumber: "",
-        address: "",
-        comment: "",
+        // firstName: "",
+        // lastName: "",
+        // mobileNumber: "",
+        // address: "",
+        // comment: "",
+        // TODO: replace with empty strings when the task is completed
+        firstName: "first name",
+        lastName: "last name",
+        mobileNumber: "380987334325",
+        address: "address",
+        comment: "comment",
       },
       mode: "onTouched",
     });
@@ -73,8 +79,8 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
     }
   };
 
-  const openPaymentPageHandler = handleSubmit((delivery: IDelivery) => {
-    const deliveryInfo: IDelivery = watch();
+  const openPaymentPageHandler = handleSubmit(() => {
+    const deliveryInfo: IDeliveryInfo = watch();
 
     navigation.navigate("PaymentsMethod", { deliveryInfo });
   });

@@ -26,7 +26,7 @@ import {
 } from "../../helpers";
 import { useBackHandler } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { IPayment } from "../../types";
+import { IPaymentInfo } from "../../types";
 import styles from "./styles";
 
 type Props = HomeScreenProps<"PaymentsMethod">;
@@ -46,7 +46,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
   };
 
   const { control, resetField, handleSubmit, trigger, watch } =
-    useForm<IPayment>({
+    useForm<IPaymentInfo>({
       defaultValues: {
         cardNumber: "",
         cardHolder: "",
@@ -86,7 +86,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
 
   useBackHandler(backButtonPressedHandler);
 
-  const confirmAndPayHandler = handleSubmit((paymentForm: IPayment) => {
+  const confirmAndPayHandler = handleSubmit((paymentForm: IPaymentInfo) => {
     console.log("submit data", paymentForm);
 
     navigation.dispatch(

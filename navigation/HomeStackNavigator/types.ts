@@ -1,13 +1,13 @@
 import { RouteProp } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import { IDelivery } from "../../types";
+import { IDeliveryInfo } from "../../types";
 
 export type HomeStackParamList = {
   AppDataLoader: undefined;
   Homepage: undefined;
   DeliveryDetails: undefined;
-  PaymentsMethod: { deliveryInfo: IDelivery };
+  PaymentsMethod: { deliveryInfo: IDeliveryInfo };
   SuccessfulPayment: { orderId: string };
 };
 
