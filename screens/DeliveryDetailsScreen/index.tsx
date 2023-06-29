@@ -115,24 +115,28 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
         <ScrollView>
           <View style={styles.formContainer}>
             <View style={styles.nameInputsContainer}>
-              <CustomTextInput
-                formController={hookFormController}
-                name="firstName"
-                title="First Name"
-                autoCapitalize="words"
-                autoFocus
-                placeholder="Enter first name"
-                rules={NAME_RULES}
-              />
+              <View style={styles.lastNameInputContainer}>
+                <CustomTextInput
+                  formController={hookFormController}
+                  name="firstName"
+                  title="First Name"
+                  autoCapitalize="words"
+                  autoFocus
+                  placeholder="Enter first name"
+                  rules={NAME_RULES}
+                />
+              </View>
 
-              <CustomTextInput
-                formController={hookFormController}
-                name="lastName"
-                title="Last Name"
-                placeholder="Enter last name"
-                autoCapitalize="words"
-                rules={NAME_RULES}
-              />
+              <View style={styles.lastNameInputContainer}>
+                <CustomTextInput
+                  formController={hookFormController}
+                  name="lastName"
+                  title="Last Name"
+                  placeholder="Enter last name"
+                  autoCapitalize="words"
+                  rules={NAME_RULES}
+                />
+              </View>
             </View>
 
             <CustomTextInput
@@ -172,7 +176,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
         <View style={separatorStyles.i1} />
 
         <CustomButton
-          style={styles.button}
+          style={styles.goToPayButton}
           imageSource={IC_ARROW_RIGHT_WHITE}
           onPress={openPaymentPageHandler}
         >

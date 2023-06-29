@@ -22,10 +22,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  expiryDateInput: {
+  expiryDateInputContainer: {
     flex: 1,
   },
-  cvcInput: {
+  cvcInputContainer: {
     flex: 1,
   },
   totalContainer: {

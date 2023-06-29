@@ -17,14 +17,21 @@ const styles = StyleSheet.create({
     marginHorizontal: scaleSize(16),
   },
   nameInputsContainer: {
-    columnGap: 10,
+    columnGap: scaleSize(8),
     flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  firstNameInputContainer: {
+    flex: 1,
+  },
+  lastNameInputContainer: {
+    flex: 1,
   },
   commentTextInput: {
     height: scaleSize(129),
     marginBottom: scaleSize(40),
   },
-  button: {
+  goToPayButton: {
     margin: scaleSize(16),
     ...customButtonStyles.i1,
   },

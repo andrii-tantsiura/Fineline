@@ -66,8 +66,8 @@ const HomeStackNavigator: FC = () => (
               imageStyle={iconButtonStyles.i2}
               // TODO: replace by navigation to the shopping cart page when it is completed
               onPress={
-                () => navigation.navigate("PaymentsMethod", { deliveryInfo })
-                // navigation.navigate("DeliveryDetails")
+                // () => navigation.navigate("PaymentsMethod", { deliveryInfo })
+                () => navigation.navigate("DeliveryDetails")
               }
             />
           );

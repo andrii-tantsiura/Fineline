@@ -154,7 +154,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
           />
 
           <View style={styles.inputsRowContainer}>
-            <View style={styles.expiryDateInput}>
+            <View style={styles.expiryDateInputContainer}>
               <CustomTextInput
                 formController={hookFormController}
                 name="expirationDate"
@@ -170,7 +170,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
               />
             </View>
 
-            <View style={styles.cvcInput}>
+            <View style={styles.cvcInputContainer}>
               <CustomTextInput
                 formController={hookFormController}
                 name="cvc"
