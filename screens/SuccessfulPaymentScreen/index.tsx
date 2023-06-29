@@ -14,7 +14,7 @@ export const SuccessfulPaymentScreen: FC<HomeScreenProps> = ({
   const orderId = route.params?.orderId;
 
   function onContinueShoppingHandler() {
-    navigation.navigate("Homepage");
+    navigation.replace("Homepage");
   }
 
   return (
