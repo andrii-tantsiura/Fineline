@@ -29,7 +29,9 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IPayment } from "../../types";
 import styles from "./styles";
 
-export const PaymentsMethodScreen: FC<HomeScreenProps> = ({ navigation }) => {
+type Props = HomeScreenProps<"PaymentsMethod">;
+
+export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
   const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
     useState<boolean>(false);
 

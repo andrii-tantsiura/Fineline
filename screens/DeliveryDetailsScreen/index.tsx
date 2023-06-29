@@ -2,11 +2,7 @@ import { FC, useLayoutEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
-import {
-  IC_ARROW_LEFT_RED,
-  IC_ARROW_RIGHT_WHITE,
-  IC_SEARCH_LIGHT_GRAY,
-} from "../../assets/icons";
+import { IC_ARROW_LEFT_RED, IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
 import {
   CustomButton,
   IFormController,
@@ -26,7 +22,9 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IDelivery } from "../../types";
 import styles from "./styles";
 
-export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
+type Props = HomeScreenProps<"DeliveryDetails">;
+
+export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
   const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
     useState<boolean>(false);
 
@@ -76,8 +74,9 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   const openPaymentPageHandler = handleSubmit((delivery: IDelivery) => {
-    // TODO: add passing deliveryInfo to PaymentsMethod
-    navigation.navigate("PaymentsMethod");
+    const deliveryInfo: IDelivery = watch();
+
+    navigation.navigate("PaymentsMethod", { deliveryInfo });
   });
 
   const backButtonPressedHandler = () => {

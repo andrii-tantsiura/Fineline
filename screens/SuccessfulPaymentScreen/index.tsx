@@ -1,17 +1,16 @@
 import { FC } from "react";
 import { Image, View } from "react-native";
 
-import styles from "./styles";
+import { PIC_THANK_YOU } from "../../assets/icons";
+import { CustomButton, Typography } from "../../components/common";
 import { typographyStyle_i6, typographyStyle_i8 } from "../../constants";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { CustomButton, Typography } from "../../components/common";
-import { PIC_THANK_YOU } from "../../assets/icons";
+import styles from "./styles";
 
-export const SuccessfulPaymentScreen: FC<HomeScreenProps> = ({
-  navigation,
-  route,
-}) => {
-  const orderId = route.params?.orderId;
+type Props = HomeScreenProps<"SuccessfulPayment">;
+
+export const SuccessfulPaymentScreen: FC<Props> = ({ navigation, route }) => {
+  const orderId = route.params.orderId;
 
   function onContinueShoppingHandler() {
     navigation.replace("Homepage");

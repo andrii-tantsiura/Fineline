@@ -1,11 +1,17 @@
-import { StackScreenProps } from "@react-navigation/stack";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { IDelivery } from "../../types";
 
 export type HomeStackParamList = {
-  DeliveryDetails: undefined;
-  Homepage: undefined;
   AppDataLoader: undefined;
-  PaymentsMethod: undefined;
+  Homepage: undefined;
+  DeliveryDetails: undefined;
+  PaymentsMethod: { deliveryInfo: IDelivery };
   SuccessfulPayment: { orderId: string };
 };
 
-export type HomeScreenProps = StackScreenProps<HomeStackParamList>;
+export type HomeScreenProps<RouteName extends keyof HomeStackParamList> = {
+  navigation: StackNavigationProp<HomeStackParamList, RouteName>;
+  route: RouteProp<HomeStackParamList, RouteName>;
+};
