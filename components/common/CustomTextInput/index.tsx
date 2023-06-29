@@ -46,7 +46,7 @@ export const CustomTextInput: FC<ICustomTextInputProps> = ({
         name={name}
         formController={formController}
         rules={rules}
-        style={style}
+        style={[styles.input, style]}
         {...rest}
       />
 

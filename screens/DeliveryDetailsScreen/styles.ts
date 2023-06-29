@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   },
   commentTextInput: {
     height: scaleSize(129),
+    marginBottom: scaleSize(40),
   },
   button: {
     margin: scaleSize(16),
