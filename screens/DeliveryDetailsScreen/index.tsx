@@ -117,7 +117,6 @@ export const DeliveryDetailsScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <View style={styles.formContainer}>
             <View style={styles.nameInputsContainer}>
               <CustomTextInput
-                leftImageSource={IC_SEARCH_LIGHT_GRAY}
                 formController={hookFormController}
                 name="firstName"
                 title="First Name"

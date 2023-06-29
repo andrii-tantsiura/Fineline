@@ -1,25 +1,31 @@
-import { useProducts } from "../hooks/useProducts";
-import { useCategories } from "../hooks/useCategories";
 import { useBanners } from "./useBanners";
+import { useCategories } from "./useCategories";
+import { useProducts } from "./useProducts";
 
-export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
-  const [
-    categories,
+interface IUseAppInitDataValues {
+  isDataLoaded: boolean;
+  errorMessage: string;
+  loadData: () => Promise<void>;
+}
+
+export const useAppInitData = (): IUseAppInitDataValues => {
+  const {
     isCategoriesLoaded,
-    errorMessageForCategories,
+    errorMessage: errorMessageForCategories,
     loadProductsCategories,
-  ] = useCategories();
+  } = useCategories();
 
-  const [products, isProductsLoaded, errorMessageForProducts, loadProducts] =
-    useProducts();
+  const {
+    isProductsLoaded,
+    errorMessage: errorMessageForProducts,
+    loadProducts,
+  } = useProducts();
 
-  const [
-    banners,
+  const {
     isBannersLoaded,
-    errorMessageForBanners,
-    closeBanner,
+    errorMessage: errorMessageForBanners,
     loadBanners,
-  ] = useBanners();
+  } = useBanners();
 
   async function loadData(): Promise<void> {
     await loadProductsCategories();
@@ -34,5 +40,5 @@ export const useAppInitData = (): [boolean, string, () => Promise<void>] => {
     errorMessageForProducts ??
     errorMessageForBanners;
 
-  return [isDataLoaded, errorMessage, loadData];
+  return { isDataLoaded, errorMessage, loadData };
 };

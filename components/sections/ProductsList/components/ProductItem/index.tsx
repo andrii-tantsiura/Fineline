@@ -1,14 +1,15 @@
-import { View, Image } from "react-native";
+import { View } from "react-native";
 
-import styles from "./styles";
+import { IC_SHOPPING_CART_WHITE } from "../../../../../assets/icons";
+import {
+  iconButtonStyles,
+  typographyStyle_i12,
+  typographyStyle_i17,
+} from "../../../../../constants";
 import { IProduct } from "../../../../../types";
 import { IconButton, Typography } from "../../../../common";
-import {
-  typographyStyle_i17,
-  typographyStyle_i12,
-  iconButtonStyles,
-} from "../../../../../constants";
-import { IC_SHOPPING_CART_WHITE } from "../../../../../assets/icons";
+import { ImagePlaceholder } from "../../../ImagePlaceholder";
+import styles from "./styles";
 
 interface IProductItem {
   product: IProduct;
@@ -25,17 +26,15 @@ export const ProductItem: React.FC<IProductItem> = ({
 
   return (
     <View style={styles.wrapperContainer}>
-      <Image
-        style={styles.imageProduct}
-        source={{
-          uri: product.imageUrl,
-        }}
+      <ImagePlaceholder
+        style={styles.productPreview}
+        imageUrl={product.imageUrl}
       />
 
       <View style={styles.container}>
         <View style={styles.info}>
           <Typography style={typographyStyle_i17}>{product.name}</Typography>
-          <Typography style={typographyStyle_i12}>$ {product.price}</Typography>
+          <Typography style={typographyStyle_i12}>${product.price}</Typography>
         </View>
 
         <IconButton
