@@ -6,7 +6,7 @@ const MM_YY_DATE_REGEX = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
 
 const CARD_NUMBER_REGEX = /^[0-9]{4}\s[0-9]{4}\s[0-9]{4}\s[0-9]{4}$/;
 
-const CVC_REGEX = /^[0-9]{3}$/;
+const CVC_REGEX = /^[0-9]{3,4}$/;
 
 export {
   NAME_REGEX,

@@ -174,7 +174,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
                 title="CVC"
                 placeholder="Enter CVC"
                 keyboardType="numeric"
-                maxLength={3}
+                maxLength={4}
                 rules={CVC_RULES}
                 maskConfig={{
                   maskType: "custom",

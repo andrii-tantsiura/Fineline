@@ -22,7 +22,7 @@ const NAME_RULES: RulesType = {
   },
   pattern: {
     value: NAME_REGEX,
-    message: ValidationErrorMessages.INCORRECT_NAME_FORMAT,
+    message: ValidationErrorMessages.INVALID_NAME,
   },
 };
 
@@ -30,7 +30,7 @@ const PHONE_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
   pattern: {
     value: PHONE_REGEX,
-    message: ValidationErrorMessages.INCORRECT_PHONE_FORMAT,
+    message: ValidationErrorMessages.INVALID_MOBILE_NUMBER,
   },
 };
 
@@ -61,7 +61,7 @@ const MM_YY_DATE_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
   pattern: {
     value: MM_YY_DATE_REGEX,
-    message: ValidationErrorMessages.INCORRECT_DATE_FORMAT,
+    message: ValidationErrorMessages.INVALID_EXPIRATION_DATE,
   },
 };
 
@@ -69,7 +69,7 @@ const CVC_RULES: RulesType = {
   required: ValidationErrorMessages.REQUIRED,
   pattern: {
     value: CVC_REGEX,
-    message: ValidationErrorMessages.INCORRECT_CVC_FORMAT,
+    message: ValidationErrorMessages.INVALID_CVC,
   },
 };
 
