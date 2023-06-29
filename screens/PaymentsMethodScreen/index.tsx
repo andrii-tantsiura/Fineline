@@ -9,9 +9,9 @@ import {
   CustomTextInput,
   IFormController,
   IconButton,
-  Typography,
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
+import { PriceInfo } from "../../components/sections";
 import {
   CARD_NUMBER_MASK,
   CVC_MASK,
@@ -19,7 +19,6 @@ import {
   iconButtonStyles,
   separatorStyles,
   typographyStyle_i12,
-  typographyStyle_i16,
 } from "../../constants";
 import {
   CARD_NUMBER_RULES,
@@ -27,16 +26,22 @@ import {
   MM_YY_DATE_RULES,
   NAME_RULES,
 } from "../../helpers";
-import { useBackHandler } from "../../hooks";
+import { useBackHandler, useCart } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IPaymentInfo } from "../../types";
 import styles from "./styles";
 
 type Props = HomeScreenProps<"PaymentsMethod">;
 
+const DELIVERY_COST = 5;
+
 export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
   const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
     useState<boolean>(false);
+
+  const { cartSubtotal } = useCart();
+
+  const totalToPay = cartSubtotal + DELIVERY_COST;
 
   const confirmClosingPageHandler = () => {
     setIsClosingConfirmationVisible(false);
@@ -98,6 +103,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
         routes: [
           {
             name: "SuccessfulPayment",
+            params: { orderId: 25 },
           },
         ],
       })
@@ -128,6 +134,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
           onConfirm={confirmClosingPageHandler}
           onCancel={cancelClosingPageHandler}
         />
+
         <View style={styles.formContainer}>
           <CustomTextInput
             formController={hookFormController}
@@ -192,20 +199,15 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
           <View style={separatorStyles.i1} />
 
           <View style={styles.totalContainer}>
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i16}>Subtotal</Typography>
-              <Typography style={typographyStyle_i16}>$31.98</Typography>
-            </View>
+            <PriceInfo label="Subtotal" price={cartSubtotal} />
 
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i16}>Delivery</Typography>
-              <Typography style={typographyStyle_i16}>$5.00</Typography>
-            </View>
+            <PriceInfo label="Delivery" price={DELIVERY_COST} />
 
-            <View style={styles.totalRowContainer}>
-              <Typography style={typographyStyle_i12}>Total to Pay</Typography>
-              <Typography style={typographyStyle_i12}>$36.00</Typography>
-            </View>
+            <PriceInfo
+              label="Total to Pay"
+              price={totalToPay}
+              textStyle={typographyStyle_i12}
+            />
 
             <CustomButton
               style={styles.confirmAndPayButton}

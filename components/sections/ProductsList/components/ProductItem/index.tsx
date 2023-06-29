@@ -7,6 +7,7 @@ import {
   typographyStyle_i17,
 } from "../../../../../constants";
 import { IProduct } from "../../../../../types";
+import { formatMoney } from "../../../../../utils";
 import { IconButton, Typography } from "../../../../common";
 import { ImagePlaceholder } from "../../../ImagePlaceholder";
 import styles from "./styles";
@@ -34,7 +35,10 @@ export const ProductItem: React.FC<IProductItem> = ({
       <View style={styles.container}>
         <View style={styles.info}>
           <Typography style={typographyStyle_i17}>{product.name}</Typography>
-          <Typography style={typographyStyle_i12}>${product.price}</Typography>
+
+          <Typography style={typographyStyle_i12}>
+            {formatMoney(product.price)}
+          </Typography>
         </View>
 
         <IconButton
