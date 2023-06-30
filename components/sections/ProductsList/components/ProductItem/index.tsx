@@ -33,7 +33,13 @@ export const ProductItem: React.FC<IProductItem> = ({
 
       <View style={styles.container}>
         <View style={styles.info}>
-          <Typography style={typographyStyle_i17}>{product.name}</Typography>
+          <Typography
+            style={typographyStyle_i17}
+            numberOfLines={2}
+            ellipsizeMode="tail"
+          >
+            {product.name}
+          </Typography>
           <Typography style={typographyStyle_i12}>${product.price}</Typography>
         </View>
 

@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   info: {
+    flex: 1,
     justifyContent: "space-between",
     height: "100%",
   },
