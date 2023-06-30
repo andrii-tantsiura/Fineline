@@ -5,34 +5,29 @@ import { COLORS } from "../../../../../constants";
 const styles = StyleSheet.create({
   wrapperContainer: {
     flexDirection: "row",
-    borderColor: COLORS.neutral_30,
     borderWidth: 1,
     borderRadius: 8,
+    borderColor: COLORS.neutral_30,
     padding: 16,
-    height: 104,
+    height: 122,
     marginBottom: 12,
   },
-  productPreview: {
-    width: 72,
+  imageProduct: {
+    width: 90,
+    height: 90,
+    resizeMode: "contain",
     marginRight: 16,
-    paddingHorizontal: 10,
-    borderRadius: 16,
-  },
-  container: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "flex-end",
-    justifyContent: "space-between",
+    borderRadius: 8,
+    backgroundColor: COLORS.neutral_20,
   },
   info: {
     flex: 1,
     justifyContent: "space-between",
-    height: "100%",
   },
-  shoppingCart: {
-    borderRadius: 8,
-    padding: 8,
-    backgroundColor: COLORS.primary,
+  container: {
+    flexDirection: "row",
+    alignItems: "flex-end",
+    justifyContent: "space-between",
   },
 });
 

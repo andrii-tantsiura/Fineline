@@ -5,14 +5,14 @@ import {
 } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
-import { IconButton, Typography } from "../../components/common";
-import { COLORS, iconButtonStyles, typographyStyle_i4 } from "../../constants";
+import { Typography } from "../../components/common";
+import { typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
   SuccessfulPaymentScreen,
   HomeScreen,
+  CartScreen,
 } from "../../screens";
 import { HomeStackParamList } from "./types";
 
@@ -41,24 +41,7 @@ const HomeStackNavigator: FC = () => (
     <HomeStack.Screen
       name="Homepage"
       component={HomeScreen}
-      options={({ navigation }) => ({
-        ...headerOptions,
-        headerRight: () => (
-          <IconButton
-            source={IC_SHOPPING_CART_PINK}
-            style={{
-              backgroundColor: COLORS.neutral_10,
-              padding: 8,
-              marginRight: 18,
-              borderRadius: 8,
-            }}
-            imageStyle={iconButtonStyles.i2}
-            onPress={() =>
-              navigation.navigate("SuccessfulPayment", { orderId: 253 })
-            }
-          />
-        ),
-      })}
+      options={headerOptions}
     />
 
     <HomeStack.Screen
@@ -76,6 +59,12 @@ const HomeStackNavigator: FC = () => (
       options={{
         headerShown: false,
       }}
+    />
+
+    <HomeStack.Screen
+      name="Cart"
+      component={CartScreen}
+      options={headerOptions}
     />
   </HomeStack.Navigator>
 );

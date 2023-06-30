@@ -1,4 +1,5 @@
 export * from "./BannersList";
+export * from "./CartList";
 export * from "./CategoriesList";
 export * from "./EmptyView";
 export * from "./LoaderView";

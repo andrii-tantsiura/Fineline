@@ -7,11 +7,17 @@ interface IUseCartValues {
   productsInCart: ICartItem[];
   cartSubtotal: number;
   addToCart: (item: ICartItem) => void;
+  removeFromCart: (id: string) => void;
 }
 
 export const useCart = (): IUseCartValues => {
-  const { products, subtotal, addProduct, increaseProductQuantity } =
-    useContext(CartContext);
+  const {
+    products,
+    subtotal,
+    addProduct,
+    removeProduct,
+    increaseProductQuantity,
+  } = useContext(CartContext);
 
   const addToCart = ({ product, quantity }: ICartItem) => {
     if (products.some((x) => x.product.id === product.id)) {
@@ -25,5 +31,6 @@ export const useCart = (): IUseCartValues => {
     productsInCart: products,
     cartSubtotal: subtotal,
     addToCart,
+    removeFromCart: removeProduct,
   };
 };

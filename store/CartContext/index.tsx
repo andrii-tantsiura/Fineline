@@ -8,6 +8,7 @@ export const CartContext = createContext<ICartContextProps>({
   products: [],
   subtotal: 0,
   addProduct: (cartItem: ICartItem) => {},
+  removeProduct: (id: string) => {},
   increaseProductQuantity: (productId: string, quantity: number) => {},
 });
 
@@ -26,6 +27,13 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     });
   }
 
+  function removeProduct(id: string): void {
+    dispatch({
+      type: "REMOVE_PRODUCT_FROM_CART",
+      payload: id,
+    });
+  }
+
   function increaseProductQuantity(productId: string, quantity: number) {
     dispatch({
       type: "INCREASE_PRODUCT_QUANTITY",
@@ -40,6 +48,7 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     products: cartState.products,
     subtotal: cartState.subtotal,
     addProduct: addProduct,
+    removeProduct: removeProduct,
     increaseProductQuantity: increaseProductQuantity,
   };
 
