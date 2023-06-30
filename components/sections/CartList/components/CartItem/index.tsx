@@ -1,14 +1,11 @@
 import { View, Image } from "react-native";
 
 import styles from "./styles";
-import { IconButton, Typography } from "../../../../common";
+import { Typography } from "../../../../common";
 import {
   typographyStyle_i17,
   typographyStyle_i12,
-  typographyStyle_i18,
-  iconButtonStyles,
 } from "../../../../../constants";
-import { IC_DELETE_RED, IC_PLUS_RED } from "../../../../../assets/icons";
 import { ICartItem } from "../../../../../types";
 import { Stepper } from "../Stepper";
 

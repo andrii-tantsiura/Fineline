@@ -10,10 +10,10 @@ import {
 } from "../../constants";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { CustomButton, IconButton, Typography } from "../../components/common";
-import { CardList } from "../../components/sections";
+import { CartList } from "../../components/sections";
 import { useCart } from "../../hooks";
 
-export const CardScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
+export const CartScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
   const { cartSubtotal } = useCart();
 
   function goBackHandler() {
@@ -45,7 +45,7 @@ export const CardScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
 
   return (
     <View style={styles.rootContainer}>
-      <CardList style={styles.cardList} />
+      <CartList style={styles.cartList} />
 
       <View style={separatorStyles.i1}></View>
 

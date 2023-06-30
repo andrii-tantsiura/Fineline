@@ -94,7 +94,7 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   useLayoutEffect(() => {
     function onPressHandler() {
       if (productsInCart.length !== 0) {
-        navigation.navigate("Card");
+        navigation.navigate("Cart");
       }
     }
 

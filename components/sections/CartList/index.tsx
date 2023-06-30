@@ -1,14 +1,14 @@
 import { FlatList, ListRenderItemInfo, ViewProps } from "react-native";
 
-import { CartItem } from "./components/CardItem";
+import { CartItem } from "./components/CartItem";
 import { useCart } from "../../../hooks";
 import { ICartItem } from "../../../types";
 
-interface ICardList {
+interface ICartList {
   style?: ViewProps["style"];
 }
 
-export const CardList: React.FC<ICardList> = ({ style }) => {
+export const CartList: React.FC<ICartList> = ({ style }) => {
   const { productsInCart, addToCart, removeFromCart } = useCart();
 
   const renderCartItem = (cartItemData: ListRenderItemInfo<ICartItem>) => (

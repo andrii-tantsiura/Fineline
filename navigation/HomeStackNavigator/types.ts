@@ -5,7 +5,7 @@ export type HomeStackParamList = {
   Homepage: undefined;
   AppDataLoader: undefined;
   SuccessfulPayment: { orderId: string };
-  Card: undefined;
+  Cart: undefined;
 };
 
 export type HomeScreenProps = StackScreenProps<HomeStackParamList>;

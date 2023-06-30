@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
   },
-  cardList: {
+  cartList: {
     marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
   },
