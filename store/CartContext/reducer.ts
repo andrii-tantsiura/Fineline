@@ -11,6 +11,7 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
         subtotal: state.subtotal + product.price * quantity,
       };
     }
+
     case "REMOVE_PRODUCT_FROM_CART": {
       const id = action.payload;
 
@@ -23,6 +24,7 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
         subtotal: calculateSubtotal(products),
       };
     }
+
     case "INCREASE_PRODUCT_QUANTITY": {
       const { quantity, productId } = action.payload;
 

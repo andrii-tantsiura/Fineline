@@ -29,7 +29,7 @@ export const useCart = (): IUseCartValues => {
   };
 
   const getProductQuantityById = (id: string): number => {
-    return products.findLast((item) => item.product.id === id)?.quantity ?? 0;
+    return products.find((item) => item.product.id === id)?.quantity ?? 0;
   };
 
   return {
