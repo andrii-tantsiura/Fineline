@@ -36,8 +36,15 @@ export const IconButton: React.FC<IIconButtonProps> = ({
     disabled ? disabledStyle : pressed && pressedStyle,
   ];
 
+  const pointerEvent = onPress ? "auto" : "none";
+
   return (
-    <Pressable disabled={disabled} onPress={onPress} style={getContainerStyle}>
+    <Pressable
+      pointerEvents={pointerEvent}
+      disabled={disabled}
+      onPress={onPress}
+      style={getContainerStyle}
+    >
       <Image style={imageStyle} resizeMode={resizeMode} source={source} />
     </Pressable>
   );

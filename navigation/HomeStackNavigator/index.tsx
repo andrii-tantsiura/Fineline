@@ -1,13 +1,10 @@
 import { HeaderTitleProps } from "@react-navigation/elements";
-import {
-  StackNavigationOptions,
-  createStackNavigator,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { IC_SHOPPING_CART_PINK } from "../../assets/icons";
+import { IC_ARROW_LEFT_RED, IC_SHOPPING_CART_PINK } from "../../assets/icons";
 import { IconButton, Typography } from "../../components/common";
-import { COLORS, iconButtonStyles, typographyStyle_i4 } from "../../constants";
+import { iconButtonStyles, typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
@@ -15,7 +12,7 @@ import {
   PaymentsMethodScreen,
   SuccessfulPaymentScreen,
 } from "../../screens";
-import { IDeliveryInfo } from "../../types";
+import styles from "./styles";
 import { HomeScreenProps, HomeStackParamList } from "./types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
@@ -24,14 +21,22 @@ const headerTitle: FC<HeaderTitleProps> = ({ children }) => (
   <Typography style={typographyStyle_i4}>{children}</Typography>
 );
 
-const headerOptions: StackNavigationOptions = {
-  headerTitleAlign: "center",
-  headerShadowVisible: false,
-  headerTitle,
-};
-
 const HomeStackNavigator: FC = () => (
-  <HomeStack.Navigator initialRouteName="AppDataLoader">
+  <HomeStack.Navigator
+    initialRouteName="AppDataLoader"
+    screenOptions={{
+      headerTitleAlign: "center",
+      headerShadowVisible: false,
+      headerTitle: headerTitle,
+      headerBackImage: () => (
+        <IconButton
+          source={IC_ARROW_LEFT_RED}
+          style={styles.backButtonContainer}
+          imageStyle={iconButtonStyles.i2}
+        />
+      ),
+    }}
+  >
     <HomeStack.Screen
       name="AppDataLoader"
       component={AppDataLoaderScreen}
@@ -44,29 +49,14 @@ const HomeStackNavigator: FC = () => (
       name="Homepage"
       component={HomeScreen}
       options={({ navigation }: HomeScreenProps<"Homepage">) => ({
-        ...headerOptions,
         headerRight: () => {
-          const deliveryInfo: IDeliveryInfo = {
-            firstName: "first name",
-            lastName: "last name",
-            mobileNumber: "380987334325",
-            address: "address",
-            comment: "comment",
-          };
-
           return (
             <IconButton
               source={IC_SHOPPING_CART_PINK}
-              style={{
-                backgroundColor: COLORS.neutral_10,
-                padding: 8,
-                marginRight: 18,
-                borderRadius: 8,
-              }}
+              style={styles.cartButtonContainer}
               imageStyle={iconButtonStyles.i2}
-              // TODO: replace by navigation to the shopping cart page when it is completed
               onPress={
-                // () => navigation.navigate("PaymentsMethod", { deliveryInfo })
+                // TODO: replace by navigation to the shopping cart page when it is completed
                 () => navigation.navigate("DeliveryDetails")
               }
             />
@@ -80,7 +70,6 @@ const HomeStackNavigator: FC = () => (
       component={DeliveryDetailsScreen}
       options={{
         title: "Delivery Information",
-        ...headerOptions,
       }}
     />
 
@@ -89,7 +78,6 @@ const HomeStackNavigator: FC = () => (
       component={PaymentsMethodScreen}
       options={{
         title: "Payments method",
-        ...headerOptions,
       }}
     />
 

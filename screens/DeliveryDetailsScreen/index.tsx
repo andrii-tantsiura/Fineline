@@ -1,23 +1,19 @@
-import { FC, useLayoutEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
-import { IC_ARROW_LEFT_RED, IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
-import {
-  CustomButton,
-  IFormController,
-  IconButton,
-} from "../../components/common";
+import { IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
+import { CustomButton, IFormController } from "../../components/common";
 import { CustomTextInput } from "../../components/common/CustomTextInput";
 import { ConfirmModal } from "../../components/modals";
-import { PHONE_MASK, iconButtonStyles, separatorStyles } from "../../constants";
+import { PHONE_MASK, separatorStyles } from "../../constants";
 import {
   ADDRESS_RULES,
   COMMENT_RULES,
   NAME_RULES,
   PHONE_RULES,
 } from "../../helpers";
-import { useBackHandler } from "../../hooks";
+import { useBackPress, useNavigationBackButton } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IDeliveryInfo } from "../../types";
 import styles from "./styles";
@@ -79,26 +75,9 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
     navigation.navigate("PaymentsMethod", { deliveryInfo });
   });
 
-  const backButtonPressedHandler = () => {
-    goBackHandler();
+  useNavigationBackButton(navigation, goBackHandler);
 
-    return true;
-  };
-
-  useBackHandler(backButtonPressedHandler);
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <IconButton
-          source={IC_ARROW_LEFT_RED}
-          onPress={goBackHandler}
-          style={styles.backButton}
-          imageStyle={iconButtonStyles.i2}
-        />
-      ),
-    });
-  }, []);
+  useBackPress(goBackHandler);
 
   return (
     <>

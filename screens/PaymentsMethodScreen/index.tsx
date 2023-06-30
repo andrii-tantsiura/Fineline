@@ -1,14 +1,12 @@
 import { CommonActions } from "@react-navigation/native";
-import { FC, useLayoutEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { View } from "react-native";
 
-import { IC_ARROW_LEFT_RED } from "../../assets/icons";
 import {
   CustomButton,
   CustomTextInput,
   IFormController,
-  IconButton,
 } from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
 import { PriceInfo } from "../../components/sections";
@@ -16,7 +14,6 @@ import {
   CARD_NUMBER_MASK,
   CVC_MASK,
   MM_YY_DATE_FORMAT_MASK,
-  iconButtonStyles,
   separatorStyles,
   typographyStyle_i12,
 } from "../../constants";
@@ -26,7 +23,7 @@ import {
   MM_YY_DATE_RULES,
   NAME_RULES,
 } from "../../helpers";
-import { useBackHandler, useCart } from "../../hooks";
+import { useBackPress, useCart, useNavigationBackButton } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IPaymentInfo } from "../../types";
 import styles from "./styles";
@@ -86,13 +83,9 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
     }
   };
 
-  const backButtonPressedHandler = () => {
-    goBackHandler();
+  useNavigationBackButton(navigation, goBackHandler);
 
-    return true;
-  };
-
-  useBackHandler(backButtonPressedHandler);
+  useBackPress(goBackHandler);
 
   const confirmAndPayHandler = handleSubmit((paymentForm: IPaymentInfo) => {
     console.log("submit data", paymentForm);
@@ -109,19 +102,6 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
       })
     );
   });
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <IconButton
-          source={IC_ARROW_LEFT_RED}
-          onPress={goBackHandler}
-          style={styles.backButton}
-          imageStyle={iconButtonStyles.i2}
-        />
-      ),
-    });
-  }, []);
 
   return (
     <>
