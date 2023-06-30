@@ -1,3 +1,4 @@
+import { calculateSubtotal } from "../../helpers/calculateSubtotal";
 import { ICartState, Action } from "./types";
 
 export function cartReducer(state: ICartState, action: Action): ICartState {
@@ -17,14 +18,9 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
         (cartItem) => cartItem.product.id !== id
       );
 
-      const subtotal = products.reduce(
-        (sum, { product, quantity }) => sum + product.price * quantity,
-        0
-      );
-
       return {
         products,
-        subtotal,
+        subtotal: calculateSubtotal(products),
       };
     }
 
@@ -37,14 +33,9 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
           : x
       );
 
-      const subtotal = products.reduce(
-        (sum, { product, quantity }) => sum + product.price * quantity,
-        0
-      );
-
       return {
         products,
-        subtotal,
+        subtotal: calculateSubtotal(products),
       };
     }
 
