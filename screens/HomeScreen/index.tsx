@@ -20,10 +20,7 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import { IProduct } from "../../types";
 import styles from "./styles";
-import {
-  IC_SHOPPING_CART_PINK,
-  IC_SHOPPING_CART_RED,
-} from "../../assets/icons";
+import { IC_SHOPPING_CART_RED } from "../../assets/icons";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -92,21 +89,19 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
   };
 
   useLayoutEffect(() => {
+    const isDisabled = productsInCart.length === 0;
+
     function onPressHandler() {
-      if (productsInCart.length !== 0) {
+      if (!isDisabled) {
         navigation.navigate("Cart");
       }
     }
 
-    const imageSource =
-      productsInCart.length === 0
-        ? IC_SHOPPING_CART_PINK
-        : IC_SHOPPING_CART_RED;
-
     navigation.setOptions({
       headerRight: () => (
         <IconButton
-          source={imageSource}
+          source={IC_SHOPPING_CART_RED}
+          disabled={isDisabled}
           style={{
             backgroundColor: COLORS.neutral_10,
             padding: 8,

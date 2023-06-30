@@ -9,7 +9,6 @@ import IC_MINUS_RED from "../../assets/icons/ic_minus_red.png";
 import IC_PLUS_RED from "../../assets/icons/ic_plus_red.png";
 import IC_SEARCH_LIGHT_GRAY from "../../assets/icons/ic_search_light_gray.png";
 import IC_SHOPPING_CART_RED from "../../assets/icons/ic_shopping_cart_red.png";
-import IC_SHOPPING_CART_PINK from "../../assets/icons/ic_shopping_cart_pink.png";
 import IC_SHOPPING_CART_WHITE from "../../assets/icons/ic_shopping_cart_white.png";
 import IC_STAR_YELLOW from "../../assets/icons/ic_star_yellow.png";
 import PIC_COURIER from "../../assets/icons/pic_courier.png";
@@ -30,7 +29,6 @@ export {
   IC_PLUS_RED,
   IC_SEARCH_LIGHT_GRAY,
   IC_SHOPPING_CART_RED,
-  IC_SHOPPING_CART_PINK,
   IC_SHOPPING_CART_WHITE,
   IC_STAR_YELLOW,
   PIC_COURIER,

@@ -9,23 +9,23 @@ import {
 import { ICartItem } from "../../../../../types";
 import { Stepper } from "../Stepper";
 
-interface ICartItemComponent {
-  cartItem: ICartItem;
+interface ICartItemProps {
+  item: ICartItem;
   onAddToCart: (item: ICartItem) => void;
   onRemoveFromCart: (id: string) => void;
 }
 
-export const CartItem: React.FC<ICartItemComponent> = ({
-  cartItem,
+export const CartItem: React.FC<ICartItemProps> = ({
+  item,
   onAddToCart,
   onRemoveFromCart,
 }) => {
-  function onIncreaseProductQuantityHandler(value: number) {
-    onAddToCart({ ...cartItem, quantity: value - cartItem.quantity });
+  function increaseProductQuantityHandler(value: number) {
+    onAddToCart({ ...item, quantity: value - item.quantity });
   }
 
-  function onRemoveFromCartHandler() {
-    onRemoveFromCart(cartItem.product.id);
+  function removeFromCartHandler() {
+    onRemoveFromCart(item.product.id);
   }
 
   return (
@@ -33,7 +33,7 @@ export const CartItem: React.FC<ICartItemComponent> = ({
       <Image
         style={styles.imageProduct}
         source={{
-          uri: cartItem.product.imageUrl,
+          uri: item.product.imageUrl,
         }}
       />
 
@@ -43,19 +43,19 @@ export const CartItem: React.FC<ICartItemComponent> = ({
           numberOfLines={2}
           ellipsizeMode="tail"
         >
-          {cartItem.product.name}
+          {item.product.name}
         </Typography>
 
         <View style={styles.container}>
           <Stepper
-            onRemove={onRemoveFromCartHandler}
-            onValueChanged={onIncreaseProductQuantityHandler}
+            onRemove={removeFromCartHandler}
+            onValueChanged={increaseProductQuantityHandler}
           >
-            {cartItem.quantity}
+            {item.quantity}
           </Stepper>
 
           <Typography style={typographyStyle_i12}>
-            ${cartItem.product.price}
+            ${item.product.price}
           </Typography>
         </View>
       </View>

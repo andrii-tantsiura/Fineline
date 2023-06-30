@@ -1,5 +1,5 @@
-import { View } from "react-native";
 import { useState } from "react";
+import { View } from "react-native";
 
 import styles from "./styles";
 import { IconButton, Typography } from "../../../../common";
@@ -22,29 +22,29 @@ export const Stepper: React.FC<IStepper> = ({
 }) => {
   const [value, setValue] = useState<number>(children);
 
-  function onPlusPressHandler() {
+  function plusPressHandler() {
     setValue((currentValue) => currentValue + 1);
 
     onValueChanged(value + 1);
   }
 
   return (
-    <View style={styles.actionsContainer}>
+    <View style={styles.container}>
       <IconButton
         onPress={onRemove}
         source={IC_DELETE_RED}
-        style={styles.action}
+        style={styles.chaild}
         imageStyle={iconButtonStyles.i2}
       />
 
-      <Typography style={[typographyStyle_i18, styles.action]}>
+      <Typography style={[typographyStyle_i18, styles.chaild]}>
         {value}
       </Typography>
 
       <IconButton
-        onPress={onPlusPressHandler}
+        onPress={plusPressHandler}
         source={IC_PLUS_RED}
-        style={styles.action}
+        style={styles.chaild}
         imageStyle={iconButtonStyles.i2}
       />
     </View>

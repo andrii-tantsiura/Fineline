@@ -20,7 +20,7 @@ export const CartScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
     navigation.goBack();
   }
 
-  function onCheckoutHandler() {
+  function goCheckoutHandler() {
     navigation.navigate("DeliveryDetails");
   }
 
@@ -54,7 +54,7 @@ export const CartScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
         <Typography style={typographyStyle_i12}>${cartSubtotal}</Typography>
       </View>
 
-      <CustomButton style={styles.button} onPress={onCheckoutHandler}>
+      <CustomButton style={styles.button} onPress={goCheckoutHandler}>
         Checkout
       </CustomButton>
     </View>

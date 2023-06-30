@@ -15,7 +15,7 @@ export const useCart = (): IUseCartValues => {
     products,
     subtotal,
     addProduct,
-    removeProduct: removeFromCart,
+    removeProduct,
     increaseProductQuantity,
   } = useContext(CartContext);
 
@@ -31,6 +31,6 @@ export const useCart = (): IUseCartValues => {
     productsInCart: products,
     cartSubtotal: subtotal,
     addToCart,
-    removeFromCart,
+    removeFromCart: removeProduct,
   };
 };

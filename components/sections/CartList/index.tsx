@@ -4,16 +4,16 @@ import { CartItem } from "./components/CartItem";
 import { useCart } from "../../../hooks";
 import { ICartItem } from "../../../types";
 
-interface ICartList {
+interface ICartListProps {
   style?: ViewProps["style"];
 }
 
-export const CartList: React.FC<ICartList> = ({ style }) => {
+export const CartList: React.FC<ICartListProps> = ({ style }) => {
   const { productsInCart, addToCart, removeFromCart } = useCart();
 
   const renderCartItem = (cartItemData: ListRenderItemInfo<ICartItem>) => (
     <CartItem
-      cartItem={cartItemData.item}
+      item={cartItemData.item}
       onAddToCart={addToCart}
       onRemoveFromCart={removeFromCart}
     />
