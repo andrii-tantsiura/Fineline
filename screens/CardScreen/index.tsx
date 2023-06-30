@@ -1,4 +1,4 @@
-import { FC, useLayoutEffect } from "react";
+import { FC, useEffect, useLayoutEffect } from "react";
 import { View } from "react-native";
 
 import styles from "./styles";
@@ -36,6 +36,12 @@ export const CardScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
       ),
     });
   }, []);
+
+  useEffect(() => {
+    if (cartSubtotal === 0) {
+      goBackHandler();
+    }
+  }, [cartSubtotal]);
 
   return (
     <View style={styles.rootContainer}>
