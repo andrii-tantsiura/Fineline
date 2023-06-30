@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     backgroundColor: COLORS.neutral_10,
   },
-  chaild: {
+  child: {
     padding: 8,
   },
 });

@@ -33,18 +33,18 @@ export const Stepper: React.FC<IStepper> = ({
       <IconButton
         onPress={onRemove}
         source={IC_DELETE_RED}
-        style={styles.chaild}
+        style={styles.child}
         imageStyle={iconButtonStyles.i2}
       />
 
-      <Typography style={[typographyStyle_i18, styles.chaild]}>
+      <Typography style={[typographyStyle_i18, styles.child]}>
         {value}
       </Typography>
 
       <IconButton
         onPress={plusPressHandler}
         source={IC_PLUS_RED}
-        style={styles.chaild}
+        style={styles.child}
         imageStyle={iconButtonStyles.i2}
       />
     </View>
