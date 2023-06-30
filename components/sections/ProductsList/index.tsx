@@ -22,12 +22,8 @@ export const ProductsList: React.FC<IProductsList> = ({
   sortType = SortType.RATING,
   onPressProduct = (product: IProduct) => {},
 }) => {
-  const [
-    filteredProducts,
-    isProductsLoaded,
-    errorMessageForProducts,
-    sortAndFilterProducts,
-  ] = useFilterProducts();
+  const { filteredProducts, sortAndFilter: sortAndFilterProducts } =
+    useFilterProducts();
 
   useEffect(() => {
     sortAndFilterProducts(selectedCategoryId, searchQuery, sortType);

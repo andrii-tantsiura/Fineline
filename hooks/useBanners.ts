@@ -1,16 +1,18 @@
 import { useContext } from "react";
 
 import { IBanner } from "../types";
-import { BannersContext } from "../store/BannersContext";
+import { BannersContext } from "../store";
 import BannersService from "../services/BannersService";
 
-export const useBanners = (): [
-  IBanner[],
-  boolean,
-  string,
-  (bannerId: string) => Promise<void>,
-  () => Promise<void>
-] => {
+interface IUseBannersValues {
+  banners: IBanner[];
+  isBannersLoaded: boolean;
+  errorMessage: string;
+  closeBanner: (bannerId: string) => Promise<void>;
+  loadBanners: () => Promise<void>;
+}
+
+export const useBanners = (): IUseBannersValues => {
   const {
     banners,
     isBannersLoaded,
@@ -36,5 +38,5 @@ export const useBanners = (): [
     setBanners(banners.filter((banner) => banner.id !== bannerId));
   }
 
-  return [banners, isBannersLoaded, errorMessage, closeBanner, loadBanners];
+  return { banners, isBannersLoaded, errorMessage, closeBanner, loadBanners };
 };

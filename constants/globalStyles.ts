@@ -32,6 +32,10 @@ const iconButtonStyles = StyleSheet.create({
     height: 24,
     width: 24,
   },
+  i3: {
+    height: 28,
+    width: 28,
+  },
 });
 
 const textInputStyles = {

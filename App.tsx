@@ -7,16 +7,17 @@ import { FontWeightAliases } from "./constants";
 import { useSplashScreen } from "./hooks";
 import AppRoutes from "./navigation/AppRoutes";
 import {
+  BannersContextProvider,
+  CartContextProvider,
   CategoriesContextProvider,
   ProductsContextProvider,
-  BannersContextProvider,
 } from "./store";
 
 export default function App() {
   const [isAppResourcesLoaded, setIsAppResourcesLoaded] =
     useState<boolean>(false);
 
-  const [hideSplashScreen, onLayoutRootView] = useSplashScreen();
+  const { hideSplashScreen, onLayoutRootView } = useSplashScreen();
 
   const [isFontsLoaded] = useFonts({
     [FontWeightAliases.SemiBold]: require("./assets/fonts/Poppins-SemiBold.ttf"),
@@ -36,9 +37,11 @@ export default function App() {
       <BannersContextProvider>
         <CategoriesContextProvider>
           <ProductsContextProvider>
-            {isAppResourcesLoaded ? (
-              <AppRoutes onReady={onLayoutRootView} />
-            ) : null}
+            <CartContextProvider>
+              {isAppResourcesLoaded ? (
+                <AppRoutes onReady={onLayoutRootView} />
+              ) : null}
+            </CartContextProvider>
           </ProductsContextProvider>
         </CategoriesContextProvider>
       </BannersContextProvider>

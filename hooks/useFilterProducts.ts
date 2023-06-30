@@ -5,15 +5,25 @@ import { SortType } from "../enums";
 import { sortAndFilterProducts } from "../helpers";
 import { useProducts } from "./useProducts";
 
-export const useFilterProducts = (): [
-  IProduct[],
-  boolean,
-  string,
-  (categoryId: string, searchNameProduct: string, sortType: SortType) => void,
-  () => Promise<void>
-] => {
-  const [products, isProductsLoaded, errorMessageForProducts, loadProducts] =
-    useProducts();
+interface IUseFilterProductsValues {
+  filteredProducts: IProduct[];
+  isProductsLoaded: boolean;
+  errorMessageForProducts: string;
+  sortAndFilter: (
+    categoryId: string,
+    searchNameProduct: string,
+    sortType: SortType
+  ) => void;
+  loadProducts: () => Promise<void>;
+}
+
+export const useFilterProducts = (): IUseFilterProductsValues => {
+  const {
+    products,
+    isProductsLoaded,
+    errorMessage: errorMessageForProducts,
+    loadProducts,
+  } = useProducts();
 
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
@@ -41,11 +51,11 @@ export const useFilterProducts = (): [
     );
   }, [products]);
 
-  return [
+  return {
     filteredProducts,
     isProductsLoaded,
     errorMessageForProducts,
     sortAndFilter,
     loadProducts,
-  ];
+  };
 };

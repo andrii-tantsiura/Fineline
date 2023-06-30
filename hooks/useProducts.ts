@@ -2,14 +2,16 @@ import { useContext } from "react";
 
 import { IProduct } from "../types";
 import ProductsService from "../services/ProductsService";
-import { ProductsContext } from "../store/ProductsContext";
+import { ProductsContext } from "../store";
 
-export const useProducts = (): [
-  IProduct[],
-  boolean,
-  string,
-  () => Promise<void>
-] => {
+interface IUseProductsValues {
+  products: IProduct[];
+  isProductsLoaded: boolean;
+  errorMessage: string;
+  loadProducts: () => Promise<void>;
+}
+
+export const useProducts = (): IUseProductsValues => {
   const {
     products,
     isProductsLoaded,
@@ -29,5 +31,5 @@ export const useProducts = (): [
     }
   }
 
-  return [products, isProductsLoaded, errorMessage, loadProducts];
+  return { products, isProductsLoaded, errorMessage, loadProducts };
 };

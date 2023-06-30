@@ -14,7 +14,7 @@ export const CategoriesList: React.FC<ICategoriesList> = ({
   selectedCategoryId,
   onSelect = (categoryId: string) => {},
 }) => {
-  const [categories] = useCategories();
+  const { categories } = useCategories();
 
   const renderCategory = (categoryData: ListRenderItemInfo<ICategory>) => (
     <CategoryItem

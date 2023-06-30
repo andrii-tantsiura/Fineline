@@ -1,16 +1,16 @@
+import { useState } from "react";
+import { Image, StyleProp, View, ViewStyle } from "react-native";
 import {
   Menu,
-  MenuOptions,
   MenuOption,
+  MenuOptions,
   MenuTrigger,
 } from "react-native-popup-menu";
-import { View, Image, StyleProp, ViewStyle } from "react-native";
-import { useState } from "react";
 
-import styles from "./styles";
 import { IC_CHEVRON_DOWN_RED } from "../../../assets/icons";
 import { Typography } from "../Typography";
 import { ITypographyStyle } from "../Typography/types";
+import styles from "./styles";
 
 export interface IMenuItem {
   text: string;
@@ -64,7 +64,8 @@ export const DropDownList: React.FC<IDropDownList> = ({
         onBackdropPress={onToggleMenuVisibilityHandler}
       >
         <MenuTrigger text="" />
-        <MenuOptions>
+
+        <MenuOptions optionsContainerStyle={styles.optionsContainer}>
           {items.map((item) => (
             <MenuOption
               key={item.value}
@@ -72,9 +73,11 @@ export const DropDownList: React.FC<IDropDownList> = ({
                 onToggleMenuVisibilityHandler();
                 onSelectItemHandler(item);
               }}
-              text={item.text}
-              value={item.value}
-            />
+            >
+              <Typography style={[textStyle, { margin: 4 }]}>
+                {item.text}
+              </Typography>
+            </MenuOption>
           ))}
         </MenuOptions>
       </Menu>

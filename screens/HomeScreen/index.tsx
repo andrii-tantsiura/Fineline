@@ -1,19 +1,20 @@
-import { FC, useState, useEffect } from "react";
-import { View, TextInput, ScrollView, RefreshControl } from "react-native";
+import { FC, useEffect, useState } from "react";
+import { RefreshControl, ScrollView, TextInput, View } from "react-native";
 
-import styles from "./styles";
-import { SortType } from "../../enums";
-import { IProduct } from "../../types";
-import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { DropDownList, IMenuItem } from "../../components/common";
-import { typographyStyle_i19, containerStyles } from "../../constants";
-import { useAppInitData, useCategories } from "../../hooks";
-import AlertService from "../../services/AlertService";
 import {
+  BannersList,
   CategoriesList,
   ProductsList,
-  BannersList,
 } from "../../components/sections";
+import { containerStyles, typographyStyle_i19 } from "../../constants";
+import { SortType } from "../../enums";
+import { useAppInitData, useCategories } from "../../hooks";
+import { CartItemSelectorModal } from "../../modals/";
+import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import AlertService from "../../services/AlertService";
+import { IProduct } from "../../types";
+import styles from "./styles";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -31,8 +32,12 @@ const sortTypes: IMenuItem[] = [
 ];
 
 export const HomeScreen: FC<HomeScreenProps> = () => {
-  const [isDataLoaded, errorMessageDataLoad, loadData] = useAppInitData();
-  const [categories] = useCategories();
+  const {
+    isDataLoaded,
+    errorMessage: errorMessageDataLoad,
+    loadData,
+  } = useAppInitData();
+  const { categories } = useCategories();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
@@ -43,6 +48,8 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
   const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
   const [manualDataRefreshCounter, setManualDataRefreshCounter] =
     useState<number>(0);
+
+  const [selectedProduct, setSelectedProduct] = useState<IProduct | null>(null);
 
   function onSelectSortTypeHandler(item: IMenuItem) {
     setSortType(item.value);
@@ -66,53 +73,69 @@ export const HomeScreen: FC<HomeScreenProps> = () => {
     );
   }
 
+  const openCartItemSelectorHandler = (product: IProduct) => {
+    setSelectedProduct(product);
+  };
+
+  const cartItemsSelectorClosedHandler = () => {
+    setSelectedProduct(null);
+  };
+
   useEffect(() => {
     showAlertIfNeeded();
   }, [manualDataRefreshCounter]);
 
   return (
-    <ScrollView
-      style={containerStyles.i2}
-      refreshControl={
-        <RefreshControl
-          refreshing={isRefreshingData}
-          onRefresh={onRefreshDataHandler}
+    <>
+      {selectedProduct && (
+        <CartItemSelectorModal
+          product={selectedProduct}
+          onClosed={cartItemsSelectorClosedHandler}
         />
-      }
-    >
-      <View>
-        <BannersList />
+      )}
 
-        <View style={styles.searchContainer}>
-          <TextInput
-            style={styles.inputSearchQuery}
-            onChangeText={setSearchQuery}
-            placeholder="Search for food"
-            value={searchQuery}
+      <ScrollView
+        style={containerStyles.i2}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshingData}
+            onRefresh={onRefreshDataHandler}
+          />
+        }
+      >
+        <View>
+          <BannersList />
+
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.inputSearchQuery}
+              onChangeText={setSearchQuery}
+              placeholder="Search for food"
+              value={searchQuery}
+            />
+
+            <DropDownList
+              style={styles.sortSelector}
+              textStyle={typographyStyle_i19}
+              onSelect={onSelectSortTypeHandler}
+            >
+              {sortTypes}
+            </DropDownList>
+          </View>
+
+          <CategoriesList
+            selectedCategoryId={selectedCategoryId}
+            onSelect={setSelectedCategoryId}
           />
 
-          <DropDownList
-            style={styles.sortSelector}
-            textStyle={typographyStyle_i19}
-            onSelect={onSelectSortTypeHandler}
-          >
-            {sortTypes}
-          </DropDownList>
+          <ProductsList
+            selectedCategoryId={selectedCategoryId}
+            searchQuery={searchQuery}
+            sortType={sortType}
+            onPressProduct={openCartItemSelectorHandler}
+          />
         </View>
-
-        <CategoriesList
-          selectedCategoryId={selectedCategoryId}
-          onSelect={setSelectedCategoryId}
-        />
-
-        {/* TODO: onPressProduct */}
-        <ProductsList
-          selectedCategoryId={selectedCategoryId}
-          searchQuery={searchQuery}
-          sortType={sortType}
-          onPressProduct={(product: IProduct) => {}}
-        />
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
