@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     padding: 8,
     backgroundColor: COLORS.primary,
   },
+  shoppingCartText: {
+    width: 40,
+    height: 40,
+  },
 });
 
 export default styles;

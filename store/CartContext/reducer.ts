@@ -23,7 +23,6 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
         subtotal: calculateSubtotal(products),
       };
     }
-
     case "INCREASE_PRODUCT_QUANTITY": {
       const { quantity, productId } = action.payload;
 

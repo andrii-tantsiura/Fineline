@@ -8,6 +8,7 @@ interface IUseCartValues {
   cartSubtotal: number;
   addToCart: (item: ICartItem) => void;
   removeFromCart: (id: string) => void;
+  getProductQuantityById: (id: string) => number;
 }
 
 export const useCart = (): IUseCartValues => {
@@ -27,10 +28,15 @@ export const useCart = (): IUseCartValues => {
     }
   };
 
+  const getProductQuantityById = (id: string): number => {
+    return products.findLast((item) => item.product.id === id)?.quantity ?? 0;
+  };
+
   return {
     productsInCart: products,
     cartSubtotal: subtotal,
     addToCart,
     removeFromCart: removeProduct,
+    getProductQuantityById,
   };
 };
