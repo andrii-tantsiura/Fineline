@@ -1,4 +1,5 @@
 import { UseControllerProps } from "react-hook-form";
+
 import {
   CARD_NUMBER_REGEX,
   CVC_REGEX,
@@ -7,6 +8,7 @@ import {
   PHONE_REGEX,
 } from "../constants";
 import { ValidationErrorMessages } from "../enums";
+import { checkIsCreditCardExpired } from "./date";
 
 type RulesType = UseControllerProps["rules"];
 
@@ -62,6 +64,11 @@ const MM_YY_DATE_RULES: RulesType = {
   pattern: {
     value: MM_YY_DATE_REGEX,
     message: ValidationErrorMessages.INVALID_EXPIRATION_DATE,
+  },
+  validate: {
+    expiredDate: (fieldValue) =>
+      !checkIsCreditCardExpired(fieldValue) ||
+      ValidationErrorMessages.CARD_HAS_EXPIRED,
   },
 };
 

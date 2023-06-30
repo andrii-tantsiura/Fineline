@@ -11,7 +11,6 @@ import {
 import { ConfirmModal } from "../../components/modals";
 import { PriceInfo } from "../../components/sections";
 import {
-  CARD_NUMBER_MASK,
   CVC_MASK,
   MM_YY_DATE_FORMAT_MASK,
   separatorStyles,
@@ -25,18 +24,20 @@ import {
 } from "../../helpers";
 import { useBackPress, useCart, useNavigationBackButton } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { IPaymentInfo } from "../../types";
+import AlertService from "../../services/AlertService";
+import OrderService from "../../services/OrderService";
+import { IOrder, IPaymentInfo, IPurchase } from "../../types";
 import styles from "./styles";
-
-type Props = HomeScreenProps<"PaymentsMethod">;
 
 const DELIVERY_COST = 5;
 
-export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
+type Props = HomeScreenProps<"PaymentsMethod">;
+
+export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
   const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
     useState<boolean>(false);
 
-  const { cartSubtotal } = useCart();
+  const { productsInCart, cartSubtotal } = useCart();
 
   const totalToPay = cartSubtotal + DELIVERY_COST;
 
@@ -87,21 +88,38 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
 
   useBackPress(goBackHandler);
 
-  const confirmAndPayHandler = handleSubmit((paymentForm: IPaymentInfo) => {
-    console.log("submit data", paymentForm);
+  const confirmAndPayHandler = handleSubmit(
+    async (paymentInfo: IPaymentInfo) => {
+      const purchases: IPurchase[] = productsInCart.map((x) => ({
+        productId: x.product.id,
+        quantity: x.quantity,
+      }));
 
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 1,
-        routes: [
-          {
-            name: "SuccessfulPayment",
-            params: { orderId: 25 },
-          },
-        ],
-      })
-    );
-  });
+      const order: IOrder = {
+        purchases: purchases,
+        paymentInfo: paymentInfo,
+        deliveryInfo: route.params.deliveryInfo,
+      };
+
+      const sendOrderResult = await OrderService.sendOrder(order);
+
+      if (sendOrderResult.isSuccess || sendOrderResult.result) {
+        navigation.dispatch(
+          CommonActions.reset({
+            index: 1,
+            routes: [
+              {
+                name: "SuccessfulPayment",
+                params: { orderId: sendOrderResult.result },
+              },
+            ],
+          })
+        );
+      } else {
+        AlertService.error(sendOrderResult.exception);
+      }
+    }
+  );
 
   return (
     <>
@@ -125,8 +143,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation }) => {
             maxLength={19}
             rules={CARD_NUMBER_RULES}
             maskConfig={{
-              maskType: "custom",
-              maskValue: CARD_NUMBER_MASK,
+              maskType: "credit-card",
             }}
           />
 

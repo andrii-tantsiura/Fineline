@@ -16,3 +16,16 @@ export const getArrayFromFirebase = <T>(
 
     return response.data;
   });
+
+export const postModelToFirebase = <T>(
+  path: string,
+  item: T
+): Promise<AOResult<number>> =>
+  ExecuteAsync(async (onFailure: FailureCallback): Promise<number> => {
+    const response = await axios.post(API_URL + path, item);
+
+    const id = response.data.name;
+    console.log("id: " + id);
+
+    return id;
+  });

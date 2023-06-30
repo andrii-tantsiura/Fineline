@@ -34,7 +34,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
     setIsClosingConfirmationVisible(false);
   };
 
-  const { control, resetField, handleSubmit, trigger, watch, formState } =
+  const { control, resetField, handleSubmit, trigger, watch } =
     useForm<IDeliveryInfo>({
       defaultValues: {
         firstName: "",

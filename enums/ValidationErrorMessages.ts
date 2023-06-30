@@ -10,4 +10,5 @@ export enum ValidationErrorMessages {
   INCORRECT_CARD_NUMBER_FORMAT = "Invalid card number",
   INVALID_CVC = "Invalid CVC",
   INVALID_EXPIRATION_DATE = "Invalid expiration date",
+  CARD_HAS_EXPIRED = "The card has expired",
 }
