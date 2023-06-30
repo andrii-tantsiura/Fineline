@@ -10,6 +10,7 @@ export const CartContext = createContext<ICartContextProps>({
   addProduct: (cartItem: ICartItem) => {},
   removeProduct: (id: string) => {},
   increaseProductQuantity: (productId: string, quantity: number) => {},
+  resetCart: () => {},
 });
 
 export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
@@ -44,12 +45,17 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     });
   }
 
+  function resetCart() {
+    dispatch({ type: "RESET_CART" });
+  }
+
   const value: ICartContextProps = {
     products: cartState.products,
     subtotal: cartState.subtotal,
     addProduct: addProduct,
     removeProduct: removeProduct,
     increaseProductQuantity: increaseProductQuantity,
+    resetCart: resetCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

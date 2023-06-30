@@ -40,6 +40,13 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
       };
     }
 
+    case "RESET_CART": {
+      return {
+        products: [],
+        subtotal: 0,
+      };
+    }
+
     default:
       return state;
   }

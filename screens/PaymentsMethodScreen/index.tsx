@@ -37,7 +37,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
   const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
     useState<boolean>(false);
 
-  const { productsInCart, cartSubtotal } = useCart();
+  const { productsInCart, cartSubtotal, resetCart } = useCart();
 
   const totalToPay = cartSubtotal + DELIVERY_COST;
 
@@ -104,6 +104,8 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
       const sendOrderResult = await OrderService.sendOrder(order);
 
       if (sendOrderResult.isSuccess || sendOrderResult.result) {
+        resetCart();
+
         navigation.dispatch(
           CommonActions.reset({
             index: 1,

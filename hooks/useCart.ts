@@ -9,6 +9,7 @@ interface IUseCartValues {
   addToCart: (item: ICartItem) => void;
   removeFromCart: (id: string) => void;
   getProductQuantityById: (id: string) => number;
+  resetCart: () => void;
 }
 
 export const useCart = (): IUseCartValues => {
@@ -18,6 +19,7 @@ export const useCart = (): IUseCartValues => {
     addProduct,
     removeProduct,
     increaseProductQuantity,
+    resetCart,
   } = useContext(CartContext);
 
   const addToCart = ({ product, quantity }: ICartItem) => {
@@ -38,5 +40,6 @@ export const useCart = (): IUseCartValues => {
     addToCart,
     removeFromCart: removeProduct,
     getProductQuantityById,
+    resetCart,
   };
 };
