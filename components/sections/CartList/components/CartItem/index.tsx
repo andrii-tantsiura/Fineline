@@ -55,7 +55,7 @@ export const CartItem: React.FC<ICartItemProps> = ({
           </Stepper>
 
           <Typography style={typographyStyle_i12}>
-            ${item.product.price}
+            ${item.product.price * item.quantity}
           </Typography>
         </View>
       </View>
