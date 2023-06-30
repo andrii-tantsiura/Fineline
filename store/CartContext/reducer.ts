@@ -10,6 +10,23 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
         subtotal: state.subtotal + product.price * quantity,
       };
     }
+    case "REMOVE_PRODUCT_FROM_CART": {
+      const id = action.payload;
+
+      const products = state.products.filter(
+        (cartItem) => cartItem.product.id !== id
+      );
+
+      const subtotal = products.reduce(
+        (sum, { product, quantity }) => sum + product.price * quantity,
+        0
+      );
+
+      return {
+        products,
+        subtotal,
+      };
+    }
 
     case "INCREASE_PRODUCT_QUANTITY": {
       const { quantity, productId } = action.payload;

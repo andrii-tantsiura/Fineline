@@ -29,15 +29,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
   },
-  actionsContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 8,
-    backgroundColor: COLORS.neutral_10,
-  },
-  action: {
-    padding: 8,
-  },
 });
 
 export default styles;

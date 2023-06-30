@@ -11,8 +11,11 @@ import {
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { CustomButton, IconButton, Typography } from "../../components/common";
 import { CardList } from "../../components/sections";
+import { useCart } from "../../hooks";
 
 export const CardScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
+  const { cartSubtotal } = useCart();
+
   function goBackHandler() {
     navigation.goBack();
   }
@@ -42,7 +45,7 @@ export const CardScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
 
       <View style={styles.subtotal}>
         <Typography style={typographyStyle_i12}>Subtotal</Typography>
-        <Typography style={typographyStyle_i12}>$33</Typography>
+        <Typography style={typographyStyle_i12}>${cartSubtotal}</Typography>
       </View>
 
       <CustomButton style={styles.button} onPress={onCheckoutHandler}>

@@ -42,22 +42,7 @@ const HomeStackNavigator: FC = () => (
     <HomeStack.Screen
       name="Homepage"
       component={HomeScreen}
-      options={({ navigation }) => ({
-        ...headerOptions,
-        headerRight: () => (
-          <IconButton
-            source={IC_SHOPPING_CART_PINK}
-            style={{
-              backgroundColor: COLORS.neutral_10,
-              padding: 8,
-              marginRight: 18,
-              borderRadius: 8,
-            }}
-            imageStyle={iconButtonStyles.i2}
-            onPress={() => navigation.navigate("Card")}
-          />
-        ),
-      })}
+      options={headerOptions}
     />
 
     <HomeStack.Screen

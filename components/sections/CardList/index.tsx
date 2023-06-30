@@ -1,69 +1,32 @@
 import { FlatList, ListRenderItemInfo, ViewProps } from "react-native";
 
-import { CardItem } from "./components/CardItem";
-
-const cardList = [
-  {
-    name: "Product 1 er er er er er er er dfvdf df fdf df df df xs ddfdf fd df",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 12,
-    count: 3,
-  },
-  {
-    name: "Product 2",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 34,
-    count: 1,
-  },
-  {
-    name: "Product 3",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 62,
-    count: 2,
-  },
-  {
-    name: "Product 4",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 23,
-    count: 3,
-  },
-  {
-    name: "Product 5",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 23,
-    count: 3,
-  },
-  {
-    name: "Product 6",
-    imageUrl:
-      "https://raw.githubusercontent.com/DenysVedernykov/Food-App-Assets/main/products/default.png",
-    price: 23,
-    count: 3,
-  },
-];
+import { CartItem } from "./components/CardItem";
+import { useCart } from "../../../hooks";
+import { ICartItem } from "../../../types";
 
 interface ICardList {
   style?: ViewProps["style"];
 }
 
 export const CardList: React.FC<ICardList> = ({ style }) => {
-  const renderProduct = (productData: ListRenderItemInfo<any>) => (
-    <CardItem product={productData.item} />
+  const { productsInCart, addToCart, removeFromCart } = useCart();
+
+  const renderCartItem = (cartItemData: ListRenderItemInfo<ICartItem>) => (
+    <CartItem
+      cartItem={cartItemData.item}
+      onAddToCart={addToCart}
+      onRemoveFromCart={removeFromCart}
+    />
   );
 
   return (
     <FlatList
       style={style}
-      data={cardList}
-      renderItem={renderProduct}
+      data={productsInCart}
+      renderItem={renderCartItem}
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
-      keyExtractor={(product: any) => product.name}
+      keyExtractor={(cartItem: ICartItem) => cartItem.product.id}
     />
   );
 };

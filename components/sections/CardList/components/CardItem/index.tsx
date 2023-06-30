@@ -9,18 +9,26 @@ import {
   iconButtonStyles,
 } from "../../../../../constants";
 import { IC_DELETE_RED, IC_PLUS_RED } from "../../../../../assets/icons";
+import { ICartItem } from "../../../../../types";
+import { Stepper } from "../Stepper";
 
-interface IProductItem {
-  product: any;
-  onPress?: (product: any) => void;
+interface ICartItemComponent {
+  cartItem: ICartItem;
+  onAddToCart: (item: ICartItem) => void;
+  onRemoveFromCart: (id: string) => void;
 }
 
-export const CardItem: React.FC<IProductItem> = ({
-  product,
-  onPress = (product: any) => {},
+export const CartItem: React.FC<ICartItemComponent> = ({
+  cartItem,
+  onAddToCart,
+  onRemoveFromCart,
 }) => {
-  function onCartPressHandler() {
-    onPress(product);
+  function onIncreaseProductQuantityHandler(value: number) {
+    onAddToCart({ ...cartItem, quantity: value - cartItem.quantity });
+  }
+
+  function onRemoveFromCartHandler() {
+    onRemoveFromCart(cartItem.product.id);
   }
 
   return (
@@ -28,7 +36,7 @@ export const CardItem: React.FC<IProductItem> = ({
       <Image
         style={styles.imageProduct}
         source={{
-          uri: product.imageUrl,
+          uri: cartItem.product.imageUrl,
         }}
       />
 
@@ -38,31 +46,20 @@ export const CardItem: React.FC<IProductItem> = ({
           numberOfLines={2}
           ellipsizeMode="tail"
         >
-          {product.name}
+          {cartItem.product.name}
         </Typography>
 
         <View style={styles.container}>
-          <View style={styles.actionsContainer}>
-            <IconButton
-              onPress={onCartPressHandler}
-              source={IC_DELETE_RED}
-              style={styles.action}
-              imageStyle={iconButtonStyles.i2}
-            />
+          <Stepper
+            onRemove={onRemoveFromCartHandler}
+            onValueChanged={onIncreaseProductQuantityHandler}
+          >
+            {cartItem.quantity}
+          </Stepper>
 
-            <Typography style={[typographyStyle_i18, styles.action]}>
-              {product.count}
-            </Typography>
-
-            <IconButton
-              onPress={onCartPressHandler}
-              source={IC_PLUS_RED}
-              style={styles.action}
-              imageStyle={iconButtonStyles.i2}
-            />
-          </View>
-
-          <Typography style={typographyStyle_i12}>${product.price}</Typography>
+          <Typography style={typographyStyle_i12}>
+            ${cartItem.product.price}
+          </Typography>
         </View>
       </View>
     </View>

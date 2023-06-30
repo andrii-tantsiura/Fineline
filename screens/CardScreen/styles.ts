@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS, customButtonStyles, iconButtonStyles } from "../../constants";
+import { customButtonStyles, iconButtonStyles } from "../../constants";
 import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
