@@ -23,7 +23,7 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
   const modalRef = useRef<RBSheet>(null);
   const headerHeight = useHeaderHeight();
 
-  const { productsInCart, cartSubtotal, addToCart } = useCart();
+  const { addToCart } = useCart();
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [subtotal, setSubtotal] = useState<number>(0);
 
@@ -66,15 +66,6 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
     >
       <ScrollView showsVerticalScrollIndicator={false}>
         <ProductDetails product={product} />
-
-        {productsInCart.map((x) => (
-          <>
-            <Text>name: {x.product.name}</Text>
-            <Text>quantity: {x.quantity}</Text>
-            <Text>price: {x.product.price}</Text>
-          </>
-        ))}
-        <Text>subtotal {cartSubtotal}</Text>
 
         <View style={styles.quantitySelectionContainer}>
           <Stepper

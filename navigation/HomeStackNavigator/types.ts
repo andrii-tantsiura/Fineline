@@ -9,6 +9,7 @@ export type HomeStackParamList = {
   DeliveryDetails: undefined;
   PaymentsMethod: { deliveryInfo: IDeliveryInfo };
   SuccessfulPayment: { orderId: string };
+  Cart: undefined;
 };
 
 export type HomeScreenProps<RouteName extends keyof HomeStackParamList> = {

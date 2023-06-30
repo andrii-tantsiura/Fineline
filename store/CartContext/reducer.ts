@@ -1,3 +1,4 @@
+import { calculateSubtotal } from "../../helpers/calculateSubtotal";
 import { ICartState, Action } from "./types";
 
 export function cartReducer(state: ICartState, action: Action): ICartState {
@@ -11,6 +12,19 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
       };
     }
 
+    case "REMOVE_PRODUCT_FROM_CART": {
+      const id = action.payload;
+
+      const products = state.products.filter(
+        (cartItem) => cartItem.product.id !== id
+      );
+
+      return {
+        products,
+        subtotal: calculateSubtotal(products),
+      };
+    }
+
     case "INCREASE_PRODUCT_QUANTITY": {
       const { quantity, productId } = action.payload;
 
@@ -20,14 +34,9 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
           : x
       );
 
-      const subtotal = products.reduce(
-        (sum, { product, quantity }) => sum + product.price * quantity,
-        0
-      );
-
       return {
         products,
-        subtotal,
+        subtotal: calculateSubtotal(products),
       };
     }
 

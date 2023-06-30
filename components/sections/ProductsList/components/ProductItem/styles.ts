@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   info: {
+    flex: 1,
     justifyContent: "space-between",
     height: "100%",
   },
@@ -32,6 +33,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 8,
     backgroundColor: COLORS.primary,
+  },
+  shoppingCartText: {
+    width: 40,
+    height: 40,
   },
 });
 

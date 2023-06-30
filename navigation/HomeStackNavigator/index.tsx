@@ -2,7 +2,7 @@ import { HeaderTitleProps } from "@react-navigation/elements";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { IC_ARROW_LEFT_RED, IC_SHOPPING_CART_PINK } from "../../assets/icons";
+import { IC_ARROW_LEFT_RED, IC_SHOPPING_CART_RED } from "../../assets/icons";
 import { IconButton, Typography } from "../../components/common";
 import { iconButtonStyles, typographyStyle_i4 } from "../../constants";
 import {
@@ -12,6 +12,7 @@ import {
   PaymentsMethodScreen,
   SuccessfulPaymentScreen,
 } from "../../screens";
+import { CartScreen } from "../../screens/CartScreen";
 import styles from "./styles";
 import { HomeScreenProps, HomeStackParamList } from "./types";
 
@@ -48,21 +49,21 @@ const HomeStackNavigator: FC = () => (
     <HomeStack.Screen
       name="Homepage"
       component={HomeScreen}
-      options={({ navigation }: HomeScreenProps<"Homepage">) => ({
-        headerRight: () => {
-          return (
-            <IconButton
-              source={IC_SHOPPING_CART_PINK}
-              style={styles.cartButtonContainer}
-              imageStyle={iconButtonStyles.i2}
-              onPress={
-                // TODO: replace by navigation to the shopping cart page when it is completed
-                () => navigation.navigate("DeliveryDetails")
-              }
-            />
-          );
-        },
-      })}
+      // options={({ navigation }: HomeScreenProps<"Homepage">) => ({
+      //   headerRight: () => {
+      //     return (
+      //       <IconButton
+      //         source={IC_SHOPPING_CART_RED}
+      //         style={styles.cartButtonContainer}
+      //         imageStyle={iconButtonStyles.i2}
+      //         onPress={
+      //           // TODO: replace by navigation to the shopping cart page when it is completed
+      //           () => navigation.navigate("DeliveryDetails")
+      //         }
+      //       />
+      //     );
+      //   },
+      // })}
     />
 
     <HomeStack.Screen
@@ -88,6 +89,8 @@ const HomeStackNavigator: FC = () => (
         headerShown: false,
       }}
     />
+
+    <HomeStack.Screen name="Cart" component={CartScreen} />
   </HomeStack.Navigator>
 );
 

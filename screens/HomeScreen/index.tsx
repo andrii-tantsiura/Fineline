@@ -1,15 +1,21 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useLayoutEffect, useState } from "react";
 import { RefreshControl, ScrollView, TextInput, View } from "react-native";
 
-import { DropDownList, IMenuItem } from "../../components/common";
+import { IC_SHOPPING_CART_RED } from "../../assets/icons";
+import { DropDownList, IMenuItem, IconButton } from "../../components/common";
 import {
   BannersList,
   CategoriesList,
   ProductsList,
 } from "../../components/sections";
-import { containerStyles, typographyStyle_i19 } from "../../constants";
+import {
+  COLORS,
+  containerStyles,
+  iconButtonStyles,
+  typographyStyle_i19,
+} from "../../constants";
 import { SortType } from "../../enums";
-import { useAppInitData, useCategories } from "../../hooks";
+import { useAppInitData, useCart, useCategories } from "../../hooks";
 import { CartItemSelectorModal } from "../../modals/";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
@@ -33,13 +39,14 @@ const sortTypes: IMenuItem[] = [
 
 type Props = HomeScreenProps<"Homepage">;
 
-export const HomeScreen: FC<Props> = () => {
+export const HomeScreen: FC<Props> = ({ navigation }) => {
   const {
     isDataLoaded,
     errorMessage: errorMessageDataLoad,
     loadData,
   } = useAppInitData();
   const { categories } = useCategories();
+  const { productsInCart } = useCart();
 
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [sortType, setSortType] = useState<SortType>(SortType.RATING);
@@ -82,6 +89,33 @@ export const HomeScreen: FC<Props> = () => {
   const cartItemsSelectorClosedHandler = () => {
     setSelectedProduct(null);
   };
+
+  useLayoutEffect(() => {
+    const isDisabled = productsInCart.length === 0;
+
+    function onPressHandler() {
+      if (!isDisabled) {
+        navigation.navigate("Cart");
+      }
+    }
+
+    navigation.setOptions({
+      headerRight: () => (
+        <IconButton
+          source={IC_SHOPPING_CART_RED}
+          disabled={isDisabled}
+          style={{
+            backgroundColor: COLORS.neutral_10,
+            padding: 8,
+            marginRight: 18,
+            borderRadius: 8,
+          }}
+          imageStyle={iconButtonStyles.i2}
+          onPress={onPressHandler}
+        />
+      ),
+    });
+  }, [productsInCart]);
 
   useEffect(() => {
     showAlertIfNeeded();
