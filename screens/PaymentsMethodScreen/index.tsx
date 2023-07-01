@@ -85,20 +85,14 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
 
   const confirmAndPayHandler = handleSubmit(
     async (paymentInfo: IPaymentInfo) => {
-      const purchases: IPurchase[] = productsInCart.map((x) => ({
-        productId: x.product.id,
-        quantity: x.quantity,
-      }));
+      const { isSuccess, result, getErrorDescription } =
+        await OrderService.createOrder(
+          productsInCart,
+          route.params.deliveryInfo,
+          paymentInfo
+        );
 
-      const order: IOrder = {
-        purchases: purchases,
-        paymentInfo: paymentInfo,
-        deliveryInfo: route.params.deliveryInfo,
-      };
-
-      const sendOrderResult = await OrderService.sendOrder(order);
-
-      if (sendOrderResult.isSuccess || sendOrderResult.result) {
+      if (isSuccess || result) {
         resetCart();
 
         navigation.dispatch(
@@ -107,13 +101,13 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
             routes: [
               {
                 name: "SuccessfulPayment",
-                params: { orderId: sendOrderResult.result },
+                params: { orderId: result },
               },
             ],
           })
         );
       } else {
-        AlertService.error(sendOrderResult.exception);
+        AlertService.error(getErrorDescription());
       }
     }
   );

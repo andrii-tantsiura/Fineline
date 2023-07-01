@@ -25,7 +25,6 @@ export const postModelToFirebase = <T>(
     const response = await axios.post(API_URL + path, item);
 
     const id = response.data.name;
-    console.log("id: " + id);
 
     return id;
   });

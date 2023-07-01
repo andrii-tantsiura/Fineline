@@ -3,5 +3,5 @@ export interface IErrors {
 }
 
 export const ERRORS: IErrors = {
-  someErrorOccurred: "some error occurred",
+  someErrorOccurred: "Some error occurred",
 };
