@@ -5,12 +5,13 @@ import { PIC_THANK_YOU } from "../../assets/icons";
 import { CustomButton, Typography } from "../../components/common";
 import { typographyStyle_i6, typographyStyle_i8 } from "../../constants";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import { hashToNumber } from "../../utils";
 import styles from "./styles";
 
 type Props = HomeScreenProps<"SuccessfulPayment">;
 
 export const SuccessfulPaymentScreen: FC<Props> = ({ navigation, route }) => {
-  const orderId = route.params.orderId;
+  const orderId = hashToNumber(route.params.orderId);
 
   function onContinueShoppingHandler() {
     navigation.replace("Homepage");

@@ -132,6 +132,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
             placeholder="Enter card number"
             keyboardType="numeric"
             maxLength={19}
+            autoFocus
             rules={CARD_NUMBER_RULES}
             maskConfig={{
               maskType: "credit-card",
