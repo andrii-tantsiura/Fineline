@@ -21,10 +21,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
   },
-  firstNameInputContainer: {
-    flex: 1,
-  },
-  lastNameInputContainer: {
+  nameInputContainer: {
     flex: 1,
   },
   commentTextInput: {

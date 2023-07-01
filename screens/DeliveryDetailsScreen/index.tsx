@@ -94,7 +94,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
         <ScrollView>
           <View style={styles.formContainer}>
             <View style={styles.nameInputsContainer}>
-              <View style={styles.lastNameInputContainer}>
+              <View style={styles.nameInputContainer}>
                 <CustomTextInput
                   formController={hookFormController}
                   name="firstName"
@@ -106,7 +106,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
                 />
               </View>
 
-              <View style={styles.lastNameInputContainer}>
+              <View style={styles.nameInputContainer}>
                 <CustomTextInput
                   formController={hookFormController}
                   name="lastName"

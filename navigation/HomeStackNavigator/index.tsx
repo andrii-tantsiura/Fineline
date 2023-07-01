@@ -46,25 +46,7 @@ const HomeStackNavigator: FC = () => (
       }}
     />
 
-    <HomeStack.Screen
-      name="Homepage"
-      component={HomeScreen}
-      // options={({ navigation }: HomeScreenProps<"Homepage">) => ({
-      //   headerRight: () => {
-      //     return (
-      //       <IconButton
-      //         source={IC_SHOPPING_CART_RED}
-      //         style={styles.cartButtonContainer}
-      //         imageStyle={iconButtonStyles.i2}
-      //         onPress={
-      //           // TODO: replace by navigation to the shopping cart page when it is completed
-      //           () => navigation.navigate("DeliveryDetails")
-      //         }
-      //       />
-      //     );
-      //   },
-      // })}
-    />
+    <HomeStack.Screen name="Homepage" component={HomeScreen} />
 
     <HomeStack.Screen
       name="DeliveryDetails"

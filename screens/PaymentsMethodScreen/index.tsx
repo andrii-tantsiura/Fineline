@@ -34,21 +34,21 @@ const DELIVERY_COST = 5;
 type Props = HomeScreenProps<"PaymentsMethod">;
 
 export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
-  const [isClosingPageConfirmationVisible, setIsClosingConfirmationVisible] =
+  const [isCloseConfirmationVisible, setIsCloseConfirmationVisible] =
     useState<boolean>(false);
 
   const { productsInCart, cartSubtotal, resetCart } = useCart();
 
   const totalToPay = cartSubtotal + DELIVERY_COST;
 
-  const confirmClosingPageHandler = () => {
-    setIsClosingConfirmationVisible(false);
+  const confirmClosePageHandler = () => {
+    setIsCloseConfirmationVisible(false);
 
     navigation.goBack();
   };
 
-  const cancelClosingPageHandler = () => {
-    setIsClosingConfirmationVisible(false);
+  const cancelClosePageHandler = () => {
+    setIsCloseConfirmationVisible(false);
   };
 
   const { control, resetField, handleSubmit, trigger, watch } =
@@ -78,7 +78,7 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
       cvc !== "";
 
     if (isAnyDataEntered) {
-      setIsClosingConfirmationVisible(true);
+      setIsCloseConfirmationVisible(true);
     } else if (navigation.canGoBack()) {
       navigation.goBack();
     }
@@ -127,12 +127,12 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
     <>
       <View style={styles.rootContainer}>
         <ConfirmModal
-          visible={isClosingPageConfirmationVisible}
+          visible={isCloseConfirmationVisible}
           titleText="The data will not be saved"
           descriptionText="Do you really want to close the page?"
           confirmText="Close"
-          onConfirm={confirmClosingPageHandler}
-          onCancel={cancelClosingPageHandler}
+          onConfirm={confirmClosePageHandler}
+          onCancel={cancelClosePageHandler}
         />
 
         <View style={styles.formContainer}>
