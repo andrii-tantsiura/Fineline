@@ -1,6 +1,6 @@
-export interface IPaymentInfo {
+export type IPaymentInfo = {
   cardNumber: string;
   cardHolder: string;
   expirationDate: string;
   cvc: string;
-}
+};

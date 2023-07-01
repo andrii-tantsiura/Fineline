@@ -27,6 +27,7 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import OrderService from "../../services/OrderService";
 import { IOrder, IPaymentInfo, IPurchase } from "../../types";
+import { isAnyFormFieldNotEmpty } from "../../utils";
 import styles from "./styles";
 
 const DELIVERY_COST = 5;
@@ -69,15 +70,9 @@ export const PaymentsMethodScreen: FC<Props> = ({ navigation, route }) => {
   };
 
   const goBackHandler = () => {
-    const { cardNumber, cardHolder, expirationDate, cvc } = watch();
+    const paymentForm = watch();
 
-    const isAnyDataEntered =
-      cardNumber !== "" ||
-      cardHolder !== "" ||
-      expirationDate !== "" ||
-      cvc !== "";
-
-    if (isAnyDataEntered) {
+    if (isAnyFormFieldNotEmpty(paymentForm)) {
       setIsCloseConfirmationVisible(true);
     } else if (navigation.canGoBack()) {
       navigation.goBack();

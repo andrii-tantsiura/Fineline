@@ -16,6 +16,7 @@ import {
 import { useBackPress, useNavigationBackButton } from "../../hooks";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import { IDeliveryInfo } from "../../types";
+import { isAnyFormFieldNotEmpty } from "../../utils";
 import styles from "./styles";
 
 type Props = HomeScreenProps<"DeliveryDetails">;
@@ -53,16 +54,9 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
   };
 
   const goBackHandler = () => {
-    const { firstName, lastName, mobileNumber, address, comment } = watch();
+    const deliveryForm = watch();
 
-    const isAnyDataEntered =
-      firstName !== "" ||
-      lastName !== "" ||
-      mobileNumber !== "" ||
-      address !== "" ||
-      comment !== "";
-
-    if (isAnyDataEntered) {
+    if (isAnyFormFieldNotEmpty(deliveryForm)) {
       setIsClosingConfirmationVisible(true);
     } else if (navigation.canGoBack()) {
       navigation.goBack();
