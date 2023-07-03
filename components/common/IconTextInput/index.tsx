@@ -3,7 +3,7 @@ import { Image, ImageProps, StyleProp, View, ViewProps } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
-import { iconButtonStyles } from "../../../constants";
+import { imageStyles } from "../../../constants";
 import { typographyStyleToTextStyle } from "../../../helpers";
 import { IconButton } from "../IconButton";
 import { ITypographyStyle } from "../Typography/types";
@@ -37,7 +37,7 @@ export const IconTextInput: FC<IIconTextInput> = ({
 
   return (
     <View style={[styles.container, style]}>
-      <Image style={iconButtonStyles.i2} source={imageSource} />
+      <Image style={imageStyles.i1} source={imageSource} />
 
       <TextInput
         style={textInputStyle}
@@ -49,7 +49,7 @@ export const IconTextInput: FC<IIconTextInput> = ({
 
       {value && (
         <IconButton
-          imageStyle={iconButtonStyles.i2}
+          imageStyle={imageStyles.i1}
           source={IC_CLOSE_DARK}
           onPress={clearHandler}
         />

@@ -17,11 +17,7 @@ import {
 import { TextInputMask, TextInputMaskTypeProp } from "react-native-masked-text";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
-import {
-  COLORS,
-  iconButtonStyles,
-  typographyStyle_i19,
-} from "../../../constants";
+import { COLORS, imageStyles, typographyStyle_i19 } from "../../../constants";
 import { typographyStyleToTextStyle } from "../../../helpers";
 import { IconButton } from "../IconButton";
 import { ITypographyStyle } from "../Typography/types";
@@ -120,7 +116,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
             {value && (
               <IconButton
                 style={styles.clearButton}
-                imageStyle={iconButtonStyles.i2}
+                imageStyle={imageStyles.i1}
                 source={IC_CLOSE_DARK}
                 onPress={clearHandler}
               />

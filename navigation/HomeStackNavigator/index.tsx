@@ -2,9 +2,9 @@ import { HeaderTitleProps } from "@react-navigation/elements";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { IC_ARROW_LEFT_RED, IC_SHOPPING_CART_RED } from "../../assets/icons";
+import { IC_ARROW_LEFT_RED } from "../../assets/icons";
 import { IconButton, Typography } from "../../components/common";
-import { iconButtonStyles, typographyStyle_i4 } from "../../constants";
+import { imageStyles, typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
@@ -14,7 +14,7 @@ import {
 } from "../../screens";
 import { CartScreen } from "../../screens/CartScreen";
 import styles from "./styles";
-import { HomeScreenProps, HomeStackParamList } from "./types";
+import { HomeStackParamList } from "./types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -33,7 +33,7 @@ const HomeStackNavigator: FC = () => (
         <IconButton
           source={IC_ARROW_LEFT_RED}
           style={styles.backButtonContainer}
-          imageStyle={iconButtonStyles.i2}
+          imageStyle={imageStyles.i1}
         />
       ),
     }}

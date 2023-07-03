@@ -16,7 +16,7 @@ import {
 import {
   COLORS,
   containerStyles,
-  iconButtonStyles,
+  imageStyles,
   typographyStyle_i19,
 } from "../../constants";
 import { SortType } from "../../enums";
@@ -115,7 +115,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
             marginRight: 18,
             borderRadius: 8,
           }}
-          imageStyle={iconButtonStyles.i2}
+          imageStyle={imageStyles.i1}
           onPress={onPressHandler}
         />
       ),

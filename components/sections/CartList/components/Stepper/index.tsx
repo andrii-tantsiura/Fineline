@@ -4,10 +4,7 @@ import { View } from "react-native";
 import styles from "./styles";
 import { IconButton, Typography } from "../../../../common";
 import { IC_DELETE_RED, IC_PLUS_RED } from "../../../../../assets/icons";
-import {
-  iconButtonStyles,
-  typographyStyle_i18,
-} from "../../../../../constants";
+import { imageStyles, typographyStyle_i18 } from "../../../../../constants";
 
 interface IStepper {
   children: number;
@@ -34,7 +31,7 @@ export const Stepper: React.FC<IStepper> = ({
         onPress={onRemove}
         source={IC_DELETE_RED}
         style={styles.child}
-        imageStyle={iconButtonStyles.i2}
+        imageStyle={imageStyles.i1}
       />
 
       <Typography style={[typographyStyle_i18, styles.child]}>
@@ -45,7 +42,7 @@ export const Stepper: React.FC<IStepper> = ({
         onPress={plusPressHandler}
         source={IC_PLUS_RED}
         style={styles.child}
-        imageStyle={iconButtonStyles.i2}
+        imageStyle={imageStyles.i1}
       />
     </View>
   );

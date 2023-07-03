@@ -21,19 +21,22 @@ const customButtonStyles = StyleSheet.create({
   },
 });
 
+const imageStyles = StyleSheet.create({
+  i1: {
+    height: scaleSize(20),
+    width: scaleSize(20),
+  },
+  i2: {
+    height: scaleSize(24),
+    width: scaleSize(24),
+  },
+});
+
 const iconButtonStyles = StyleSheet.create({
   i1: {
     padding: 8,
     borderRadius: 8,
     backgroundColor: COLORS.neutral_10,
-  },
-  i2: {
-    height: 24,
-    width: 24,
-  },
-  i3: {
-    height: 28,
-    width: 28,
   },
 });
 
@@ -71,6 +74,7 @@ export {
   containerStyles,
   customButtonStyles,
   iconButtonStyles,
+  imageStyles,
   separatorStyles,
   shadowStyles,
 };
