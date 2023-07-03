@@ -21,6 +21,7 @@ export const LoaderView: React.FC<ILoaderView> = ({
 }) => (
   <View style={[containerStyles.i1, style]}>
     <ActivityIndicator color={spinnerColor} size="large" />
+
     <Typography style={typographyStyle_i1}>{message}</Typography>
   </View>
 );

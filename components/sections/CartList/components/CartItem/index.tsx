@@ -1,13 +1,14 @@
-import { View, Image } from "react-native";
+import { Image, View } from "react-native";
 
-import styles from "./styles";
-import { Typography } from "../../../../common";
 import {
-  typographyStyle_i17,
   typographyStyle_i12,
+  typographyStyle_i17,
 } from "../../../../../constants";
 import { ICartItem } from "../../../../../types";
+import { formatMoney } from "../../../../../utils";
+import { Typography } from "../../../../common";
 import { Stepper } from "../Stepper";
+import styles from "./styles";
 
 interface ICartItemProps {
   item: ICartItem;
@@ -55,7 +56,7 @@ export const CartItem: React.FC<ICartItemProps> = ({
           </Stepper>
 
           <Typography style={typographyStyle_i12}>
-            ${item.product.price * item.quantity}
+            {formatMoney(item.product.price * item.quantity)}
           </Typography>
         </View>
       </View>

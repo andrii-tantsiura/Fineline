@@ -1,13 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { customButtonStyles, iconButtonStyles } from "../../constants";
+import { customButtonStyles } from "../../constants";
 import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
-  backButton: {
-    marginLeft: scaleSize(16),
-    ...iconButtonStyles.i1,
-  },
   formContainer: {
     rowGap: scaleSize(18),
     marginTop: scaleSize(16),

@@ -51,6 +51,7 @@ export const ProductItem: React.FC<IProductItem> = ({
           >
             {product.name}
           </Typography>
+
           <Typography style={typographyStyle_i12}>
             {formatMoney(product.price)}
           </Typography>

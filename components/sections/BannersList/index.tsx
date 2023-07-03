@@ -6,16 +6,14 @@ import { SCREEN_WIDTH } from "../../../utils";
 import { BannerItem } from "./components/BannerItem";
 import styles from "./styles";
 
-interface IBannersList {}
+const FLAT_LIST_MARGIN = 36;
 
-export const BannersList: React.FC<IBannersList> = () => {
-  const flatListMargin = 36;
-
+export const BannersList: React.FC = () => {
   const { banners, closeBanner } = useBanners();
 
   const renderBanner = (bannerData: ListRenderItemInfo<IBanner>) => (
     <BannerItem
-      width={SCREEN_WIDTH - flatListMargin}
+      width={SCREEN_WIDTH - FLAT_LIST_MARGIN}
       banner={bannerData.item}
       onClose={() => closeBanner(bannerData.item.id)}
     />

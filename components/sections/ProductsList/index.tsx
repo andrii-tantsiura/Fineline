@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { FlatList, ListRenderItemInfo } from "react-native";
 
-import styles from "./styles";
-import { SortType } from "../../../enums";
-import { IProduct } from "../../../types";
-import { ProductItem } from "./components/ProductItem";
-import { useFilterProducts } from "../../../hooks";
-import { EmptyList } from "../../common";
 import { PIC_NO_SEARCH_RESULT } from "../../../assets/icons";
+import { SortType } from "../../../enums";
+import { useFilterProducts } from "../../../hooks";
+import { IProduct } from "../../../types";
+import { EmptyList } from "../../common";
+import { ProductItem } from "./components/ProductItem";
+import styles from "./styles";
 
 interface IProductsList {
   selectedCategoryId: string;

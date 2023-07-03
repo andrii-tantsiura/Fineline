@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 import { scaleSize } from "../utils/";
 import { COLORS } from "./colors";
-import { FontSizes, FontWeightAliases } from "./typography";
 
 const customButtonStyles = StyleSheet.create({
   i1: {
@@ -69,9 +68,9 @@ const shadowStyles = StyleSheet.create({
 });
 
 export {
-  iconButtonStyles,
   containerStyles,
+  customButtonStyles,
+  iconButtonStyles,
   separatorStyles,
   shadowStyles,
-  customButtonStyles,
 };

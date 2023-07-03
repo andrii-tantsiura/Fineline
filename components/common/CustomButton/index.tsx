@@ -39,6 +39,7 @@ export const CustomButton: React.FC<ICustomButtonProps> = ({
   return (
     <Pressable style={getStyle} disabled={disabled} onPress={onPress}>
       <Typography style={textStyle}>{children}</Typography>
+
       {imageSource && (
         <Image style={iconButtonStyles.i2} source={imageSource} />
       )}

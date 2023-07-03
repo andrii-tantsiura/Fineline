@@ -1,6 +1,6 @@
 import { useHeaderHeight } from "@react-navigation/elements";
 import React, { useEffect, useRef, useState } from "react";
-import { Platform, ScrollView, StatusBar, Text, View } from "react-native";
+import { Platform, ScrollView, StatusBar, View } from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 
 import { CustomButton, Stepper, Typography } from "../../components/common";
@@ -8,7 +8,7 @@ import { ProductDetails } from "../../components/sections";
 import { COLORS } from "../../constants";
 import { useCart } from "../../hooks";
 import { ICartItem, IProduct } from "../../types";
-import { SCREEN_HEIGHT } from "../../utils";
+import { SCREEN_HEIGHT, formatMoney } from "../../utils";
 import styles from "./styles";
 
 interface ICartItemSelectorModalProps {
@@ -74,7 +74,7 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
           />
 
           <Typography style={styles.subtotalText}>
-            ${subtotal.toFixed(2)}
+            {formatMoney(subtotal)}
           </Typography>
         </View>
 

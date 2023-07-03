@@ -1,47 +1,25 @@
-import { FC, useEffect, useLayoutEffect } from "react";
+import { FC, useEffect } from "react";
 import { View } from "react-native";
 
-import styles from "./styles";
-import { IC_ARROW_LEFT_RED } from "../../assets/icons";
-import {
-  iconButtonStyles,
-  separatorStyles,
-  typographyStyle_i12,
-} from "../../constants";
-import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
-import { CustomButton, IconButton, Typography } from "../../components/common";
-import { CartList } from "../../components/sections";
+import { CustomButton } from "../../components/common";
+import { CartList, PriceInfo } from "../../components/sections";
+import { separatorStyles } from "../../constants";
 import { useCart } from "../../hooks";
+import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
+import styles from "./styles";
 
 type Props = HomeScreenProps<"Cart">;
 
 export const CartScreen: FC<Props> = ({ navigation }) => {
   const { cartSubtotal } = useCart();
 
-  function goBackHandler() {
-    navigation.goBack();
-  }
-
   function goCheckoutHandler() {
     navigation.navigate("DeliveryDetails");
   }
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerLeft: () => (
-        <IconButton
-          source={IC_ARROW_LEFT_RED}
-          onPress={goBackHandler}
-          style={styles.backButton}
-          imageStyle={iconButtonStyles.i2}
-        />
-      ),
-    });
-  }, []);
-
   useEffect(() => {
     if (cartSubtotal === 0) {
-      goBackHandler();
+      navigation.goBack();
     }
   }, [cartSubtotal]);
 
@@ -49,12 +27,13 @@ export const CartScreen: FC<Props> = ({ navigation }) => {
     <View style={styles.rootContainer}>
       <CartList style={styles.cartList} />
 
-      <View style={separatorStyles.i1}></View>
+      <View style={separatorStyles.i1} />
 
-      <View style={styles.subtotal}>
-        <Typography style={typographyStyle_i12}>Subtotal</Typography>
-        <Typography style={typographyStyle_i12}>${cartSubtotal}</Typography>
-      </View>
+      <PriceInfo
+        textStyle={styles.subtotal}
+        label="Subtotal"
+        price={cartSubtotal}
+      />
 
       <CustomButton style={styles.button} onPress={goCheckoutHandler}>
         Checkout
