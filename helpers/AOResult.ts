@@ -27,6 +27,7 @@ export class AOResult<T> {
 }
 
 export type FailureCallback = (message: string) => void;
+
 type AsyncFunc<T> = (onFailure: FailureCallback) => Promise<T>;
 
 export async function ExecuteAsync<T>(

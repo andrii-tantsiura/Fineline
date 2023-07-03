@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-import { COLORS } from "../../constants";
+import { COLORS, iconButtonStyles } from "../../constants";
 
 const styles = StyleSheet.create({
   searchContainer: {
@@ -21,6 +21,10 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1,
     width: 124,
+  },
+  cartButton: {
+    ...iconButtonStyles.i1,
+    marginRight: 18,
   },
 });
 

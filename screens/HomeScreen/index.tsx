@@ -14,7 +14,6 @@ import {
   ProductsList,
 } from "../../components/sections";
 import {
-  COLORS,
   containerStyles,
   imageStyles,
   typographyStyle_i19,
@@ -109,12 +108,7 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
         <IconButton
           source={IC_SHOPPING_CART_RED}
           disabled={isDisabled}
-          style={{
-            backgroundColor: COLORS.neutral_10,
-            padding: 8,
-            marginRight: 18,
-            borderRadius: 8,
-          }}
+          style={styles.cartButton}
           imageStyle={imageStyles.i1}
           onPress={onPressHandler}
         />
