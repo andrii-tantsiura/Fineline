@@ -1,20 +1,20 @@
 import { HeaderTitleProps } from "@react-navigation/elements";
-import {
-  StackNavigationOptions,
-  createStackNavigator,
-} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import React, { FC } from "react";
 
-import { Typography } from "../../components/common";
-import { typographyStyle_i4 } from "../../constants";
+import { IC_ARROW_LEFT_RED, IC_SHOPPING_CART_RED } from "../../assets/icons";
+import { IconButton, Typography } from "../../components/common";
+import { iconButtonStyles, typographyStyle_i4 } from "../../constants";
 import {
   AppDataLoaderScreen,
   DeliveryDetailsScreen,
-  SuccessfulPaymentScreen,
   HomeScreen,
-  CartScreen,
+  PaymentsMethodScreen,
+  SuccessfulPaymentScreen,
 } from "../../screens";
-import { HomeStackParamList } from "./types";
+import { CartScreen } from "../../screens/CartScreen";
+import styles from "./styles";
+import { HomeScreenProps, HomeStackParamList } from "./types";
 
 const HomeStack = createStackNavigator<HomeStackParamList>();
 
@@ -22,14 +22,22 @@ const headerTitle: FC<HeaderTitleProps> = ({ children }) => (
   <Typography style={typographyStyle_i4}>{children}</Typography>
 );
 
-const headerOptions: StackNavigationOptions = {
-  headerTitleAlign: "center",
-  headerShadowVisible: false,
-  headerTitle,
-};
-
 const HomeStackNavigator: FC = () => (
-  <HomeStack.Navigator initialRouteName="AppDataLoader">
+  <HomeStack.Navigator
+    initialRouteName="AppDataLoader"
+    screenOptions={{
+      headerTitleAlign: "center",
+      headerShadowVisible: false,
+      headerTitle: headerTitle,
+      headerBackImage: () => (
+        <IconButton
+          source={IC_ARROW_LEFT_RED}
+          style={styles.backButtonContainer}
+          imageStyle={iconButtonStyles.i2}
+        />
+      ),
+    }}
+  >
     <HomeStack.Screen
       name="AppDataLoader"
       component={AppDataLoaderScreen}
@@ -38,18 +46,21 @@ const HomeStackNavigator: FC = () => (
       }}
     />
 
-    <HomeStack.Screen
-      name="Homepage"
-      component={HomeScreen}
-      options={headerOptions}
-    />
+    <HomeStack.Screen name="Homepage" component={HomeScreen} />
 
     <HomeStack.Screen
       name="DeliveryDetails"
       component={DeliveryDetailsScreen}
       options={{
         title: "Delivery Information",
-        ...headerOptions,
+      }}
+    />
+
+    <HomeStack.Screen
+      name="PaymentsMethod"
+      component={PaymentsMethodScreen}
+      options={{
+        title: "Payments method",
       }}
     />
 
@@ -61,11 +72,7 @@ const HomeStackNavigator: FC = () => (
       }}
     />
 
-    <HomeStack.Screen
-      name="Cart"
-      component={CartScreen}
-      options={headerOptions}
-    />
+    <HomeStack.Screen name="Cart" component={CartScreen} />
   </HomeStack.Navigator>
 );
 

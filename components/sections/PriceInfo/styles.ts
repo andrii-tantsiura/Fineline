@@ -1,10 +1,7 @@
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
-  input: {
-    paddingLeft: 14,
-  },
-  headerContainer: {
+  container: {
     flexDirection: "row",
     justifyContent: "space-between",
   },

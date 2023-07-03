@@ -6,7 +6,9 @@ import { containerStyles } from "../../constants";
 import { EmptyView, LoaderView } from "../../components/sections";
 import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 
-export const AppDataLoaderScreen: FC<HomeScreenProps> = ({ navigation }) => {
+type Props = HomeScreenProps<"AppDataLoader">;
+
+export const AppDataLoaderScreen: FC<Props> = ({ navigation }) => {
   const [isRefreshingData, setIsRefreshingData] = useState<boolean>(false);
 
   const {

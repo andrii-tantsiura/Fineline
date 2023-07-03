@@ -119,6 +119,7 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
 
             {value && (
               <IconButton
+                style={styles.clearButton}
                 imageStyle={iconButtonStyles.i2}
                 source={IC_CLOSE_DARK}
                 onPress={clearHandler}

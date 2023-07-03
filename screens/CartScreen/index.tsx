@@ -13,7 +13,9 @@ import { CustomButton, IconButton, Typography } from "../../components/common";
 import { CartList } from "../../components/sections";
 import { useCart } from "../../hooks";
 
-export const CartScreen: FC<HomeScreenProps> = ({ navigation, route }) => {
+type Props = HomeScreenProps<"Cart">;
+
+export const CartScreen: FC<Props> = ({ navigation }) => {
   const { cartSubtotal } = useCart();
 
   function goBackHandler() {

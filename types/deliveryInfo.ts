@@ -1,4 +1,4 @@
-export type Delivery = {
+export type IDeliveryInfo = {
   firstName: string;
   lastName: string;
   mobileNumber: string;

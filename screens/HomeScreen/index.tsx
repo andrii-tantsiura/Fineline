@@ -42,7 +42,9 @@ const sortTypes: IMenuItem[] = [
   },
 ];
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+type Props = HomeScreenProps<"Homepage">;
+
+export const HomeScreen: FC<Props> = ({ navigation }) => {
   const {
     isDataLoaded,
     errorMessage: errorMessageDataLoad,
