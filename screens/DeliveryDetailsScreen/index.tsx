@@ -3,8 +3,11 @@ import { useForm } from "react-hook-form";
 import { ScrollView, View } from "react-native";
 
 import { IC_ARROW_RIGHT_WHITE } from "../../assets/icons";
-import { CustomButton, IFormController } from "../../components/common";
-import { CustomTextInput } from "../../components/common/CustomTextInput";
+import {
+  CustomButton,
+  CustomTextInput,
+  IFormController,
+} from "../../components/common";
 import { ConfirmModal } from "../../components/modals";
 import { PHONE_MASK, separatorStyles } from "../../constants";
 import {
@@ -37,14 +40,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
 
   const { control, resetField, handleSubmit, trigger, watch } =
     useForm<IDeliveryInfo>({
-      defaultValues: {
-        firstName: "",
-        lastName: "",
-        mobileNumber: "",
-        address: "",
-        comment: "",
-      },
-      mode: "onTouched",
+      delayError: 250,
     });
 
   const hookFormController: IFormController = {
@@ -74,7 +70,7 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
   useBackPress(goBackHandler);
 
   return (
-    <>
+    <ScrollView>
       <ConfirmModal
         visible={isClosingPageConfirmationVisible}
         titleText="The data will not be saved"
@@ -84,78 +80,74 @@ export const DeliveryDetailsScreen: FC<Props> = ({ navigation }) => {
         onCancel={cancelClosingPageHandler}
       />
 
-      <View style={styles.rootContainer}>
-        <ScrollView>
-          <View style={styles.formContainer}>
-            <View style={styles.nameInputsContainer}>
-              <View style={styles.nameInputContainer}>
-                <CustomTextInput
-                  formController={hookFormController}
-                  name="firstName"
-                  title="First Name"
-                  autoCapitalize="words"
-                  autoFocus
-                  placeholder="Enter first name"
-                  rules={NAME_RULES}
-                />
-              </View>
-
-              <View style={styles.nameInputContainer}>
-                <CustomTextInput
-                  formController={hookFormController}
-                  name="lastName"
-                  title="Last Name"
-                  placeholder="Enter last name"
-                  autoCapitalize="words"
-                  rules={NAME_RULES}
-                />
-              </View>
-            </View>
-
+      <View style={styles.formContainer}>
+        <View style={styles.nameInputsContainer}>
+          <View style={styles.nameInputContainer}>
             <CustomTextInput
               formController={hookFormController}
-              name="mobileNumber"
-              title="Mobile Number"
-              maskConfig={{
-                maskType: "custom",
-                maskValue: PHONE_MASK,
-              }}
-              keyboardType="phone-pad"
-              placeholder="Enter mobile number"
-              rules={PHONE_RULES}
-              maxLength={16}
-            />
-
-            <CustomTextInput
-              formController={hookFormController}
-              name="address"
-              title="Address"
-              placeholder="Enter address"
-              rules={ADDRESS_RULES}
-            />
-
-            <CustomTextInput
-              style={styles.commentTextInput}
-              formController={hookFormController}
-              name="comment"
-              title="Comment"
-              placeholder="Enter your comment"
-              multiline
-              rules={COMMENT_RULES}
+              name="firstName"
+              title="First Name"
+              autoCapitalize="words"
+              autoFocus
+              placeholder="Enter first name"
+              rules={NAME_RULES}
             />
           </View>
-        </ScrollView>
 
-        <View style={separatorStyles.i1} />
+          <View style={styles.nameInputContainer}>
+            <CustomTextInput
+              formController={hookFormController}
+              name="lastName"
+              title="Last Name"
+              placeholder="Enter last name"
+              autoCapitalize="words"
+              rules={NAME_RULES}
+            />
+          </View>
+        </View>
 
-        <CustomButton
-          style={styles.goToPayButton}
-          imageSource={IC_ARROW_RIGHT_WHITE}
-          onPress={openPaymentPageHandler}
-        >
-          Go to Pay
-        </CustomButton>
+        <CustomTextInput
+          formController={hookFormController}
+          name="mobileNumber"
+          title="Mobile Number"
+          maskConfig={{
+            maskType: "custom",
+            maskValue: PHONE_MASK,
+          }}
+          keyboardType="phone-pad"
+          placeholder="Enter mobile number"
+          rules={PHONE_RULES}
+          maxLength={16}
+        />
+
+        <CustomTextInput
+          formController={hookFormController}
+          name="address"
+          title="Address"
+          placeholder="Enter address"
+          rules={ADDRESS_RULES}
+        />
+
+        <CustomTextInput
+          style={styles.commentTextInput}
+          formController={hookFormController}
+          name="comment"
+          title="Comment"
+          placeholder="Enter your comment"
+          multiline
+          rules={COMMENT_RULES}
+        />
       </View>
-    </>
+
+      <View style={separatorStyles.i1} />
+
+      <CustomButton
+        style={styles.goToPayButton}
+        imageSource={IC_ARROW_RIGHT_WHITE}
+        onPress={openPaymentPageHandler}
+      >
+        Go to Pay
+      </CustomButton>
+    </ScrollView>
   );
 };

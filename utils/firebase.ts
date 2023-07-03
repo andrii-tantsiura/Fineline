@@ -20,8 +20,8 @@ export const getArrayFromFirebase = <T>(
 export const postModelToFirebase = <T>(
   path: string,
   item: T
-): Promise<AOResult<number>> =>
-  ExecuteAsync(async (onFailure: FailureCallback): Promise<number> => {
+): Promise<AOResult<string>> =>
+  ExecuteAsync(async (onFailure: FailureCallback): Promise<string> => {
     const response = await axios.post(API_URL + path, item);
 
     const id = response.data.name;

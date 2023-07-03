@@ -4,9 +4,6 @@ import { customButtonStyles, iconButtonStyles } from "../../constants";
 import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
-  rootContainer: {
-    flex: 1,
-  },
   backButton: {
     marginLeft: scaleSize(16),
     ...iconButtonStyles.i1,

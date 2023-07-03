@@ -8,7 +8,7 @@ import {
   PHONE_REGEX,
 } from "../constants";
 import { ValidationErrorMessages } from "../enums";
-import { checkIsCreditCardExpired } from "./date";
+import { checkIsCreditCardExpired } from "./payment";
 
 type RulesType = UseControllerProps["rules"];
 

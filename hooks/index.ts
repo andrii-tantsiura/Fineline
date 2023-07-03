@@ -1,5 +1,5 @@
 export * from "./useAppInitData";
-export * from "./useBackHandler";
+export * from "./useBackPress";
 export * from "./useBanners";
 export * from "./useCart";
 export * from "./useCategories";
