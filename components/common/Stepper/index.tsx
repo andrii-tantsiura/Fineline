@@ -2,7 +2,7 @@ import { FC } from "react";
 import { View } from "react-native";
 
 import { IC_MINUS_RED, IC_PLUS_RED } from "../../../assets/icons";
-import { iconButtonStyles } from "../../../constants";
+import { imageStyles } from "../../../constants";
 import { IconButton } from "../IconButton";
 import { Typography } from "../Typography";
 import styles from "./styles";
@@ -35,7 +35,7 @@ export const Stepper: FC<IStepperProps> = ({
   return (
     <View style={styles.container}>
       <IconButton
-        imageStyle={iconButtonStyles.i3}
+        imageStyle={imageStyles.i2}
         source={IC_MINUS_RED}
         onPress={decrementHandler}
       />
@@ -45,7 +45,7 @@ export const Stepper: FC<IStepperProps> = ({
       </View>
 
       <IconButton
-        imageStyle={iconButtonStyles.i3}
+        imageStyle={imageStyles.i2}
         source={IC_PLUS_RED}
         onPress={incrementHandler}
       />

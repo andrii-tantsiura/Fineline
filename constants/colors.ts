@@ -13,8 +13,6 @@ export interface IColors {
   neutral_80: string;
   neutral_90: string;
   neutral_100: string;
-  success: string;
-  info: string;
   warning: string;
   error: string;
 }
@@ -34,8 +32,6 @@ export const COLORS: IColors = {
   neutral_80: "#27364B",
   neutral_90: "#1E2A3B",
   neutral_100: "#0F1A2A",
-  success: "#32D861",
-  info: "#4ea2e1",
   warning: "#F0AD4E",
   error: "#D8093B",
 };

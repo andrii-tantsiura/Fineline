@@ -1,13 +1,9 @@
 import { StyleSheet } from "react-native";
 
-import { customButtonStyles, iconButtonStyles } from "../../constants";
+import { customButtonStyles, typographyStyle_i12 } from "../../constants";
 import { scaleSize } from "../../utils";
 
 const styles = StyleSheet.create({
-  backButton: {
-    marginLeft: scaleSize(16),
-    ...iconButtonStyles.i1,
-  },
   rootContainer: {
     flex: 1,
   },
@@ -18,8 +14,7 @@ const styles = StyleSheet.create({
   subtotal: {
     marginTop: scaleSize(16),
     marginHorizontal: scaleSize(16),
-    flexDirection: "row",
-    justifyContent: "space-between",
+    ...typographyStyle_i12,
   },
   button: {
     marginHorizontal: scaleSize(16),

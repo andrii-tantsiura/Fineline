@@ -1,17 +1,21 @@
 import { FC, useEffect, useLayoutEffect, useState } from "react";
-import { RefreshControl, ScrollView, TextInput, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 
-import { IC_SHOPPING_CART_RED } from "../../assets/icons";
-import { DropDownList, IMenuItem, IconButton } from "../../components/common";
+import { IC_SEARCH_LIGHT_GRAY, IC_SHOPPING_CART_RED } from "../../assets/icons";
+import {
+  DropDownList,
+  IMenuItem,
+  IconButton,
+  IconTextInput,
+} from "../../components/common";
 import {
   BannersList,
   CategoriesList,
   ProductsList,
 } from "../../components/sections";
 import {
-  COLORS,
   containerStyles,
-  iconButtonStyles,
+  imageStyles,
   typographyStyle_i19,
 } from "../../constants";
 import { SortType } from "../../enums";
@@ -104,13 +108,8 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
         <IconButton
           source={IC_SHOPPING_CART_RED}
           disabled={isDisabled}
-          style={{
-            backgroundColor: COLORS.neutral_10,
-            padding: 8,
-            marginRight: 18,
-            borderRadius: 8,
-          }}
-          imageStyle={iconButtonStyles.i2}
+          style={styles.cartButton}
+          imageStyle={imageStyles.i1}
           onPress={onPressHandler}
         />
       ),
@@ -143,11 +142,13 @@ export const HomeScreen: FC<Props> = ({ navigation }) => {
           <BannersList />
 
           <View style={styles.searchContainer}>
-            <TextInput
+            <IconTextInput
               style={styles.inputSearchQuery}
-              onChangeText={setSearchQuery}
+              typographyStyle={typographyStyle_i19}
+              imageSource={IC_SEARCH_LIGHT_GRAY}
               placeholder="Search for food"
               value={searchQuery}
+              onValueChanged={setSearchQuery}
             />
 
             <DropDownList

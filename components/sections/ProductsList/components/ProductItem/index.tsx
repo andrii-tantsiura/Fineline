@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { useEffect, useState } from "react";
 import { IC_SHOPPING_CART_WHITE } from "../../../../../assets/icons";
 import {
-  iconButtonStyles,
+  imageStyles,
   typographyStyle_i12,
   typographyStyle_i17,
   typographyStyle_i3,
@@ -51,6 +51,7 @@ export const ProductItem: React.FC<IProductItem> = ({
           >
             {product.name}
           </Typography>
+
           <Typography style={typographyStyle_i12}>
             {formatMoney(product.price)}
           </Typography>
@@ -61,7 +62,7 @@ export const ProductItem: React.FC<IProductItem> = ({
             onPress={onCartPressHandler}
             source={IC_SHOPPING_CART_WHITE}
             style={styles.shoppingCart}
-            imageStyle={iconButtonStyles.i2}
+            imageStyle={imageStyles.i1}
           />
         ) : (
           <CustomButton
