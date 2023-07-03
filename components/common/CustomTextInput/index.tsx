@@ -29,7 +29,7 @@ export const CustomTextInput: FC<ICustomTextInputProps> = ({
   const { errors } = useFormState({ control: formController.control });
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={style}>
       <View style={styles.headerContainer}>
         <Typography textAlign="left" style={typographyStyle_i13}>
           {title}
@@ -46,7 +46,7 @@ export const CustomTextInput: FC<ICustomTextInputProps> = ({
         name={name}
         formController={formController}
         rules={rules}
-        style={style}
+        style={[styles.input, style]}
         {...rest}
       />
 

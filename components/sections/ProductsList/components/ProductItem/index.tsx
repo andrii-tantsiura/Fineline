@@ -1,5 +1,6 @@
 import { View } from "react-native";
 
+import { useEffect, useState } from "react";
 import { IC_SHOPPING_CART_WHITE } from "../../../../../assets/icons";
 import {
   iconButtonStyles,
@@ -7,12 +8,12 @@ import {
   typographyStyle_i17,
   typographyStyle_i3,
 } from "../../../../../constants";
+import { useCart } from "../../../../../hooks";
 import { IProduct } from "../../../../../types";
+import { formatMoney } from "../../../../../utils";
 import { CustomButton, IconButton, Typography } from "../../../../common";
 import { ImagePlaceholder } from "../../../ImagePlaceholder";
 import styles from "./styles";
-import { useCart } from "../../../../../hooks";
-import { useEffect, useState } from "react";
 
 interface IProductItem {
   product: IProduct;
@@ -50,7 +51,9 @@ export const ProductItem: React.FC<IProductItem> = ({
           >
             {product.name}
           </Typography>
-          <Typography style={typographyStyle_i12}>${product.price}</Typography>
+          <Typography style={typographyStyle_i12}>
+            {formatMoney(product.price)}
+          </Typography>
         </View>
 
         {quantity === 0 ? (

@@ -1,5 +1,5 @@
-import { calculateSubtotal } from "../../helpers/calculateSubtotal";
-import { ICartState, Action } from "./types";
+import { calculateSubtotal } from "../../helpers";
+import { Action, ICartState } from "./types";
 
 export function cartReducer(state: ICartState, action: Action): ICartState {
   switch (action.type) {
@@ -37,6 +37,13 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
       return {
         products,
         subtotal: calculateSubtotal(products),
+      };
+    }
+
+    case "RESET_CART": {
+      return {
+        products: [],
+        subtotal: 0,
       };
     }
 

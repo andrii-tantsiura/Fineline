@@ -1,6 +1,7 @@
 import { FC, useEffect, useLayoutEffect, useState } from "react";
 import { RefreshControl, ScrollView, TextInput, View } from "react-native";
 
+import { IC_SHOPPING_CART_RED } from "../../assets/icons";
 import { DropDownList, IMenuItem, IconButton } from "../../components/common";
 import {
   BannersList,
@@ -20,7 +21,6 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import { IProduct } from "../../types";
 import styles from "./styles";
-import { IC_SHOPPING_CART_RED } from "../../assets/icons";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -37,7 +37,9 @@ const sortTypes: IMenuItem[] = [
   },
 ];
 
-export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
+type Props = HomeScreenProps<"Homepage">;
+
+export const HomeScreen: FC<Props> = ({ navigation }) => {
   const {
     isDataLoaded,
     errorMessage: errorMessageDataLoad,
