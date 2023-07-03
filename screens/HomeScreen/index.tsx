@@ -1,7 +1,13 @@
 import { FC, useEffect, useLayoutEffect, useState } from "react";
-import { RefreshControl, ScrollView, TextInput, View } from "react-native";
+import { RefreshControl, ScrollView, View } from "react-native";
 
-import { DropDownList, IMenuItem, IconButton } from "../../components/common";
+import { IC_SEARCH_LIGHT_GRAY, IC_SHOPPING_CART_RED } from "../../assets/icons";
+import {
+  DropDownList,
+  IMenuItem,
+  IconButton,
+  IconTextInput,
+} from "../../components/common";
 import {
   BannersList,
   CategoriesList,
@@ -20,7 +26,6 @@ import { HomeScreenProps } from "../../navigation/HomeStackNavigator/types";
 import AlertService from "../../services/AlertService";
 import { IProduct } from "../../types";
 import styles from "./styles";
-import { IC_SHOPPING_CART_RED } from "../../assets/icons";
 
 const sortTypes: IMenuItem[] = [
   {
@@ -141,11 +146,13 @@ export const HomeScreen: FC<HomeScreenProps> = ({ navigation }) => {
           <BannersList />
 
           <View style={styles.searchContainer}>
-            <TextInput
+            <IconTextInput
               style={styles.inputSearchQuery}
-              onChangeText={setSearchQuery}
+              typographyStyle={typographyStyle_i19}
+              imageSource={IC_SEARCH_LIGHT_GRAY}
               placeholder="Search for food"
               value={searchQuery}
+              onValueChanged={setSearchQuery}
             />
 
             <DropDownList

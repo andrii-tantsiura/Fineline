@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    columnGap: 13,
+    columnGap: 10,
     paddingTop: 16,
     paddingHorizontal: 18,
   },
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.neutral_40,
     borderRadius: 8,
     borderWidth: 1,
-    paddingHorizontal: 15,
   },
   sortSelector: {
     borderColor: COLORS.neutral_40,

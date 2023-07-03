@@ -89,8 +89,8 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
         };
 
         const containerStyle = [
-          style,
           styles.inputContainer,
+          style,
           (isFocused || Boolean(error)) && styles.highlightedInputContainer,
         ];
 
