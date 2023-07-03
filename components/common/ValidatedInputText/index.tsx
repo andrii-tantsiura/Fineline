@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import {
   Control,
   Controller,
@@ -7,7 +7,6 @@ import {
 } from "react-hook-form";
 import { UseFormTrigger } from "react-hook-form/dist/types";
 import {
-  Image,
   StyleProp,
   TextInput,
   TextInputProps,
@@ -18,8 +17,14 @@ import {
 import { TextInputMask, TextInputMaskTypeProp } from "react-native-masked-text";
 
 import { IC_CLOSE_DARK } from "../../../assets/icons";
-import { COLORS, iconButtonStyles, textInputStyles } from "../../../constants";
+import {
+  COLORS,
+  iconButtonStyles,
+  typographyStyle_i19,
+} from "../../../constants";
+import { typographyStyleToTextStyle } from "../../../helpers";
 import { IconButton } from "../IconButton";
+import { ITypographyStyle } from "../Typography/types";
 import styles from "./styles";
 
 type MaskConfig =
@@ -37,9 +42,9 @@ export interface IValidatedInputTextProps extends TextInputProps {
   maskConfig?: MaskConfig;
   formController: IFormController;
   rules?: UseControllerProps["rules"];
-  leftImageSource?: any;
   style?: StyleProp<ViewStyle>;
   textInputStyle?: StyleProp<TextStyle>;
+  typographyStyle?: StyleProp<ITypographyStyle>;
 }
 
 export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
@@ -47,12 +52,12 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
   maskConfig = "none",
   formController: { control, trigger, resetField },
   rules = {},
-  leftImageSource,
   style,
   textInputStyle,
+  typographyStyle = typographyStyle_i19,
   placeholderTextColor = COLORS.neutral_50,
   onFocus,
-  ...rest
+  ...restProps
 }) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
@@ -60,6 +65,12 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
     resetField(name);
     trigger(name);
   };
+
+  const textStyles = [
+    typographyStyleToTextStyle(typographyStyle),
+    styles.input,
+    textInputStyle,
+  ];
 
   return (
     <Controller
@@ -71,8 +82,8 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
         fieldState: { error },
       }) => {
         const textInputProps: TextInputProps = {
-          ...rest,
-          style: [textInputStyles.i1, styles.input, textInputStyle],
+          ...restProps,
+          style: textStyles,
           cursorColor: COLORS.primary,
           selectionColor: COLORS.primary,
           placeholderTextColor: placeholderTextColor,
@@ -96,10 +107,6 @@ export const ValidatedInputText: React.FC<IValidatedInputTextProps> = ({
 
         return (
           <View style={containerStyle}>
-            {leftImageSource && (
-              <Image style={iconButtonStyles.i2} source={leftImageSource} />
-            )}
-
             {maskConfig === "none" ? (
               <TextInput {...textInputProps} />
             ) : (

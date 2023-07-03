@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 
 import { COLORS } from "../../../constants";
+import { scaleSize } from "../../../utils";
 
 const styles = StyleSheet.create({
   inputContainer: {
@@ -11,7 +12,8 @@ const styles = StyleSheet.create({
     marginVertical: 6,
     paddingTop: 14,
     paddingBottom: 10,
-    paddingHorizontal: 10,
+    paddingLeft: scaleSize(12),
+    paddingRight: scaleSize(14),
     borderWidth: 1,
     borderRadius: 8,
     borderColor: COLORS.neutral_40,

@@ -38,14 +38,6 @@ const iconButtonStyles = StyleSheet.create({
   },
 });
 
-const textInputStyles = {
-  i1: {
-    fontSize: FontSizes.i14,
-    fontFamily: FontWeightAliases.Regular,
-    color: COLORS.neutral_100,
-  },
-};
-
 const containerStyles = StyleSheet.create({
   i1: {
     flex: 1,
@@ -81,6 +73,5 @@ export {
   containerStyles,
   separatorStyles,
   shadowStyles,
-  textInputStyles,
   customButtonStyles,
 };
