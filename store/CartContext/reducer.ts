@@ -1,5 +1,5 @@
-import { calculateSubtotal } from "../../helpers/calculateSubtotal";
-import { ICartState, Action } from "./types";
+import { calculateSubtotal } from "../../helpers";
+import { Action, ICartState } from "./types";
 
 export function cartReducer(state: ICartState, action: Action): ICartState {
   switch (action.type) {
