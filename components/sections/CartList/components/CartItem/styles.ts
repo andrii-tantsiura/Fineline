@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
     width: 90,
     height: 90,
     resizeMode: "contain",
+    paddingHorizontal: 10,
     marginRight: 16,
     borderRadius: 8,
     backgroundColor: COLORS.neutral_20,

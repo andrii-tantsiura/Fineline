@@ -9,6 +9,7 @@ import { formatMoney } from "../../../../../utils";
 import { Typography } from "../../../../common";
 import { Stepper } from "../Stepper";
 import styles from "./styles";
+import { ImagePlaceholder } from "../../../ImagePlaceholder";
 
 interface ICartItemProps {
   item: ICartItem;
@@ -31,11 +32,9 @@ export const CartItem: React.FC<ICartItemProps> = ({
 
   return (
     <View style={styles.wrapperContainer}>
-      <Image
+      <ImagePlaceholder
         style={styles.imageProduct}
-        source={{
-          uri: item.product.imageUrl,
-        }}
+        imageUrl={item.product.imageUrl}
       />
 
       <View style={styles.info}>

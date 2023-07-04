@@ -1,5 +1,12 @@
-import { FC } from "react";
-import { Image, ImageStyle, StyleProp, View, ViewStyle } from "react-native";
+import { FC, useState } from "react";
+import {
+  Image,
+  ImageBackground,
+  ImageStyle,
+  StyleProp,
+  View,
+  ViewStyle,
+} from "react-native";
 
 import { IC_DISH_PLACEHOLDER_LIGHT } from "../../../assets/icons";
 import styles from "./styles";
@@ -19,13 +26,36 @@ export const ImagePlaceholder: FC<IImagePlaceholder> = ({
 }) => {
   const imageSource = imageUrl ? { uri: imageUrl } : placeholderImageSource;
 
+  const [isImageLoaded, setIsImageLoaded] = useState<boolean>(false);
+
+  function loadStartHandler() {
+    setIsImageLoaded(false);
+  }
+
+  function loadEndHandler() {
+    setIsImageLoaded(true);
+  }
+
   return (
     <View style={[styles.container, style]}>
-      <Image
+      <ImageBackground
+        source={placeholderImageSource}
         style={[styles.image, imageStyle]}
-        resizeMode="contain"
-        source={imageSource}
-      />
+        imageStyle={[
+          styles.image,
+          imageStyle,
+          {
+            display: isImageLoaded ? "none" : "flex",
+          },
+        ]}
+      >
+        <Image
+          source={imageSource}
+          style={[styles.image, imageStyle]}
+          onLoadStart={loadStartHandler}
+          onLoadEnd={loadEndHandler}
+        />
+      </ImageBackground>
     </View>
   );
 };
