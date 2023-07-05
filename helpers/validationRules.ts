@@ -8,7 +8,10 @@ import {
   PHONE_REGEX,
 } from "../constants";
 import { ValidationErrorMessages } from "../enums";
-import { checkIsCreditCardExpired } from "./payment";
+import {
+  checkIsCreditCardExpired,
+  isValidCreditCardNumber,
+} from "./creditCard";
 
 type RulesType = UseControllerProps["rules"];
 
@@ -56,6 +59,11 @@ const CARD_NUMBER_RULES: RulesType = {
   pattern: {
     value: CARD_NUMBER_REGEX,
     message: ValidationErrorMessages.INCORRECT_CARD_NUMBER_FORMAT,
+  },
+  validate: {
+    isValidCardNumber: (fieldValue) =>
+      isValidCreditCardNumber(fieldValue) ||
+      ValidationErrorMessages.INCORRECT_CARD_NUMBER_FORMAT,
   },
 };
 
