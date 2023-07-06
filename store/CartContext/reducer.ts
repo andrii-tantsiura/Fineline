@@ -34,13 +34,11 @@ export function cartReducer(state: ICartState, action: Action): ICartState {
       };
     }
 
-    case "INCREASE_PRODUCT_QUANTITY": {
+    case "SET_PRODUCT_QUANTITY": {
       const { quantity, productId } = action.payload;
 
       const products = state.products.map((x) =>
-        x.product.id === productId
-          ? { ...x, quantity: x.quantity + quantity }
-          : x
+        x.product.id === productId ? { ...x, quantity } : x
       );
 
       return {

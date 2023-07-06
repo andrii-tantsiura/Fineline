@@ -23,7 +23,7 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
   const modalRef = useRef<RBSheet>(null);
   const headerHeight = useHeaderHeight();
 
-  const { addToCart } = useCart();
+  const { addToCart, getProductQuantityById } = useCart();
   const [productQuantity, setProductQuantity] = useState<number>(1);
   const [subtotal, setSubtotal] = useState<number>(0);
 
@@ -40,6 +40,14 @@ export const CartItemSelectorModal: React.FC<ICartItemSelectorModalProps> = ({
   useEffect(() => {
     setSubtotal(product.price * productQuantity);
   }, [productQuantity]);
+
+  useEffect(() => {
+    const itemsInCartQuantity = getProductQuantityById(product.id);
+
+    if (itemsInCartQuantity > 0) {
+      setProductQuantity(itemsInCartQuantity);
+    }
+  }, []);
 
   useEffect(() => {
     modalRef.current?.open();

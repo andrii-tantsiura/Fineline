@@ -15,7 +15,7 @@ export const CartContext = createContext<ICartContextProps>({
   subtotal: 0,
   addProduct: (cartItem: ICartItem) => {},
   removeProduct: (id: string) => {},
-  increaseProductQuantity: (productId: string, quantity: number) => {},
+  setProductQuantity: (productId: string, quantity: number) => {},
   resetCart: () => {},
 });
 
@@ -47,9 +47,9 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     });
   }
 
-  function increaseProductQuantity(productId: string, quantity: number) {
+  function setProductQuantity(productId: string, quantity: number) {
     dispatch({
-      type: "INCREASE_PRODUCT_QUANTITY",
+      type: "SET_PRODUCT_QUANTITY",
       payload: {
         productId,
         quantity,
@@ -66,7 +66,7 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     subtotal: cartState.subtotal,
     addProduct: addProduct,
     removeProduct: removeProduct,
-    increaseProductQuantity: increaseProductQuantity,
+    setProductQuantity: setProductQuantity,
     resetCart: resetCart,
   };
 

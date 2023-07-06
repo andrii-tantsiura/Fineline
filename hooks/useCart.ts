@@ -18,13 +18,13 @@ export const useCart = (): IUseCartValues => {
     subtotal,
     addProduct,
     removeProduct,
-    increaseProductQuantity,
+    setProductQuantity,
     resetCart,
   } = useContext(CartContext);
 
   const addToCart = ({ product, quantity }: ICartItem) => {
     if (products.some((x) => x.product.id === product.id)) {
-      increaseProductQuantity(product.id, quantity);
+      setProductQuantity(product.id, quantity);
     } else {
       addProduct({ product, quantity });
     }
