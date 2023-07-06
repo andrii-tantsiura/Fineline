@@ -22,8 +22,8 @@ export const CartItem: React.FC<ICartItemProps> = ({
   onAddToCart,
   onRemoveFromCart,
 }) => {
-  function increaseProductQuantityHandler(value: number) {
-    onAddToCart({ ...item, quantity: value - item.quantity });
+  function setProductQuantityHandler(value: number) {
+    onAddToCart({ ...item, quantity: value });
   }
 
   function removeFromCartHandler() {
@@ -49,7 +49,7 @@ export const CartItem: React.FC<ICartItemProps> = ({
         <View style={styles.container}>
           <Stepper
             onRemove={removeFromCartHandler}
-            onValueChanged={increaseProductQuantityHandler}
+            onValueChanged={setProductQuantityHandler}
           >
             {item.quantity}
           </Stepper>

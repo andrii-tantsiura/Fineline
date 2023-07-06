@@ -8,7 +8,7 @@ export interface ICartState {
 export interface ICartContextProps extends Required<ICartState> {
   addProduct: (cartItem: ICartItem) => void;
   removeProduct: (id: string) => void;
-  increaseProductQuantity: (productId: string, quantity: number) => void;
+  setProductQuantity: (productId: string, quantity: number) => void;
   resetCart: () => void;
 }
 
@@ -26,7 +26,7 @@ export type Action =
       payload: string;
     }
   | {
-      type: "INCREASE_PRODUCT_QUANTITY";
+      type: "SET_PRODUCT_QUANTITY";
       payload: {
         productId: string;
         quantity: number;
