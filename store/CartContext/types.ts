@@ -1,4 +1,3 @@
-import { SetStateAction } from "../../hooks";
 import { ICartItem } from "../../types";
 
 export interface ICartState {
@@ -18,7 +17,10 @@ export interface ICartContextProviderProps {
 }
 
 export type Action =
-  | SetStateAction<ICartState>
+  | {
+      type: "SET";
+      payload: ICartState;
+    }
   | {
       type: "ADD_PRODUCT_TO_CART";
       payload: ICartItem;

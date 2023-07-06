@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 import { StorageItem } from "../enums";
 import { getItemFromAsyncStorage, storeItemToAsyncStorage } from "../helpers";
 
-export type SetStateAction<T> = {
-  type: "SET";
-  payload: T;
-};
-
-export const useContextStateStorage = <T>(
+export const useStateSyncWithStorage = <T>(
   contextState: T,
   onStateLoaded: (state: T) => void,
   storageItem: StorageItem

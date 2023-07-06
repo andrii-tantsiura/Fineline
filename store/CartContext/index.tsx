@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 import { StorageItem } from "../../enums";
-import { useContextStateStorage } from "../../hooks/useContextStateStorage";
+import { useStateSyncWithStorage } from "../../hooks/useStateSyncWithStorage";
 import { ICartItem } from "../../types";
 import { cartReducer } from "./reducer";
 import {
@@ -27,15 +27,11 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     subtotal: 0,
   });
 
-  const onStateLoaded = (state: ICartState) => {
+  const setState = (state: ICartState) => {
     dispatch({ type: "SET", payload: state });
   };
 
-  useContextStateStorage<ICartState>(
-    cartState,
-    onStateLoaded,
-    StorageItem.CART_STATE
-  );
+  useStateSyncWithStorage(cartState, setState, StorageItem.CART_STATE);
 
   function addProduct(cartItem: ICartItem): void {
     dispatch({
