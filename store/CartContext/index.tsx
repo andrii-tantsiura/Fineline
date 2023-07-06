@@ -1,8 +1,14 @@
 import { createContext, useReducer } from "react";
 
+import { StorageItem } from "../../enums";
+import { useStateSyncWithStorage } from "../../hooks/useStateSyncWithStorage";
 import { ICartItem } from "../../types";
 import { cartReducer } from "./reducer";
-import { ICartContextProps, ICartContextProviderProps } from "./types";
+import {
+  ICartContextProps,
+  ICartContextProviderProps,
+  ICartState,
+} from "./types";
 
 export const CartContext = createContext<ICartContextProps>({
   products: [],
@@ -20,6 +26,12 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     products: [],
     subtotal: 0,
   });
+
+  const setState = (state: ICartState) => {
+    dispatch({ type: "SET", payload: state });
+  };
+
+  useStateSyncWithStorage(cartState, setState, StorageItem.CART_STATE);
 
   function addProduct(cartItem: ICartItem): void {
     dispatch({

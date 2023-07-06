@@ -18,6 +18,10 @@ export interface ICartContextProviderProps {
 
 export type Action =
   | {
+      type: "SET";
+      payload: ICartState;
+    }
+  | {
       type: "ADD_PRODUCT_TO_CART";
       payload: ICartItem;
     }
