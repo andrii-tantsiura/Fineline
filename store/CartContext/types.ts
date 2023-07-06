@@ -1,3 +1,4 @@
+import { SetStateAction } from "../../hooks";
 import { ICartItem } from "../../types";
 
 export interface ICartState {
@@ -6,6 +7,7 @@ export interface ICartState {
 }
 
 export interface ICartContextProps extends Required<ICartState> {
+  loadCartFromStorage: () => Promise<void>;
   addProduct: (cartItem: ICartItem) => void;
   removeProduct: (id: string) => void;
   increaseProductQuantity: (productId: string, quantity: number) => void;
@@ -17,6 +19,7 @@ export interface ICartContextProviderProps {
 }
 
 export type Action =
+  | SetStateAction<ICartState>
   | {
       type: "ADD_PRODUCT_TO_CART";
       payload: ICartItem;
