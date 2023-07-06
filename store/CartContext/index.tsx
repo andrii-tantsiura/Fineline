@@ -4,12 +4,15 @@ import { StorageItem } from "../../enums";
 import { useContextStateStorage } from "../../hooks/useContextStateStorage";
 import { ICartItem } from "../../types";
 import { cartReducer } from "./reducer";
-import { ICartContextProps, ICartContextProviderProps } from "./types";
+import {
+  ICartContextProps,
+  ICartContextProviderProps,
+  ICartState,
+} from "./types";
 
 export const CartContext = createContext<ICartContextProps>({
   products: [],
   subtotal: 0,
-  loadCartFromStorage: async () => {},
   addProduct: (cartItem: ICartItem) => {},
   removeProduct: (id: string) => {},
   increaseProductQuantity: (productId: string, quantity: number) => {},
@@ -24,9 +27,13 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
     subtotal: 0,
   });
 
-  const { loadFromStorage } = useContextStateStorage(
+  const onStateLoaded = (state: ICartState) => {
+    dispatch({ type: "SET", payload: state });
+  };
+
+  useContextStateStorage<ICartState>(
     cartState,
-    dispatch,
+    onStateLoaded,
     StorageItem.CART_STATE
   );
 
@@ -61,7 +68,6 @@ export const CartContextProvider: React.FC<ICartContextProviderProps> = ({
   const value: ICartContextProps = {
     products: cartState.products,
     subtotal: cartState.subtotal,
-    loadCartFromStorage: loadFromStorage,
     addProduct: addProduct,
     removeProduct: removeProduct,
     increaseProductQuantity: increaseProductQuantity,

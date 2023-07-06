@@ -6,7 +6,6 @@ import { ICartItem } from "../types";
 interface IUseCartValues {
   productsInCart: ICartItem[];
   cartSubtotal: number;
-  loadCartFromStorage: () => Promise<void>;
   addToCart: (item: ICartItem) => void;
   removeFromCart: (id: string) => void;
   getProductQuantityById: (id: string) => number;
@@ -17,7 +16,6 @@ export const useCart = (): IUseCartValues => {
   const {
     products,
     subtotal,
-    loadCartFromStorage,
     addProduct,
     removeProduct,
     increaseProductQuantity,
@@ -39,7 +37,6 @@ export const useCart = (): IUseCartValues => {
   return {
     productsInCart: products,
     cartSubtotal: subtotal,
-    loadCartFromStorage,
     addToCart,
     removeFromCart: removeProduct,
     getProductQuantityById,

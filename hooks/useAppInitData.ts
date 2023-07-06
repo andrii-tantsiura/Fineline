@@ -1,5 +1,4 @@
 import { useBanners } from "./useBanners";
-import { useCart } from "./useCart";
 import { useCategories } from "./useCategories";
 import { useProducts } from "./useProducts";
 
@@ -10,8 +9,6 @@ interface IUseAppInitDataValues {
 }
 
 export const useAppInitData = (): IUseAppInitDataValues => {
-  const { loadCartFromStorage } = useCart();
-
   const {
     isCategoriesLoaded,
     errorMessage: errorMessageForCategories,
@@ -34,7 +31,6 @@ export const useAppInitData = (): IUseAppInitDataValues => {
     await loadProductsCategories();
     await loadProducts();
     await loadBanners();
-    await loadCartFromStorage();
   }
 
   const isDataLoaded =

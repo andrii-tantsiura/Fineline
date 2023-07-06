@@ -7,7 +7,6 @@ export interface ICartState {
 }
 
 export interface ICartContextProps extends Required<ICartState> {
-  loadCartFromStorage: () => Promise<void>;
   addProduct: (cartItem: ICartItem) => void;
   removeProduct: (id: string) => void;
   increaseProductQuantity: (productId: string, quantity: number) => void;

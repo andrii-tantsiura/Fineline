@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { StorageItem } from "../enums";
 import { getItemFromAsyncStorage, storeItemToAsyncStorage } from "../helpers";
 
@@ -7,24 +8,24 @@ export type SetStateAction<T> = {
   payload: T;
 };
 
-interface IUseContextStateStorage {
-  loadFromStorage: () => Promise<void>;
-}
-
 export const useContextStateStorage = <T>(
   contextState: T,
-  dispatch: React.Dispatch<SetStateAction<T>>,
+  onStateLoaded: (state: T) => void,
   storageItem: StorageItem
-): IUseContextStateStorage => {
+): void => {
   const [isInitialized, setIsInitialized] = useState<boolean>(false);
 
   const loadFromStorage = async () => {
     const storedState: T | null = await getItemFromAsyncStorage(storageItem);
 
     if (storedState) {
-      dispatch({ type: "SET", payload: storedState });
+      onStateLoaded(storedState);
     }
   };
+
+  useEffect(() => {
+    loadFromStorage();
+  }, []);
 
   useEffect(() => {
     if (isInitialized) {
@@ -33,6 +34,4 @@ export const useContextStateStorage = <T>(
       setIsInitialized(true);
     }
   }, [contextState]);
-
-  return { loadFromStorage };
 };
