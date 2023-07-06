@@ -3,6 +3,15 @@ import { Action, ICartState } from "./types";
 
 export function cartReducer(state: ICartState, action: Action): ICartState {
   switch (action.type) {
+    case "SET": {
+      const { products, subtotal } = action.payload;
+
+      return {
+        products,
+        subtotal,
+      };
+    }
+
     case "ADD_PRODUCT_TO_CART": {
       const { product, quantity } = action.payload;
 
