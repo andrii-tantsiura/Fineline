@@ -4,7 +4,7 @@ import { StorageItem } from "../enums";
 import { getItemFromAsyncStorage, storeItemToAsyncStorage } from "../helpers";
 
 export const useStateSyncWithStorage = <T>(
-  contextState: T,
+  state: T,
   onStateLoaded: (state: T) => void,
   storageItem: StorageItem
 ): void => {
@@ -24,9 +24,9 @@ export const useStateSyncWithStorage = <T>(
 
   useEffect(() => {
     if (isInitialized) {
-      storeItemToAsyncStorage(storageItem, contextState);
+      storeItemToAsyncStorage(storageItem, state);
     } else {
       setIsInitialized(true);
     }
-  }, [contextState]);
+  }, [state]);
 };
